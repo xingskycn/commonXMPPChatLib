@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F67AAEE171C011800357955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
+		1F67AAF3171C011800357955 /* KechengIphoneChatLib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F67AAF2171C011800357955 /* KechengIphoneChatLib.h */; };
+		1F67AAF5171C011800357955 /* KechengIphoneChatLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F67AAF4171C011800357955 /* KechengIphoneChatLib.m */; };
+		1F67AAFD171C011800357955 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFC171C011800357955 /* SenTestingKit.framework */; };
+		1F67AAFF171C011800357955 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFE171C011800357955 /* UIKit.framework */; };
+		1F67AB00171C011800357955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
+		1F67AB03171C011800357955 /* libKechengIphoneChatLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */; };
+		1F67AB09171C011800357955 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F67AB07171C011800357955 /* InfoPlist.strings */; };
+		1F67AB0C171C011800357955 /* KechengIphoneChatLibTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F67AB0B171C011800357955 /* KechengIphoneChatLibTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F67AB01171C011800357955 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F67AAE2171C011800357955 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F67AAE9171C011800357955;
+			remoteInfo = KechengIphoneChatLib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1F67AAE8171C011800357955 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				1F67AAF3171C011800357955 /* KechengIphoneChatLib.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKechengIphoneChatLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F67AAED171C011800357955 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1F67AAF1171C011800357955 /* KechengIphoneChatLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KechengIphoneChatLib-Prefix.pch"; sourceTree = "<group>"; };
+		1F67AAF2171C011800357955 /* KechengIphoneChatLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KechengIphoneChatLib.h; sourceTree = "<group>"; };
+		1F67AAF4171C011800357955 /* KechengIphoneChatLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KechengIphoneChatLib.m; sourceTree = "<group>"; };
+		1F67AAFB171C011800357955 /* KechengIphoneChatLibTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KechengIphoneChatLibTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F67AAFC171C011800357955 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1F67AAFE171C011800357955 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		1F67AB06171C011800357955 /* KechengIphoneChatLibTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KechengIphoneChatLibTests-Info.plist"; sourceTree = "<group>"; };
+		1F67AB08171C011800357955 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F67AB0A171C011800357955 /* KechengIphoneChatLibTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KechengIphoneChatLibTests.h; sourceTree = "<group>"; };
+		1F67AB0B171C011800357955 /* KechengIphoneChatLibTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KechengIphoneChatLibTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F67AAE7171C011800357955 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F67AAEE171C011800357955 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F67AAF7171C011800357955 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F67AAFD171C011800357955 /* SenTestingKit.framework in Frameworks */,
+				1F67AAFF171C011800357955 /* UIKit.framework in Frameworks */,
+				1F67AB00171C011800357955 /* Foundation.framework in Frameworks */,
+				1F67AB03171C011800357955 /* libKechengIphoneChatLib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F67AAE1171C011800357955 = {
+			isa = PBXGroup;
+			children = (
+				1F67AAEF171C011800357955 /* KechengIphoneChatLib */,
+				1F67AB04171C011800357955 /* KechengIphoneChatLibTests */,
+				1F67AAEC171C011800357955 /* Frameworks */,
+				1F67AAEB171C011800357955 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1F67AAEB171C011800357955 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */,
+				1F67AAFB171C011800357955 /* KechengIphoneChatLibTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F67AAEC171C011800357955 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AAED171C011800357955 /* Foundation.framework */,
+				1F67AAFC171C011800357955 /* SenTestingKit.framework */,
+				1F67AAFE171C011800357955 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F67AAEF171C011800357955 /* KechengIphoneChatLib */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AAF2171C011800357955 /* KechengIphoneChatLib.h */,
+				1F67AAF4171C011800357955 /* KechengIphoneChatLib.m */,
+				1F67AAF0171C011800357955 /* Supporting Files */,
+			);
+			path = KechengIphoneChatLib;
+			sourceTree = "<group>";
+		};
+		1F67AAF0171C011800357955 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AAF1171C011800357955 /* KechengIphoneChatLib-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F67AB04171C011800357955 /* KechengIphoneChatLibTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AB0A171C011800357955 /* KechengIphoneChatLibTests.h */,
+				1F67AB0B171C011800357955 /* KechengIphoneChatLibTests.m */,
+				1F67AB05171C011800357955 /* Supporting Files */,
+			);
+			path = KechengIphoneChatLibTests;
+			sourceTree = "<group>";
+		};
+		1F67AB05171C011800357955 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AB06171C011800357955 /* KechengIphoneChatLibTests-Info.plist */,
+				1F67AB07171C011800357955 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F67AAE9171C011800357955 /* KechengIphoneChatLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F67AB0F171C011800357955 /* Build configuration list for PBXNativeTarget "KechengIphoneChatLib" */;
+			buildPhases = (
+				1F67AAE6171C011800357955 /* Sources */,
+				1F67AAE7171C011800357955 /* Frameworks */,
+				1F67AAE8171C011800357955 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KechengIphoneChatLib;
+			productName = KechengIphoneChatLib;
+			productReference = 1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		1F67AAFA171C011800357955 /* KechengIphoneChatLibTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F67AB12171C011800357955 /* Build configuration list for PBXNativeTarget "KechengIphoneChatLibTests" */;
+			buildPhases = (
+				1F67AAF6171C011800357955 /* Sources */,
+				1F67AAF7171C011800357955 /* Frameworks */,
+				1F67AAF8171C011800357955 /* Resources */,
+				1F67AAF9171C011800357955 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F67AB02171C011800357955 /* PBXTargetDependency */,
+			);
+			name = KechengIphoneChatLibTests;
+			productName = KechengIphoneChatLibTests;
+			productReference = 1F67AAFB171C011800357955 /* KechengIphoneChatLibTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F67AAE2171C011800357955 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = zuoyl;
+			};
+			buildConfigurationList = 1F67AAE5171C011800357955 /* Build configuration list for PBXProject "KechengIphoneChatLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1F67AAE1171C011800357955;
+			productRefGroup = 1F67AAEB171C011800357955 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F67AAE9171C011800357955 /* KechengIphoneChatLib */,
+				1F67AAFA171C011800357955 /* KechengIphoneChatLibTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F67AAF8171C011800357955 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F67AB09171C011800357955 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F67AAF9171C011800357955 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F67AAE6171C011800357955 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F67AAF5171C011800357955 /* KechengIphoneChatLib.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F67AAF6171C011800357955 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F67AB0C171C011800357955 /* KechengIphoneChatLibTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1F67AB02171C011800357955 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F67AAE9171C011800357955 /* KechengIphoneChatLib */;
+			targetProxy = 1F67AB01171C011800357955 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1F67AB07171C011800357955 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F67AB08171C011800357955 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1F67AB0D171C011800357955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1F67AB0E171C011800357955 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F67AB10171C011800357955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/KechengIphoneChatLib.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1F67AB11171C011800357955 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/KechengIphoneChatLib.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		1F67AB13171C011800357955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				INFOPLIST_FILE = "KechengIphoneChatLibTests/KechengIphoneChatLibTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1F67AB14171C011800357955 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				INFOPLIST_FILE = "KechengIphoneChatLibTests/KechengIphoneChatLibTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F67AAE5171C011800357955 /* Build configuration list for PBXProject "KechengIphoneChatLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F67AB0D171C011800357955 /* Debug */,
+				1F67AB0E171C011800357955 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F67AB0F171C011800357955 /* Build configuration list for PBXNativeTarget "KechengIphoneChatLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F67AB10171C011800357955 /* Debug */,
+				1F67AB11171C011800357955 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1F67AB12171C011800357955 /* Build configuration list for PBXNativeTarget "KechengIphoneChatLibTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F67AB13171C011800357955 /* Debug */,
+				1F67AB14171C011800357955 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1F67AAE2171C011800357955 /* Project object */;
+}
