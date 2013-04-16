@@ -1,0 +1,227 @@
+//
+//  ChatManager.m
+//  KechengIphoneChatLib
+//
+//  Created by zuoyl on 4/15/13.
+//  Copyright (c) 2013 zuoyl. All rights reserved.
+//
+
+#import "ChatManager.h"
+#import "XMPPStream.h"
+#import "DDXML.h"
+
+typedef enum {
+    connectionStateUnkown,
+    connectionStateOffline = 1,
+    connectionStateConnectingServer,
+    connectionStateConnecetedServer,
+    connectionStateAuthenticating,
+    connectionStateConfiguring,
+    connectionStateLoginSuccess,
+    connectionStateLoginFailure
+} connectionState;
+
+static ChatManager * chatManager = nil;
+
+static NSString * ON_LINE = @"available";
+static NSString * OFF_LINE = @"unavailable";
+static int SEND_MESSAGE_TIMEOUT = 5;
+static int CHECK_CONNECTION_TIMEOUT = 60;
+
+@interface ChatManager()<XMPPStreamDelegate>
+{
+    XMPPStream * _xmppStream;
+    connectionState _connectionState;
+    dispatch_source_t _connectionCheckTimer;
+    BOOL _bRunCheckTimer;
+}
+
+- (BOOL) connectToServer;
+
+- (void) checkAuthentication;
+
+- (void) wrongState;
+
+- (void) friendPresence:(NSString*) friendUserName presenceType:(NSString*)presenceType;
+
+- (void) mePresence:(NSString*)presenceType;
+
+- (BOOL) checkConnectionAvailable;
+
+- (NSXMLElement*) buildMessage:(NSString*)message withFriend:(id <ChatUser>)myFriend;
+
+- (void) createConnectionCheckTimer;
+
+@end
+
+@implementation ChatManager
+
++ (ChatManager*) sharedInstance
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        chatManager = [[ChatManager alloc] init];
+        if (chatManager) {
+            
+        }
+    });
+    return chatManager;
+}
+
+- (void) sendMessage:(NSString *)message toUser:(id<ChatUser>)chatUser withComplete:(void (^)(BOOL))block
+{
+    if ([self checkConnectionAvailable]) {
+        //Should dispatch async
+        XMPPElementReceipt *receipt;
+        [_xmppStream sendElement:[self buildMessage:message withFriend:chatUser] andGetReceipt:&receipt];
+        if ([receipt wait:SEND_MESSAGE_TIMEOUT]) {
+            //Wait until the element has been sent
+            block(YES);
+        } else {
+            //Maybe retry 
+            block(NO);
+        }
+    }
+    
+}
+
+- (BOOL) connectToServer
+{
+    if (_connectionState == connectionStateUnkown ||
+        _connectionState == connectionStateOffline ||
+        _connectionState == connectionStateLoginFailure) {
+        _connectionState = connectionStateConnectingServer;
+        [_xmppStream setMyJID:[XMPPJID jidWithString:[self.me xmppUserName]]];
+        [_xmppStream setHostName:self.serverHost];
+        [_xmppStream setHostPort:self.serverPort];
+        NSError * error = nil;
+        if (![_xmppStream connect:&error]) {
+            _connectionState = connectionStateLoginFailure;
+            return NO;
+        } else {
+            return YES;
+        }
+    } else {
+        [self wrongState];
+    }
+}
+
+- (void) login
+{
+    //Establish connection to server
+    
+}
+
+- (void) logout
+{
+    //Break connection to server
+}
+
+- (void) checkAuthentication
+{
+    if (_connectionState == connectionStateConnecetedServer) {
+        NSError * error = nil;
+        [_xmppStream authenticateWithPassword:[self.me xmppPassword] error:&error];
+        _connectionState = connectionStateAuthenticating;
+    } else {
+        [self wrongState];
+    }
+}
+
+- (void) friendPresence:(NSString *)friendUserName presenceType:(NSString *)presenceType
+{
+    if ([presenceType isEqualToString:ON_LINE]) {
+        //Post online notification
+    } else {
+        //Post offline notification
+    }
+}
+
+- (void) mePresence:(NSString *)presenceType
+{
+    if ([presenceType isEqualToString:ON_LINE]) {
+        _connectionState = connectionStateLoginSuccess;
+    } else {
+        _connectionState = connectionStateLoginFailure;
+        //Disconnect or something
+        [self wrongState];
+    }
+}
+
+- (BOOL) checkConnectionAvailable
+{
+    //May be not right
+    return [_xmppStream isConnected];
+}
+
+- (NSXMLElement*) buildMessage:(NSString *)message withFriend:(id<ChatUser>)myFriend
+{
+    NSXMLElement * body = [NSXMLElement elementWithName:@"body"];
+    [body setStringValue:message];
+    NSXMLElement * xmlMessage = [NSXMLElement elementWithName:@"message"];
+    [xmlMessage addAttributeWithName:@"type" stringValue:@"chat"];
+    [xmlMessage addAttributeWithName:@"to" stringValue:[myFriend xmppUserName]];
+    [xmlMessage addChild:body];
+    [_xmppStream sendElement:xmlMessage];
+    return xmlMessage;
+}
+
+- (void) createConnectionCheckTimer
+{
+    _connectionCheckTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
+    dispatch_source_set_timer(_connectionCheckTimer, dispatch_time(DISPATCH_TIME_NOW, CHECK_CONNECTION_TIMEOUT * NSEC_PER_SEC), DISPATCH_TIME_FOREVER, 0);
+    dispatch_source_set_event_handler(_connectionCheckTimer, ^{
+        if (![self checkConnectionAvailable]) {
+            //reconnect
+        }
+        if (!_bRunCheckTimer) {
+            dispatch_source_cancel(_connectionCheckTimer);
+        }
+    });
+}
+
+#pragma mark -- XMPP delegate
+- (void) xmppStreamDidConnect:(XMPPStream *)sender
+{
+    if (_connectionState == connectionStateConnecetedServer) {
+        _connectionState = connectionStateConnecetedServer;
+        [self checkAuthentication];
+    } else {
+        [self wrongState];
+    }
+}
+
+- (void) xmppStreamDidAuthenticate:(XMPPStream *)sender
+{
+    //when authentication is successful,we should notify the server that we are online
+    if (_connectionState == connectionStateAuthenticating) {
+        XMPPPresence * presence = [XMPPPresence presence];
+        [_xmppStream sendElement:presence];
+        _connectionState = connectionStateConfiguring;
+    } else {
+        [self wrongState];
+    }
+}
+
+- (void) xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
+{
+    //when we receive a presence notification,we should do something base on presence propeties;
+    NSString * presenceType = [presence type] ;
+    NSString * myXmppName = [sender.myJID user];
+    NSString * friendXmppName = [[presence from] user];
+    if (![friendXmppName isEqualToString:myXmppName]) {
+        [self friendPresence:friendXmppName presenceType:presenceType];
+    } else {
+        //Self online
+        if (_connectionState == connectionStateConfiguring || _connectionState == connectionStateLoginSuccess) {
+            [self mePresence:presenceType];
+        }
+    }
+}
+
+- (void) xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message
+{
+    
+}
+
+@end
