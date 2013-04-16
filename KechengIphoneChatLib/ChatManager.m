@@ -7,8 +7,7 @@
 //
 
 #import "ChatManager.h"
-#import "XMPPStream.h"
-#import "DDXML.h"
+#import "XMPP.h"
 
 typedef enum {
     connectionStateUnkown,
