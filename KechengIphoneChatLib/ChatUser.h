@@ -18,4 +18,6 @@
 
 +(NSString*)userNameFromXmppUserName:(NSString*) xmppUserName;
 
+-(id<ChatUser>)buildChatUserFromXmppUserName:(NSString*) xmppUserName;
+
 @end

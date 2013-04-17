@@ -21,7 +21,7 @@
 
 @property (retain, nonatomic) id <ChatUser> me;
 
-- (void) sendMessage:(NSString*)message toUser:(id <ChatUser>)chatUser withComplete:(void (^)(BOOL bSuccess))block;
+- (void) sendMessage:(ChatMessage*)message withComplete:(void (^)(BOOL bSuccess))block;
 
 - (void) login;
 

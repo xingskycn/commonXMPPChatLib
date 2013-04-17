@@ -47,7 +47,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (BOOL) checkConnectionAvailable;
 
-- (NSXMLElement*) buildMessage:(NSString*)message withFriend:(id <ChatUser>)myFriend;
+- (NSXMLElement*) chatMessage2XmppMessage:(ChatMessage*)message;
+- (ChatMessage*) xmppMessage2ChatMessage:(NSXMLElement*)xmppMessage;
 
 - (void) createConnectionCheckTimer;
 
@@ -67,28 +68,31 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     return chatManager;
 }
 
-- (void) sendMessage:(NSString *)message toUser:(id<ChatUser>)chatUser withComplete:(void (^)(BOOL))block
+- (void) sendMessage:(ChatMessage *)message withComplete:(void (^)(BOOL))block
 {
     if ([self checkConnectionAvailable]) {
-        //Should dispatch async
-        XMPPElementReceipt *receipt;
-        [_xmppStream sendElement:[self buildMessage:message withFriend:chatUser] andGetReceipt:&receipt];
-        if ([receipt wait:SEND_MESSAGE_TIMEOUT]) {
-            //Wait until the element has been sent
-            block(YES);
-        } else {
-            //Maybe retry 
-            block(NO);
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            XMPPElementReceipt *receipt;
+            [_xmppStream sendElement:[self chatMessage2XmppMessage:message] andGetReceipt:&receipt];
+            if ([receipt wait:SEND_MESSAGE_TIMEOUT]) {
+                //Wait until the element has been sent
+                block(YES);
+            } else {
+                //Maybe retry
+                block(NO);
+            }
+        });
     }
-    
 }
 
 - (BOOL) connectToServer
 {
-    if (_connectionState == connectionStateUnkown ||
-        _connectionState == connectionStateOffline ||
-        _connectionState == connectionStateLoginFailure) {
+    if ([self checkConnectionAvailable]) {
+        [_xmppStream disconnect];
+        _connectionState = connectionStateOffline;
+    }
+    
+    if (_connectionState == connectionStateUnkown || _connectionState == connectionStateOffline || _connectionState == connectionStateLoginFailure) {
         _connectionState = connectionStateConnectingServer;
         [_xmppStream setMyJID:[XMPPJID jidWithString:[self.me xmppUserName]]];
         [_xmppStream setHostName:self.serverHost];
@@ -103,17 +107,24 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     } else {
         [self wrongState];
     }
+
+    return NO;
 }
 
 - (void) login
 {
     //Establish connection to server
-    
+    [self connectToServer];
 }
 
 - (void) logout
 {
     //Break connection to server
+    if ([self checkConnectionAvailable]) {
+        XMPPPresence * presence = [XMPPPresence presenceWithType:OFF_LINE];
+        [_xmppStream sendElement:presence];
+        [_xmppStream disconnect];
+    }
 }
 
 - (void) checkAuthentication
@@ -153,16 +164,31 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     return [_xmppStream isConnected];
 }
 
-- (NSXMLElement*) buildMessage:(NSString *)message withFriend:(id<ChatUser>)myFriend
+- (NSXMLElement*) chatMessage2XmppMessage:(ChatMessage *)message
 {
     NSXMLElement * body = [NSXMLElement elementWithName:@"body"];
-    [body setStringValue:message];
+    [body setStringValue:message.content];
     NSXMLElement * xmlMessage = [NSXMLElement elementWithName:@"message"];
     [xmlMessage addAttributeWithName:@"type" stringValue:@"chat"];
-    [xmlMessage addAttributeWithName:@"to" stringValue:[myFriend xmppUserName]];
+    [xmlMessage addAttributeWithName:@"to" stringValue:[message.myFriend xmppUserName]];
     [xmlMessage addChild:body];
     [_xmppStream sendElement:xmlMessage];
     return xmlMessage;
+}
+
+- (ChatMessage*) xmppMessage2ChatMessage:(DDXMLElement *)xmppMessage
+{
+    NSString * from = [[xmppMessage attributeForName:@"from"] stringValue];
+    if (![from isEqualToString:[self.me xmppUserName]]) {
+        ChatMessage* chatMessage = [[ChatMessage alloc] init];
+        chatMessage.content = [[xmppMessage elementForName:@"body"] stringValue];
+        chatMessage.contentType = contentTypeText;
+        chatMessage.date = [NSDate date];
+        chatMessage.myFriend = [self.me buildChatUserFromXmppUserName:from];
+        return chatMessage;
+    }
+    
+    return nil;
 }
 
 - (void) createConnectionCheckTimer
@@ -172,11 +198,17 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     dispatch_source_set_event_handler(_connectionCheckTimer, ^{
         if (![self checkConnectionAvailable]) {
             //reconnect
+            [self connectToServer];
         }
         if (!_bRunCheckTimer) {
             dispatch_source_cancel(_connectionCheckTimer);
         }
     });
+}
+
+- (void) wrongState
+{
+    
 }
 
 #pragma mark -- XMPP delegate
@@ -218,9 +250,10 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     }
 }
 
-- (void) xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message
+- (void) xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
-    
+    ChatMessage* chatMessage = [self xmppMessage2ChatMessage:message];
+    //Post notification
 }
 
 @end
