@@ -183,7 +183,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     if (![from isEqualToString:[self.me xmppUserName]]) {
         ChatMessage* chatMessage = [[ChatMessage alloc] init];
         chatMessage.content = [[xmppMessage elementForName:@"body"] stringValue];
-        chatMessage.contentType = contentTypeText;
+        chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
         chatMessage.date = [NSDate date];
         chatMessage.myFriend = [self.me buildChatUserFromXmppUserName:from];
         return chatMessage;

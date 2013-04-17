@@ -100,7 +100,7 @@
 		1F4B54EB171E6379004EB4A1 /* ChatHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatHeaderView.xib; sourceTree = "<group>"; };
 		1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojis.h; sourceTree = "<group>"; };
 		1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojis.m; sourceTree = "<group>"; };
-		1F4B54F0171E7D95004EB4A1 /* ChatDelegates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDelegates.h; sourceTree = "<group>"; };
+		1F4B54F0171E7D95004EB4A1 /* ChatDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDefinitions.h; sourceTree = "<group>"; };
 		1F5A15CA171CE58F00FDF2A0 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
 		1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		1F5A15CD171CE63E00FDF2A0 /* ChatUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 				1F4B54EB171E6379004EB4A1 /* ChatHeaderView.xib */,
 				1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */,
 				1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */,
-				1F4B54F0171E7D95004EB4A1 /* ChatDelegates.h */,
+				1F4B54F0171E7D95004EB4A1 /* ChatDefinitions.h */,
 			);
 			name = ChatView;
 			sourceTree = "<group>";

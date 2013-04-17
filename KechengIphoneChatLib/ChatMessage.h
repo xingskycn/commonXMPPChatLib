@@ -8,27 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "ChatUser.h"
-
-typedef enum {
-    senderTypeMe,
-    senderTypeFriend
-} senderType;
-
-typedef enum {
-    contentTypeText,
-    contentTypeImage,
-    contentTypeFile
-} contentType;
+#import "ChatDefinitions.h"
 
 @interface ChatMessage : NSObject
 
 @property (nonatomic,retain) id <ChatUser> myFriend;
 
-@property (nonatomic) senderType whoSend;
+@property (nonatomic) CHAT_SENDER_TYPE whoSend;
 
 @property (nonatomic,retain) NSString* content;
 
-@property (nonatomic) contentType contentType;
+@property (nonatomic) CHAT_CONTENT_TYPE contentType;
 
 @property (nonatomic,retain) NSDate* date;
 

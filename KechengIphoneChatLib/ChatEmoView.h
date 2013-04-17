@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ChatDelegates.h"
+#import "ChatDefinitions.h"
 
 @interface ChatEmoView : UIView <UIScrollViewDelegate>
 
