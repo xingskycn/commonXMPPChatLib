@@ -10,4 +10,12 @@
 
 @interface ChatTableViewCell : UITableViewCell
 
+@property (nonatomic, assign) UILabel* timeLabel;
+@property (nonatomic, assign) UILabel* messageLabel;
+@property (nonatomic, assign) UIImageView* bgView;
+@property (nonatomic, assign) UIImageView* headImageView;
+@property (nonatomic, assign) UIImageView* headBgView;
+
+-(void)layoutCell:(BOOL)left showTime:(BOOL)showTime messageSize:(CGSize)size;
+
 @end

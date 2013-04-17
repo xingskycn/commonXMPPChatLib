@@ -8,13 +8,20 @@
 
 #import "ChatView.h"
 
+@interface ChatView()
+{
+    NSMutableArray * _chatMessages;
+}
+
+@end
+
 @implementation ChatView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        _chatMessages = [[NSMutableArray alloc] init];
     }
     return self;
 }

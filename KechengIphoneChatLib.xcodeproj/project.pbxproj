@@ -13,6 +13,7 @@
 		1F4B54E6171E6200004EB4A1 /* ChatEmoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E5171E6200004EB4A1 /* ChatEmoView.m */; };
 		1F4B54E9171E62D5004EB4A1 /* ChatHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E8171E62D5004EB4A1 /* ChatHeaderView.m */; };
 		1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */; };
+		1F4B54F4171E9A21004EB4A1 /* CopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54F3171E9A21004EB4A1 /* CopyLabel.m */; };
 		1F5A15CC171CE58F00FDF2A0 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */; };
 		1F5A15D0171CE7C900FDF2A0 /* ChatDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CF171CE7C900FDF2A0 /* ChatDBHelper.m */; };
 		1F5A1638171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15D8171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -101,6 +102,18 @@
 		1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojis.h; sourceTree = "<group>"; };
 		1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojis.m; sourceTree = "<group>"; };
 		1F4B54F0171E7D95004EB4A1 /* ChatDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDefinitions.h; sourceTree = "<group>"; };
+		1F4B54F2171E9A21004EB4A1 /* CopyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyLabel.h; sourceTree = "<group>"; };
+		1F4B54F3171E9A21004EB4A1 /* CopyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyLabel.m; sourceTree = "<group>"; };
+		1F4B54F6171E9C5F004EB4A1 /* bubble_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_1@2x.png"; sourceTree = "<group>"; };
+		1F4B54F7171E9C5F004EB4A1 /* bubble_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_2@2x.png"; sourceTree = "<group>"; };
+		1F4B54F8171EA071004EB4A1 /* ChatInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatInputView.xib; sourceTree = "<group>"; };
+		1F4B54F9171EAB40004EB4A1 /* button_send_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_send_pressed@2x.png"; sourceTree = "<group>"; };
+		1F4B54FA171EAB40004EB4A1 /* button_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_send@2x.png"; sourceTree = "<group>"; };
+		1F4B54FB171EABF6004EB4A1 /* chat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat@2x.png"; sourceTree = "<group>"; };
+		1F4B54FC171EACE2004EB4A1 /* emoji_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_button_pressed@2x.png"; sourceTree = "<group>"; };
+		1F4B54FD171EACE2004EB4A1 /* emoji_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_button@2x.png"; sourceTree = "<group>"; };
+		1F4B54FE171EACE2004EB4A1 /* keyboard_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_button_pressed@2x.png"; sourceTree = "<group>"; };
+		1F4B54FF171EACE2004EB4A1 /* keyboard_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_button@2x.png"; sourceTree = "<group>"; };
 		1F5A15CA171CE58F00FDF2A0 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
 		1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		1F5A15CD171CE63E00FDF2A0 /* ChatUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
@@ -235,6 +248,8 @@
 		1F4B54E3171E61A7004EB4A1 /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
+				1F4B54F5171E9C3F004EB4A1 /* Images */,
+				1F4B54F1171E99F7004EB4A1 /* lib */,
 				1F67AB19171C018800357955 /* ChatView.h */,
 				1F67AB1A171C018800357955 /* ChatView.m */,
 				1F4B54EA171E632F004EB4A1 /* ChatView.xib */,
@@ -244,6 +259,7 @@
 				1F4B54DE171E5990004EB4A1 /* ChatTableViewCell.m */,
 				1F4B54E0171E619B004EB4A1 /* ChatInputView.h */,
 				1F4B54E1171E619B004EB4A1 /* ChatInputView.m */,
+				1F4B54F8171EA071004EB4A1 /* ChatInputView.xib */,
 				1F4B54E4171E6200004EB4A1 /* ChatEmoView.h */,
 				1F4B54E5171E6200004EB4A1 /* ChatEmoView.m */,
 				1F4B54E7171E62D5004EB4A1 /* ChatHeaderView.h */,
@@ -254,6 +270,31 @@
 				1F4B54F0171E7D95004EB4A1 /* ChatDefinitions.h */,
 			);
 			name = ChatView;
+			sourceTree = "<group>";
+		};
+		1F4B54F1171E99F7004EB4A1 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				1F4B54F2171E9A21004EB4A1 /* CopyLabel.h */,
+				1F4B54F3171E9A21004EB4A1 /* CopyLabel.m */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		1F4B54F5171E9C3F004EB4A1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1F4B54FC171EACE2004EB4A1 /* emoji_button_pressed@2x.png */,
+				1F4B54FD171EACE2004EB4A1 /* emoji_button@2x.png */,
+				1F4B54FE171EACE2004EB4A1 /* keyboard_button_pressed@2x.png */,
+				1F4B54FF171EACE2004EB4A1 /* keyboard_button@2x.png */,
+				1F4B54FB171EABF6004EB4A1 /* chat@2x.png */,
+				1F4B54F9171EAB40004EB4A1 /* button_send_pressed@2x.png */,
+				1F4B54FA171EAB40004EB4A1 /* button_send@2x.png */,
+				1F4B54F6171E9C5F004EB4A1 /* bubble_1@2x.png */,
+				1F4B54F7171E9C5F004EB4A1 /* bubble_2@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		1F5A15D2171D066100FDF2A0 /* plugin */ = {
@@ -532,8 +573,8 @@
 		1F67AAEF171C011800357955 /* KechengIphoneChatLib */ = {
 			isa = PBXGroup;
 			children = (
-				1F4B54E3171E61A7004EB4A1 /* ChatView */,
 				1F5A15D2171D066100FDF2A0 /* plugin */,
+				1F4B54E3171E61A7004EB4A1 /* ChatView */,
 				1F67AB16171C016E00357955 /* ChatManager.h */,
 				1F67AB17171C016E00357955 /* ChatManager.m */,
 				1F5A15CA171CE58F00FDF2A0 /* ChatMessage.h */,
@@ -716,6 +757,7 @@
 				1F4B54E6171E6200004EB4A1 /* ChatEmoView.m in Sources */,
 				1F4B54E9171E62D5004EB4A1 /* ChatHeaderView.m in Sources */,
 				1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */,
+				1F4B54F4171E9A21004EB4A1 /* CopyLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,13 +19,29 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (IBAction)emoButtonClick:(id)sender {
 }
-*/
 
+- (IBAction)sendButtonClick:(id)sender {
+}
+
+- (void)syncEmoButtonIcon
+{
+    if (self.inputMode == CHAT_INPUT_MODE_TEXT) {
+        [self.emoButton setBackgroundImage:[UIImage imageNamed:@"keyboard_button"] forState:UIControlStateNormal];
+        [self.emoButton setBackgroundImage:[UIImage imageNamed:@"keyboard_button_pressed"] forState:UIControlStateNormal];
+    } else if (self.inputMode == CHAT_INPUT_MODE_EMO) {
+        [self.emoButton setBackgroundImage:[UIImage imageNamed:@"emoji_button"] forState:UIControlStateNormal];
+        [self.emoButton setBackgroundImage:[UIImage imageNamed:@"emoji_button_pressed"] forState:UIControlStateHighlighted];
+    }
+}
+
+- (void)dealloc
+{
+    [_bgImageView release];
+    [_inputView release];
+    [_textViewBgImageView release];
+    [_delegate release];
+    [super dealloc];
+}
 @end
