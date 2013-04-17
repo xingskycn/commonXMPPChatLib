@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol ChatEmoViewDelegate <NSObject>
-
-- (void) handleInput: (NSString *) emoji;
-- (void) handleDelete;
-
-@end
+#import "ChatDelegates.h"
 
 @interface ChatEmoView : UIView <UIScrollViewDelegate>
 
