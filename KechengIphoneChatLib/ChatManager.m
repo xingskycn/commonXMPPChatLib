@@ -48,6 +48,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 - (BOOL) checkConnectionAvailable;
 
 - (NSXMLElement*) chatMessage2XmppMessage:(ChatMessage*)message;
+
 - (ChatMessage*) xmppMessage2ChatMessage:(NSXMLElement*)xmppMessage;
 
 - (void) createConnectionCheckTimer;

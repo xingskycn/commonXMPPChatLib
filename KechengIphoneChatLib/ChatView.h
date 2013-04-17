@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatTableView.h"
+#import "ChatHeaderView.h"
+#import "ChatInputView.h"
 
 @interface ChatView : UIView
+
+@property (retain, nonatomic) IBOutlet ChatTableView *chatTableView;
+@property (retain, nonatomic) IBOutlet ChatHeaderView *chatHeaderView;
+@property (retain, nonatomic) IBOutlet ChatInputView *chatInputView;
 
 @end

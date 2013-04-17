@@ -11,6 +11,8 @@
 
 static ChatDBHelper * dbHelper = nil;
 
+static int messagesPerPage = 10;
+
 static NSString* chatTableColumn1 = @"message_id";
 
 static NSString* chatTableColumn2 = @"friend_id";
@@ -104,7 +106,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
     
     sqlite3_stmt * stetment;
     sqlite3_open(filename, &_dbh);
-    NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM '%@' WHERE %@ = :friend_id ORDER BY %@", chatMessageTableName, chatTableColumn2, chatTableColumn7];
+    NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM '%@' WHERE %@ = :friend_id ORDER BY %@ limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn7, (page - 1) * messagesPerPage, page * messagesPerPage];
     const char * sql = [selectSql UTF8String];
     sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
@@ -165,7 +167,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
     const char * filename = [self.chatDBPath UTF8String];
     sqlite3_stmt * stetment;
     sqlite3_open(filename, &_dbh);
-    NSString * updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET is_new = 1 WHERE %@ = :friend_id AND %@ = 0", chatMessageTableName, chatTableColumn2, chatTableColumn6];
+    NSString * updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET %@ = 1 WHERE %@ = :friend_id AND %@ = 0", chatMessageTableName, chatTableColumn6, chatTableColumn2, chatTableColumn6];
     const char * sql = [updateSql UTF8String];
     sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);

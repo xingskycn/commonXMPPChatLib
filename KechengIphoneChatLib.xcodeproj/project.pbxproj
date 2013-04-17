@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4B54DC171E5976004EB4A1 /* ChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54DB171E5976004EB4A1 /* ChatTableView.m */; };
+		1F4B54DF171E5990004EB4A1 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54DE171E5990004EB4A1 /* ChatTableViewCell.m */; };
+		1F4B54E2171E619B004EB4A1 /* ChatInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E1171E619B004EB4A1 /* ChatInputView.m */; };
+		1F4B54E6171E6200004EB4A1 /* ChatEmoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E5171E6200004EB4A1 /* ChatEmoView.m */; };
+		1F4B54E9171E62D5004EB4A1 /* ChatHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E8171E62D5004EB4A1 /* ChatHeaderView.m */; };
+		1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */; };
 		1F5A15CC171CE58F00FDF2A0 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */; };
 		1F5A15D0171CE7C900FDF2A0 /* ChatDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CF171CE7C900FDF2A0 /* ChatDBHelper.m */; };
 		1F5A1638171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15D8171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -80,6 +86,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F4B54DA171E5976004EB4A1 /* ChatTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableView.h; sourceTree = "<group>"; };
+		1F4B54DB171E5976004EB4A1 /* ChatTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableView.m; sourceTree = "<group>"; };
+		1F4B54DD171E5990004EB4A1 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
+		1F4B54DE171E5990004EB4A1 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
+		1F4B54E0171E619B004EB4A1 /* ChatInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatInputView.h; sourceTree = "<group>"; };
+		1F4B54E1171E619B004EB4A1 /* ChatInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatInputView.m; sourceTree = "<group>"; };
+		1F4B54E4171E6200004EB4A1 /* ChatEmoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmoView.h; sourceTree = "<group>"; };
+		1F4B54E5171E6200004EB4A1 /* ChatEmoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmoView.m; sourceTree = "<group>"; };
+		1F4B54E7171E62D5004EB4A1 /* ChatHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeaderView.h; sourceTree = "<group>"; };
+		1F4B54E8171E62D5004EB4A1 /* ChatHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatHeaderView.m; sourceTree = "<group>"; };
+		1F4B54EA171E632F004EB4A1 /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
+		1F4B54EB171E6379004EB4A1 /* ChatHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatHeaderView.xib; sourceTree = "<group>"; };
+		1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojis.h; sourceTree = "<group>"; };
+		1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojis.m; sourceTree = "<group>"; };
 		1F5A15CA171CE58F00FDF2A0 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
 		1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		1F5A15CD171CE63E00FDF2A0 /* ChatUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
@@ -211,6 +231,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F4B54E3171E61A7004EB4A1 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				1F67AB19171C018800357955 /* ChatView.h */,
+				1F67AB1A171C018800357955 /* ChatView.m */,
+				1F4B54EA171E632F004EB4A1 /* ChatView.xib */,
+				1F4B54DA171E5976004EB4A1 /* ChatTableView.h */,
+				1F4B54DB171E5976004EB4A1 /* ChatTableView.m */,
+				1F4B54DD171E5990004EB4A1 /* ChatTableViewCell.h */,
+				1F4B54DE171E5990004EB4A1 /* ChatTableViewCell.m */,
+				1F4B54E0171E619B004EB4A1 /* ChatInputView.h */,
+				1F4B54E1171E619B004EB4A1 /* ChatInputView.m */,
+				1F4B54E4171E6200004EB4A1 /* ChatEmoView.h */,
+				1F4B54E5171E6200004EB4A1 /* ChatEmoView.m */,
+				1F4B54E7171E62D5004EB4A1 /* ChatHeaderView.h */,
+				1F4B54E8171E62D5004EB4A1 /* ChatHeaderView.m */,
+				1F4B54EB171E6379004EB4A1 /* ChatHeaderView.xib */,
+				1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */,
+				1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */,
+			);
+			name = ChatView;
+			sourceTree = "<group>";
+		};
 		1F5A15D2171D066100FDF2A0 /* plugin */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,9 +530,8 @@
 		1F67AAEF171C011800357955 /* KechengIphoneChatLib */ = {
 			isa = PBXGroup;
 			children = (
+				1F4B54E3171E61A7004EB4A1 /* ChatView */,
 				1F5A15D2171D066100FDF2A0 /* plugin */,
-				1F67AB19171C018800357955 /* ChatView.h */,
-				1F67AB1A171C018800357955 /* ChatView.m */,
 				1F67AB16171C016E00357955 /* ChatManager.h */,
 				1F67AB17171C016E00357955 /* ChatManager.m */,
 				1F5A15CA171CE58F00FDF2A0 /* ChatMessage.h */,
@@ -666,6 +708,12 @@
 				1F5A1658171D06C300FDF2A0 /* DDXMLDocument.m in Sources */,
 				1F5A1659171D06C300FDF2A0 /* DDXMLElement.m in Sources */,
 				1F5A165A171D06C300FDF2A0 /* DDXMLNode.m in Sources */,
+				1F4B54DC171E5976004EB4A1 /* ChatTableView.m in Sources */,
+				1F4B54DF171E5990004EB4A1 /* ChatTableViewCell.m in Sources */,
+				1F4B54E2171E619B004EB4A1 /* ChatInputView.m in Sources */,
+				1F4B54E6171E6200004EB4A1 /* ChatEmoView.m in Sources */,
+				1F4B54E9171E62D5004EB4A1 /* ChatHeaderView.m in Sources */,
+				1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
