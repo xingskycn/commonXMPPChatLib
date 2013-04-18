@@ -7,7 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F155104171FBBB100C7469E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1660171D269100FDF2A0 /* libxml2.dylib */; };
+		1F155105171FBCAE00C7469E /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A165E171D268400FDF2A0 /* libxml2.2.dylib */; };
+		1F155196171FC2FC00C7469E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A165C171D248100FDF2A0 /* UIKit.framework */; };
+		1F155197171FC36000C7469E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4B5507171EAFA6004EB4A1 /* CoreGraphics.framework */; };
+		1F155199171FC3BF00C7469E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F155198171FC3BF00C7469E /* CFNetwork.framework */; };
+		1F15519B171FC3CD00C7469E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15519A171FC3CD00C7469E /* Security.framework */; };
+		1F15519F171FC73E00C7469E /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15519E171FC73E00C7469E /* libresolv.dylib */; };
 		1F294130171EC10600EE3F19 /* libKechengIphoneChatLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */; };
+		1F492D4F171F8EB50047066C /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F492D4D171F8EB50047066C /* ChatViewController.m */; };
+		1F492D50171F92460047066C /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F492D4E171F8EB50047066C /* ChatViewController.xib */; };
+		1F492D51171F93BC0047066C /* ChatInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54F8171EA071004EB4A1 /* ChatInputView.xib */; };
+		1F492D5B171F94B70047066C /* ChatInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E1171E619B004EB4A1 /* ChatInputView.m */; };
+		1F492D70171F96AC0047066C /* emoji_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54FC171EACE2004EB4A1 /* emoji_button_pressed@2x.png */; };
+		1F492D71171F96AC0047066C /* emoji_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54FD171EACE2004EB4A1 /* emoji_button@2x.png */; };
+		1F492D72171F96AC0047066C /* keyboard_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54FE171EACE2004EB4A1 /* keyboard_button_pressed@2x.png */; };
+		1F492D73171F96AC0047066C /* keyboard_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54FF171EACE2004EB4A1 /* keyboard_button@2x.png */; };
+		1F492D74171F96AC0047066C /* chat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54FB171EABF6004EB4A1 /* chat@2x.png */; };
+		1F492D75171F96AC0047066C /* button_send_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54F9171EAB40004EB4A1 /* button_send_pressed@2x.png */; };
+		1F492D76171F96AC0047066C /* button_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54FA171EAB40004EB4A1 /* button_send@2x.png */; };
+		1F492D77171F96AC0047066C /* bubble_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54F6171E9C5F004EB4A1 /* bubble_1@2x.png */; };
+		1F492D78171F96AC0047066C /* bubble_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54F7171E9C5F004EB4A1 /* bubble_2@2x.png */; };
 		1F4B54DC171E5976004EB4A1 /* ChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54DB171E5976004EB4A1 /* ChatTableView.m */; };
 		1F4B54DF171E5990004EB4A1 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54DE171E5990004EB4A1 /* ChatTableViewCell.m */; };
 		1F4B54E2171E619B004EB4A1 /* ChatInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E1171E619B004EB4A1 /* ChatInputView.m */; };
@@ -24,14 +44,11 @@
 		1F4B5516171EAFA6004EB4A1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B5515171EAFA6004EB4A1 /* Default.png */; };
 		1F4B5518171EAFA6004EB4A1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B5517171EAFA6004EB4A1 /* Default@2x.png */; };
 		1F4B551A171EAFA6004EB4A1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B5519171EAFA6004EB4A1 /* Default-568h@2x.png */; };
-		1F4B551D171EAFA6004EB4A1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B551B171EAFA6004EB4A1 /* MainStoryboard.storyboard */; };
-		1F4B5520171EAFA6004EB4A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B551F171EAFA6004EB4A1 /* ViewController.m */; };
 		1F4B5527171EAFA7004EB4A1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFC171C011800357955 /* SenTestingKit.framework */; };
 		1F4B5528171EAFA7004EB4A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFE171C011800357955 /* UIKit.framework */; };
 		1F4B5529171EAFA7004EB4A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
 		1F4B5531171EAFA7004EB4A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B552F171EAFA7004EB4A1 /* InfoPlist.strings */; };
 		1F4B5534171EAFA7004EB4A1 /* KechengIphoneTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B5533171EAFA7004EB4A1 /* KechengIphoneTestTests.m */; };
-		1F4B553B171EB31B004EB4A1 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54EA171E632F004EB4A1 /* ChatView.xib */; };
 		1F5A15CC171CE58F00FDF2A0 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */; };
 		1F5A15D0171CE7C900FDF2A0 /* ChatDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CF171CE7C900FDF2A0 /* ChatDBHelper.m */; };
 		1F5A1638171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15D8171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -73,13 +90,9 @@
 		1F5A1663171D27EA00FDF2A0 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1662171D27EA00FDF2A0 /* libsqlite3.0.dylib */; };
 		1F67AAEE171C011800357955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
 		1F67AAFD171C011800357955 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFC171C011800357955 /* SenTestingKit.framework */; };
-		1F67AAFF171C011800357955 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFE171C011800357955 /* UIKit.framework */; };
 		1F67AB00171C011800357955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
 		1F67AB03171C011800357955 /* libKechengIphoneChatLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */; };
-		1F67AB09171C011800357955 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F67AB07171C011800357955 /* InfoPlist.strings */; };
-		1F67AB0C171C011800357955 /* KechengIphoneChatLibTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F67AB0B171C011800357955 /* KechengIphoneChatLibTests.m */; };
 		1F67AB18171C016E00357955 /* ChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F67AB17171C016E00357955 /* ChatManager.m */; };
-		1F67AB1B171C018800357955 /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F67AB1A171C018800357955 /* ChatView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +132,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F155198171FC3BF00C7469E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1F15519A171FC3CD00C7469E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1F15519C171FC42D00C7469E /* libdnsinfo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdnsinfo.dylib; path = usr/lib/system/libdnsinfo.dylib; sourceTree = SDKROOT; };
+		1F15519E171FC73E00C7469E /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		1F492D4C171F8EB50047066C /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		1F492D4D171F8EB50047066C /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		1F492D4E171F8EB50047066C /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
 		1F4B54DA171E5976004EB4A1 /* ChatTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableView.h; sourceTree = "<group>"; };
 		1F4B54DB171E5976004EB4A1 /* ChatTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableView.m; sourceTree = "<group>"; };
 		1F4B54DD171E5990004EB4A1 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
@@ -129,7 +149,6 @@
 		1F4B54E5171E6200004EB4A1 /* ChatEmoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmoView.m; sourceTree = "<group>"; };
 		1F4B54E7171E62D5004EB4A1 /* ChatHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeaderView.h; sourceTree = "<group>"; };
 		1F4B54E8171E62D5004EB4A1 /* ChatHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatHeaderView.m; sourceTree = "<group>"; };
-		1F4B54EA171E632F004EB4A1 /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
 		1F4B54EB171E6379004EB4A1 /* ChatHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatHeaderView.xib; sourceTree = "<group>"; };
 		1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojis.h; sourceTree = "<group>"; };
 		1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojis.m; sourceTree = "<group>"; };
@@ -157,9 +176,6 @@
 		1F4B5515171EAFA6004EB4A1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1F4B5517171EAFA6004EB4A1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1F4B5519171EAFA6004EB4A1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		1F4B551C171EAFA6004EB4A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		1F4B551E171EAFA6004EB4A1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1F4B551F171EAFA6004EB4A1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1F4B5526171EAFA6004EB4A1 /* KechengIphoneTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KechengIphoneTestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4B552E171EAFA7004EB4A1 /* KechengIphoneTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KechengIphoneTestTests-Info.plist"; sourceTree = "<group>"; };
 		1F4B5530171EAFA7004EB4A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -261,14 +277,8 @@
 		1F67AAFB171C011800357955 /* KechengIphoneChatLibTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KechengIphoneChatLibTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F67AAFC171C011800357955 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F67AAFE171C011800357955 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		1F67AB06171C011800357955 /* KechengIphoneChatLibTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KechengIphoneChatLibTests-Info.plist"; sourceTree = "<group>"; };
-		1F67AB08171C011800357955 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1F67AB0A171C011800357955 /* KechengIphoneChatLibTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KechengIphoneChatLibTests.h; sourceTree = "<group>"; };
-		1F67AB0B171C011800357955 /* KechengIphoneChatLibTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KechengIphoneChatLibTests.m; sourceTree = "<group>"; };
 		1F67AB16171C016E00357955 /* ChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatManager.h; sourceTree = "<group>"; };
 		1F67AB17171C016E00357955 /* ChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatManager.m; sourceTree = "<group>"; };
-		1F67AB19171C018800357955 /* ChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatView.h; sourceTree = "<group>"; };
-		1F67AB1A171C018800357955 /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,8 +317,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F15519F171FC73E00C7469E /* libresolv.dylib in Frameworks */,
+				1F15519B171FC3CD00C7469E /* Security.framework in Frameworks */,
+				1F155199171FC3BF00C7469E /* CFNetwork.framework in Frameworks */,
+				1F155197171FC36000C7469E /* CoreGraphics.framework in Frameworks */,
+				1F155196171FC2FC00C7469E /* UIKit.framework in Frameworks */,
+				1F155105171FBCAE00C7469E /* libxml2.2.dylib in Frameworks */,
+				1F155104171FBBB100C7469E /* libxml2.dylib in Frameworks */,
 				1F67AAFD171C011800357955 /* SenTestingKit.framework in Frameworks */,
-				1F67AAFF171C011800357955 /* UIKit.framework in Frameworks */,
 				1F67AB00171C011800357955 /* Foundation.framework in Frameworks */,
 				1F67AB03171C011800357955 /* libKechengIphoneChatLib.a in Frameworks */,
 			);
@@ -322,9 +338,9 @@
 			children = (
 				1F4B54F5171E9C3F004EB4A1 /* Images */,
 				1F4B54F1171E99F7004EB4A1 /* lib */,
-				1F67AB19171C018800357955 /* ChatView.h */,
-				1F67AB1A171C018800357955 /* ChatView.m */,
-				1F4B54EA171E632F004EB4A1 /* ChatView.xib */,
+				1F492D4C171F8EB50047066C /* ChatViewController.h */,
+				1F492D4D171F8EB50047066C /* ChatViewController.m */,
+				1F492D4E171F8EB50047066C /* ChatViewController.xib */,
 				1F4B54DA171E5976004EB4A1 /* ChatTableView.h */,
 				1F4B54DB171E5976004EB4A1 /* ChatTableView.m */,
 				1F4B54DD171E5990004EB4A1 /* ChatTableViewCell.h */,
@@ -374,9 +390,6 @@
 			children = (
 				1F4B5512171EAFA6004EB4A1 /* AppDelegate.h */,
 				1F4B5513171EAFA6004EB4A1 /* AppDelegate.m */,
-				1F4B551B171EAFA6004EB4A1 /* MainStoryboard.storyboard */,
-				1F4B551E171EAFA6004EB4A1 /* ViewController.h */,
-				1F4B551F171EAFA6004EB4A1 /* ViewController.m */,
 				1F4B550A171EAFA6004EB4A1 /* Supporting Files */,
 			);
 			path = KechengIphoneTest;
@@ -658,12 +671,15 @@
 		1F67AAE1171C011800357955 = {
 			isa = PBXGroup;
 			children = (
+				1F15519E171FC73E00C7469E /* libresolv.dylib */,
+				1F15519C171FC42D00C7469E /* libdnsinfo.dylib */,
+				1F15519A171FC3CD00C7469E /* Security.framework */,
+				1F155198171FC3BF00C7469E /* CFNetwork.framework */,
 				1F5A1662171D27EA00FDF2A0 /* libsqlite3.0.dylib */,
 				1F5A1660171D269100FDF2A0 /* libxml2.dylib */,
 				1F5A165E171D268400FDF2A0 /* libxml2.2.dylib */,
 				1F5A165C171D248100FDF2A0 /* UIKit.framework */,
 				1F67AAEF171C011800357955 /* KechengIphoneChatLib */,
-				1F67AB04171C011800357955 /* KechengIphoneChatLibTests */,
 				1F4B5509171EAFA6004EB4A1 /* KechengIphoneTest */,
 				1F4B552C171EAFA7004EB4A1 /* KechengIphoneTestTests */,
 				1F67AAEC171C011800357955 /* Frameworks */,
@@ -714,25 +730,6 @@
 			isa = PBXGroup;
 			children = (
 				1F67AAF1171C011800357955 /* KechengIphoneChatLib-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1F67AB04171C011800357955 /* KechengIphoneChatLibTests */ = {
-			isa = PBXGroup;
-			children = (
-				1F67AB0A171C011800357955 /* KechengIphoneChatLibTests.h */,
-				1F67AB0B171C011800357955 /* KechengIphoneChatLibTests.m */,
-				1F67AB05171C011800357955 /* Supporting Files */,
-			);
-			path = KechengIphoneChatLibTests;
-			sourceTree = "<group>";
-		};
-		1F67AB05171C011800357955 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1F67AB06171C011800357955 /* KechengIphoneChatLibTests-Info.plist */,
-				1F67AB07171C011800357955 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -851,8 +848,17 @@
 				1F4B5516171EAFA6004EB4A1 /* Default.png in Resources */,
 				1F4B5518171EAFA6004EB4A1 /* Default@2x.png in Resources */,
 				1F4B551A171EAFA6004EB4A1 /* Default-568h@2x.png in Resources */,
-				1F4B551D171EAFA6004EB4A1 /* MainStoryboard.storyboard in Resources */,
-				1F4B553B171EB31B004EB4A1 /* ChatView.xib in Resources */,
+				1F492D50171F92460047066C /* ChatViewController.xib in Resources */,
+				1F492D51171F93BC0047066C /* ChatInputView.xib in Resources */,
+				1F492D70171F96AC0047066C /* emoji_button_pressed@2x.png in Resources */,
+				1F492D71171F96AC0047066C /* emoji_button@2x.png in Resources */,
+				1F492D72171F96AC0047066C /* keyboard_button_pressed@2x.png in Resources */,
+				1F492D73171F96AC0047066C /* keyboard_button@2x.png in Resources */,
+				1F492D74171F96AC0047066C /* chat@2x.png in Resources */,
+				1F492D75171F96AC0047066C /* button_send_pressed@2x.png in Resources */,
+				1F492D76171F96AC0047066C /* button_send@2x.png in Resources */,
+				1F492D77171F96AC0047066C /* bubble_1@2x.png in Resources */,
+				1F492D78171F96AC0047066C /* bubble_2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,7 +874,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F67AB09171C011800357955 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,7 +915,7 @@
 			files = (
 				1F4B5510171EAFA6004EB4A1 /* main.m in Sources */,
 				1F4B5514171EAFA6004EB4A1 /* AppDelegate.m in Sources */,
-				1F4B5520171EAFA6004EB4A1 /* ViewController.m in Sources */,
+				1F492D5B171F94B70047066C /* ChatInputView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,7 +932,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F67AB18171C016E00357955 /* ChatManager.m in Sources */,
-				1F67AB1B171C018800357955 /* ChatView.m in Sources */,
 				1F5A15CC171CE58F00FDF2A0 /* ChatMessage.m in Sources */,
 				1F5A15D0171CE7C900FDF2A0 /* ChatDBHelper.m in Sources */,
 				1F5A1638171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m in Sources */,
@@ -972,6 +976,7 @@
 				1F4B54E9171E62D5004EB4A1 /* ChatHeaderView.m in Sources */,
 				1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */,
 				1F4B54F4171E9A21004EB4A1 /* CopyLabel.m in Sources */,
+				1F492D4F171F8EB50047066C /* ChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -979,7 +984,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F67AB0C171C011800357955 /* KechengIphoneChatLibTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,26 +1016,10 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		1F4B551B171EAFA6004EB4A1 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1F4B551C171EAFA6004EB4A1 /* en */,
-			);
-			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
 		1F4B552F171EAFA7004EB4A1 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1F4B5530171EAFA7004EB4A1 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		1F67AB07171C011800357955 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1F67AB08171C011800357955 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1208,7 +1196,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "KechengIphoneChatLibTests/KechengIphoneChatLibTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/KechengIphoneChatLibTests\"",
+					"\"$(SRCROOT)/KechengIphoneChatLibTests/XMPP/Vendor/libidn\"",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1223,7 +1220,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "KechengIphoneChatLibTests/KechengIphoneChatLibTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/KechengIphoneChatLibTests\"",
+					"\"$(SRCROOT)/KechengIphoneChatLibTests/XMPP/Vendor/libidn\"",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};

@@ -117,12 +117,14 @@
     [emojis release];
 }
 
--(void)buttonPress:(id)sender {
+-(void)buttonPress:(id)sender
+{
     UIButton* button = sender;
     [self.delegate handleInput:button.titleLabel.text];
 }
 
--(void)backButtonPress:(id)sender {
+-(void)backButtonPress:(id)sender
+{
     [self.delegate handleDelete];
 }
 

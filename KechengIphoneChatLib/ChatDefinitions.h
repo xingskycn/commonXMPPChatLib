@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
+    CHAT_INPUT_MODE_NONE,
     CHAT_INPUT_MODE_TEXT,
     CHAT_INPUT_MODE_EMO,
 } CHAT_INPUT_MODE;
@@ -28,8 +29,10 @@ typedef enum {
 @protocol ChatInputViewDelegate <NSObject>
 
 -(void)inputViewRectChangeFrame:(CGRect)nowRect;
+-(void)onInputViewHeightChanged:(CGFloat)changedHeight;
 -(void)inputViewSendMessage:(NSString *)message;
--(void)inputViewSetInputMode:(CHAT_INPUT_MODE) inputMode;
+-(CHAT_INPUT_MODE)chatInputMode;
+-(void)onEmoButtonClick;
 
 @end
 
@@ -39,3 +42,5 @@ typedef enum {
 - (void) handleDelete;
 
 @end
+
+#define SCREEN_HEIGHT CGRectGetHeight([UIScreen mainScreen].applicationFrame) - 44

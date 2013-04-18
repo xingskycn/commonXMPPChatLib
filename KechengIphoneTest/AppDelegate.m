@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
-#import "ChatView.h"
+#import "ChatViewController.h"
 
 @implementation AppDelegate
 
@@ -22,11 +21,9 @@
 {
     // Override point for customization after application launch.
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    ViewController *rootVC = [[ViewController alloc] init];
-    NSArray *xib = [[NSBundle mainBundle] loadNibNamed:@"ChatView" owner:nil options:nil];
-    ChatView *view = [xib objectAtIndex:0];
-    [rootVC.view addSubview:view];
-    self.window.rootViewController = rootVC;
+    ChatViewController* rootVC = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ChatMessage.h"
+#import "XMPP.h"
 
-@interface ChatManager : NSObject
+@interface ChatManager : NSObject <XMPPStreamDelegate>
 
 +(ChatManager*) sharedInstance;
 

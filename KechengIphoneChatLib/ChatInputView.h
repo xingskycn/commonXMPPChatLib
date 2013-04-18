@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ChatDefinitions.h"
 
-@interface ChatInputView : UIView
+@interface ChatInputView : UIView <UITextViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *textViewBgImageView;
 
@@ -17,14 +17,15 @@
 
 @property (retain, nonatomic) IBOutlet UIImageView *bgImageView;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *emoButton;
+@property (retain, nonatomic) IBOutlet UIButton *emoButton;
+@property (retain, nonatomic) IBOutlet UIButton *sendButton;
 
 @property (retain, nonatomic) id <ChatInputViewDelegate> delegate;
-
-@property (nonatomic) CHAT_INPUT_MODE inputMode;
 
 - (IBAction)emoButtonClick:(id)sender;
 
 - (IBAction)sendButtonClick:(id)sender;
+
+- (void) syncEmoButtonIcon;
 
 @end

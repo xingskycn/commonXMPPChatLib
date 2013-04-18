@@ -69,6 +69,15 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     return chatManager;
 }
 
+- (id) init
+{
+    if (self = [super init]) {
+        _xmppStream = [[XMPPStream alloc] init];
+        [_xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    }
+    return self;
+}
+
 - (void) sendMessage:(ChatMessage *)message withComplete:(void (^)(BOOL))block
 {
     if ([self checkConnectionAvailable]) {
@@ -124,8 +133,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     if ([self checkConnectionAvailable]) {
         XMPPPresence * presence = [XMPPPresence presenceWithType:OFF_LINE];
         [_xmppStream sendElement:presence];
-        [_xmppStream disconnect];
     }
+    [_xmppStream disconnect];
 }
 
 - (void) checkAuthentication
@@ -162,7 +171,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 - (BOOL) checkConnectionAvailable
 {
     //May be not right
-    return [_xmppStream isConnected];
+    return [_xmppStream isConnected] && [_xmppStream isAuthenticated];
 }
 
 - (NSXMLElement*) chatMessage2XmppMessage:(ChatMessage *)message
