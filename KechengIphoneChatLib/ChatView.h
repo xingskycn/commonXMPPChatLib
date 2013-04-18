@@ -14,11 +14,11 @@
 
 @interface ChatView : UIView <UITableViewDataSource, UITableViewDelegate>
 
-@property (retain, nonatomic) IBOutlet ChatTableView *chatTableView;
+//@property (retain, nonatomic) IBOutlet UITableView *chatTableView;
 
-@property (retain, nonatomic) IBOutlet ChatHeaderView *chatHeaderView;
+//@property (retain, nonatomic) IBOutlet ChatHeaderView *chatHeaderView;
 
-@property (retain, nonatomic) IBOutlet ChatInputView *chatInputView;
+//@property (retain, nonatomic) IBOutlet ChatInputView *chatInputView;
 
 @property (retain, nonatomic) id <ChatUser> me;
 

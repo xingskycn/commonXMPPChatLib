@@ -11,6 +11,8 @@
 @interface ChatView()
 {
     NSMutableArray * _chatMessages;
+    UITableView * _chatTableView;
+    ChatInputView * _chatInputView;
 }
 
 @end
@@ -26,6 +28,17 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    
+    NSArray * xib = [[NSBundle mainBundle] loadNibNamed:@"ChatInputView" owner:self options:nil];
+    _chatInputView = [xib objectAtIndex:0];
+    _chatInputView.frame = CGRectMake(0, 503, 320, 45);
+    [self addSubview:_chatInputView];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -35,4 +48,8 @@
 }
 */
 
+- (void)dealloc {
+    [_chatTableView release];
+    [super dealloc];
+}
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F294130171EC10600EE3F19 /* libKechengIphoneChatLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */; };
 		1F4B54DC171E5976004EB4A1 /* ChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54DB171E5976004EB4A1 /* ChatTableView.m */; };
 		1F4B54DF171E5990004EB4A1 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54DE171E5990004EB4A1 /* ChatTableViewCell.m */; };
 		1F4B54E2171E619B004EB4A1 /* ChatInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E1171E619B004EB4A1 /* ChatInputView.m */; };
@@ -14,6 +15,23 @@
 		1F4B54E9171E62D5004EB4A1 /* ChatHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54E8171E62D5004EB4A1 /* ChatHeaderView.m */; };
 		1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */; };
 		1F4B54F4171E9A21004EB4A1 /* CopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B54F3171E9A21004EB4A1 /* CopyLabel.m */; };
+		1F4B5505171EAFA6004EB4A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFE171C011800357955 /* UIKit.framework */; };
+		1F4B5506171EAFA6004EB4A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
+		1F4B5508171EAFA6004EB4A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4B5507171EAFA6004EB4A1 /* CoreGraphics.framework */; };
+		1F4B550E171EAFA6004EB4A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B550C171EAFA6004EB4A1 /* InfoPlist.strings */; };
+		1F4B5510171EAFA6004EB4A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B550F171EAFA6004EB4A1 /* main.m */; };
+		1F4B5514171EAFA6004EB4A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B5513171EAFA6004EB4A1 /* AppDelegate.m */; };
+		1F4B5516171EAFA6004EB4A1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B5515171EAFA6004EB4A1 /* Default.png */; };
+		1F4B5518171EAFA6004EB4A1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B5517171EAFA6004EB4A1 /* Default@2x.png */; };
+		1F4B551A171EAFA6004EB4A1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B5519171EAFA6004EB4A1 /* Default-568h@2x.png */; };
+		1F4B551D171EAFA6004EB4A1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B551B171EAFA6004EB4A1 /* MainStoryboard.storyboard */; };
+		1F4B5520171EAFA6004EB4A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B551F171EAFA6004EB4A1 /* ViewController.m */; };
+		1F4B5527171EAFA7004EB4A1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFC171C011800357955 /* SenTestingKit.framework */; };
+		1F4B5528171EAFA7004EB4A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFE171C011800357955 /* UIKit.framework */; };
+		1F4B5529171EAFA7004EB4A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
+		1F4B5531171EAFA7004EB4A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B552F171EAFA7004EB4A1 /* InfoPlist.strings */; };
+		1F4B5534171EAFA7004EB4A1 /* KechengIphoneTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B5533171EAFA7004EB4A1 /* KechengIphoneTestTests.m */; };
+		1F4B553B171EB31B004EB4A1 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54EA171E632F004EB4A1 /* ChatView.xib */; };
 		1F5A15CC171CE58F00FDF2A0 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */; };
 		1F5A15D0171CE7C900FDF2A0 /* ChatDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15CF171CE7C900FDF2A0 /* ChatDBHelper.m */; };
 		1F5A1638171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A15D8171D06C300FDF2A0 /* XMPPAnonymousAuthentication.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -65,6 +83,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1F29412E171EC10100EE3F19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F67AAE2171C011800357955 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F67AAE9171C011800357955;
+			remoteInfo = KechengIphoneChatLib;
+		};
+		1F4B552A171EAFA7004EB4A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F67AAE2171C011800357955 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F4B5503171EAFA6004EB4A1;
+			remoteInfo = KechengIphoneTest;
+		};
 		1F67AB01171C011800357955 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F67AAE2171C011800357955 /* Project object */;
@@ -114,6 +146,25 @@
 		1F4B54FD171EACE2004EB4A1 /* emoji_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_button@2x.png"; sourceTree = "<group>"; };
 		1F4B54FE171EACE2004EB4A1 /* keyboard_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_button_pressed@2x.png"; sourceTree = "<group>"; };
 		1F4B54FF171EACE2004EB4A1 /* keyboard_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_button@2x.png"; sourceTree = "<group>"; };
+		1F4B5504171EAFA6004EB4A1 /* KechengIphoneTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KechengIphoneTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F4B5507171EAFA6004EB4A1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1F4B550B171EAFA6004EB4A1 /* KechengIphoneTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KechengIphoneTest-Info.plist"; sourceTree = "<group>"; };
+		1F4B550D171EAFA6004EB4A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F4B550F171EAFA6004EB4A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1F4B5511171EAFA6004EB4A1 /* KechengIphoneTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KechengIphoneTest-Prefix.pch"; sourceTree = "<group>"; };
+		1F4B5512171EAFA6004EB4A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1F4B5513171EAFA6004EB4A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1F4B5515171EAFA6004EB4A1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1F4B5517171EAFA6004EB4A1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1F4B5519171EAFA6004EB4A1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1F4B551C171EAFA6004EB4A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		1F4B551E171EAFA6004EB4A1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1F4B551F171EAFA6004EB4A1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1F4B5526171EAFA6004EB4A1 /* KechengIphoneTestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KechengIphoneTestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F4B552E171EAFA7004EB4A1 /* KechengIphoneTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KechengIphoneTestTests-Info.plist"; sourceTree = "<group>"; };
+		1F4B5530171EAFA7004EB4A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F4B5532171EAFA7004EB4A1 /* KechengIphoneTestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KechengIphoneTestTests.h; sourceTree = "<group>"; };
+		1F4B5533171EAFA7004EB4A1 /* KechengIphoneTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KechengIphoneTestTests.m; sourceTree = "<group>"; };
 		1F5A15CA171CE58F00FDF2A0 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
 		1F5A15CB171CE58F00FDF2A0 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		1F5A15CD171CE63E00FDF2A0 /* ChatUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
@@ -221,6 +272,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1F4B5501171EAFA6004EB4A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F294130171EC10600EE3F19 /* libKechengIphoneChatLib.a in Frameworks */,
+				1F4B5505171EAFA6004EB4A1 /* UIKit.framework in Frameworks */,
+				1F4B5506171EAFA6004EB4A1 /* Foundation.framework in Frameworks */,
+				1F4B5508171EAFA6004EB4A1 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F4B5522171EAFA6004EB4A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F4B5527171EAFA7004EB4A1 /* SenTestingKit.framework in Frameworks */,
+				1F4B5528171EAFA7004EB4A1 /* UIKit.framework in Frameworks */,
+				1F4B5529171EAFA7004EB4A1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F67AAE7171C011800357955 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -295,6 +367,52 @@
 				1F4B54F7171E9C5F004EB4A1 /* bubble_2@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		1F4B5509171EAFA6004EB4A1 /* KechengIphoneTest */ = {
+			isa = PBXGroup;
+			children = (
+				1F4B5512171EAFA6004EB4A1 /* AppDelegate.h */,
+				1F4B5513171EAFA6004EB4A1 /* AppDelegate.m */,
+				1F4B551B171EAFA6004EB4A1 /* MainStoryboard.storyboard */,
+				1F4B551E171EAFA6004EB4A1 /* ViewController.h */,
+				1F4B551F171EAFA6004EB4A1 /* ViewController.m */,
+				1F4B550A171EAFA6004EB4A1 /* Supporting Files */,
+			);
+			path = KechengIphoneTest;
+			sourceTree = "<group>";
+		};
+		1F4B550A171EAFA6004EB4A1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F4B550B171EAFA6004EB4A1 /* KechengIphoneTest-Info.plist */,
+				1F4B550C171EAFA6004EB4A1 /* InfoPlist.strings */,
+				1F4B550F171EAFA6004EB4A1 /* main.m */,
+				1F4B5511171EAFA6004EB4A1 /* KechengIphoneTest-Prefix.pch */,
+				1F4B5515171EAFA6004EB4A1 /* Default.png */,
+				1F4B5517171EAFA6004EB4A1 /* Default@2x.png */,
+				1F4B5519171EAFA6004EB4A1 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F4B552C171EAFA7004EB4A1 /* KechengIphoneTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F4B5532171EAFA7004EB4A1 /* KechengIphoneTestTests.h */,
+				1F4B5533171EAFA7004EB4A1 /* KechengIphoneTestTests.m */,
+				1F4B552D171EAFA7004EB4A1 /* Supporting Files */,
+			);
+			path = KechengIphoneTestTests;
+			sourceTree = "<group>";
+		};
+		1F4B552D171EAFA7004EB4A1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F4B552E171EAFA7004EB4A1 /* KechengIphoneTestTests-Info.plist */,
+				1F4B552F171EAFA7004EB4A1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		1F5A15D2171D066100FDF2A0 /* plugin */ = {
@@ -546,6 +664,8 @@
 				1F5A165C171D248100FDF2A0 /* UIKit.framework */,
 				1F67AAEF171C011800357955 /* KechengIphoneChatLib */,
 				1F67AB04171C011800357955 /* KechengIphoneChatLibTests */,
+				1F4B5509171EAFA6004EB4A1 /* KechengIphoneTest */,
+				1F4B552C171EAFA7004EB4A1 /* KechengIphoneTestTests */,
 				1F67AAEC171C011800357955 /* Frameworks */,
 				1F67AAEB171C011800357955 /* Products */,
 			);
@@ -556,6 +676,8 @@
 			children = (
 				1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */,
 				1F67AAFB171C011800357955 /* KechengIphoneChatLibTests.octest */,
+				1F4B5504171EAFA6004EB4A1 /* KechengIphoneTest.app */,
+				1F4B5526171EAFA6004EB4A1 /* KechengIphoneTestTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -566,6 +688,7 @@
 				1F67AAED171C011800357955 /* Foundation.framework */,
 				1F67AAFC171C011800357955 /* SenTestingKit.framework */,
 				1F67AAFE171C011800357955 /* UIKit.framework */,
+				1F4B5507171EAFA6004EB4A1 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -617,6 +740,43 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1F4B5503171EAFA6004EB4A1 /* KechengIphoneTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F4B5535171EAFA7004EB4A1 /* Build configuration list for PBXNativeTarget "KechengIphoneTest" */;
+			buildPhases = (
+				1F4B5500171EAFA6004EB4A1 /* Sources */,
+				1F4B5501171EAFA6004EB4A1 /* Frameworks */,
+				1F4B5502171EAFA6004EB4A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F29412F171EC10100EE3F19 /* PBXTargetDependency */,
+			);
+			name = KechengIphoneTest;
+			productName = KechengIphoneTest;
+			productReference = 1F4B5504171EAFA6004EB4A1 /* KechengIphoneTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1F4B5525171EAFA6004EB4A1 /* KechengIphoneTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F4B5538171EAFA7004EB4A1 /* Build configuration list for PBXNativeTarget "KechengIphoneTestTests" */;
+			buildPhases = (
+				1F4B5521171EAFA6004EB4A1 /* Sources */,
+				1F4B5522171EAFA6004EB4A1 /* Frameworks */,
+				1F4B5523171EAFA6004EB4A1 /* Resources */,
+				1F4B5524171EAFA6004EB4A1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F4B552B171EAFA7004EB4A1 /* PBXTargetDependency */,
+			);
+			name = KechengIphoneTestTests;
+			productName = KechengIphoneTestTests;
+			productReference = 1F4B5526171EAFA6004EB4A1 /* KechengIphoneTestTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		1F67AAE9171C011800357955 /* KechengIphoneChatLib */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F67AB0F171C011800357955 /* Build configuration list for PBXNativeTarget "KechengIphoneChatLib" */;
@@ -676,11 +836,34 @@
 			targets = (
 				1F67AAE9171C011800357955 /* KechengIphoneChatLib */,
 				1F67AAFA171C011800357955 /* KechengIphoneChatLibTests */,
+				1F4B5503171EAFA6004EB4A1 /* KechengIphoneTest */,
+				1F4B5525171EAFA6004EB4A1 /* KechengIphoneTestTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1F4B5502171EAFA6004EB4A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F4B550E171EAFA6004EB4A1 /* InfoPlist.strings in Resources */,
+				1F4B5516171EAFA6004EB4A1 /* Default.png in Resources */,
+				1F4B5518171EAFA6004EB4A1 /* Default@2x.png in Resources */,
+				1F4B551A171EAFA6004EB4A1 /* Default-568h@2x.png in Resources */,
+				1F4B551D171EAFA6004EB4A1 /* MainStoryboard.storyboard in Resources */,
+				1F4B553B171EB31B004EB4A1 /* ChatView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F4B5523171EAFA6004EB4A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F4B5531171EAFA7004EB4A1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F67AAF8171C011800357955 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -692,6 +875,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1F4B5524171EAFA6004EB4A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		1F67AAF9171C011800357955 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,6 +904,24 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1F4B5500171EAFA6004EB4A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F4B5510171EAFA6004EB4A1 /* main.m in Sources */,
+				1F4B5514171EAFA6004EB4A1 /* AppDelegate.m in Sources */,
+				1F4B5520171EAFA6004EB4A1 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F4B5521171EAFA6004EB4A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F4B5534171EAFA7004EB4A1 /* KechengIphoneTestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F67AAE6171C011800357955 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -772,6 +986,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1F29412F171EC10100EE3F19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F67AAE9171C011800357955 /* KechengIphoneChatLib */;
+			targetProxy = 1F29412E171EC10100EE3F19 /* PBXContainerItemProxy */;
+		};
+		1F4B552B171EAFA7004EB4A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F4B5503171EAFA6004EB4A1 /* KechengIphoneTest */;
+			targetProxy = 1F4B552A171EAFA7004EB4A1 /* PBXContainerItemProxy */;
+		};
 		1F67AB02171C011800357955 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1F67AAE9171C011800357955 /* KechengIphoneChatLib */;
@@ -780,6 +1004,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1F4B550C171EAFA6004EB4A1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F4B550D171EAFA6004EB4A1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1F4B551B171EAFA6004EB4A1 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F4B551C171EAFA6004EB4A1 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		1F4B552F171EAFA7004EB4A1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F4B5530171EAFA7004EB4A1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		1F67AB07171C011800357955 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -791,6 +1039,77 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1F4B5536171EAFA7004EB4A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneTest/KechengIphoneTest-Prefix.pch";
+				INFOPLIST_FILE = "KechengIphoneTest/KechengIphoneTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1F4B5537171EAFA7004EB4A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneTest/KechengIphoneTest-Prefix.pch";
+				INFOPLIST_FILE = "KechengIphoneTest/KechengIphoneTest-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1F4B5539171EAFA7004EB4A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KechengIphoneTest.app/KechengIphoneTest";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneTest/KechengIphoneTest-Prefix.pch";
+				INFOPLIST_FILE = "KechengIphoneTestTests/KechengIphoneTestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1F4B553A171EAFA7004EB4A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KechengIphoneTest.app/KechengIphoneTest";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KechengIphoneTest/KechengIphoneTest-Prefix.pch";
+				INFOPLIST_FILE = "KechengIphoneTestTests/KechengIphoneTestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		1F67AB0D171C011800357955 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -847,6 +1166,7 @@
 		1F67AB10171C011800357955 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /tmp/KechengIphoneChatLib.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
@@ -864,6 +1184,7 @@
 		1F67AB11171C011800357955 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /tmp/KechengIphoneChatLib.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
@@ -911,6 +1232,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1F4B5535171EAFA7004EB4A1 /* Build configuration list for PBXNativeTarget "KechengIphoneTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F4B5536171EAFA7004EB4A1 /* Debug */,
+				1F4B5537171EAFA7004EB4A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F4B5538171EAFA7004EB4A1 /* Build configuration list for PBXNativeTarget "KechengIphoneTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F4B5539171EAFA7004EB4A1 /* Debug */,
+				1F4B553A171EAFA7004EB4A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1F67AAE5171C011800357955 /* Build configuration list for PBXProject "KechengIphoneChatLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
