@@ -74,6 +74,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     if (self = [super init]) {
         _xmppStream = [[XMPPStream alloc] init];
         [_xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [self createConnectionCheckTimer];
     }
     return self;
 }
@@ -228,7 +229,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 #pragma mark -- XMPP delegate
 - (void) xmppStreamDidConnect:(XMPPStream *)sender
 {
-    if (_connectionState == connectionStateConnecetedServer) {
+    NSLog(@"xmppStreamDidConnect");
+    if (_connectionState == connectionStateConnectingServer) {
         _connectionState = connectionStateConnecetedServer;
         [self checkAuthentication];
     } else {
@@ -238,6 +240,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (void) xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
+    NSLog(@"xmppStreamDidAuthenticate");
     //when authentication is successful,we should notify the server that we are online
     if (_connectionState == connectionStateAuthenticating) {
         XMPPPresence * presence = [XMPPPresence presence];
@@ -251,6 +254,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (void) xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
 {
+    NSLog(@"xmppStreamDidReceivePresence");
     //when we receive a presence notification,we should do something base on presence propeties;
     NSString * presenceType = [presence type] ;
     NSString * myXmppName = [sender.myJID user];

@@ -59,6 +59,8 @@ static const CGFloat PADDING = 30.f;
     _chatInputMode = CHAT_INPUT_MODE_NONE;
     
     self.navigationItem.title = @"Origin title";
+    
+    [self registerNotification];
 }
 
 - (void)registerNotification
