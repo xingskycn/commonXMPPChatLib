@@ -88,6 +88,16 @@
 		1F5A165A171D06C300FDF2A0 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A1630171D06C300FDF2A0 /* DDXMLNode.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1F5A165D171D248100FDF2A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A165C171D248100FDF2A0 /* UIKit.framework */; };
 		1F5A1663171D27EA00FDF2A0 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1662171D27EA00FDF2A0 /* libsqlite3.0.dylib */; };
+		1F5A87A71721109400C5BD0A /* global_bg_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F5A87A61721109400C5BD0A /* global_bg_pattern.png */; };
+		1F5A87AA1721181400C5BD0A /* ChatDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A87A91721181400C5BD0A /* ChatDefinitions.m */; };
+		1F5A87AB1721181400C5BD0A /* ChatDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A87A91721181400C5BD0A /* ChatDefinitions.m */; };
+		1F5A87AE17211C0700C5BD0A /* TestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A87AD17211C0700C5BD0A /* TestUser.m */; };
+		1F5A87AF17211C0700C5BD0A /* TestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A87AD17211C0700C5BD0A /* TestUser.m */; };
+		1F5A87B01721247300C5BD0A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F155198171FC3BF00C7469E /* CFNetwork.framework */; };
+		1F5A87B11721249600C5BD0A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15519A171FC3CD00C7469E /* Security.framework */; };
+		1F5A87B2172124F100C5BD0A /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15519E171FC73E00C7469E /* libresolv.dylib */; };
+		1F5A87B31721259700C5BD0A /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1636171D06C300FDF2A0 /* libidn.a */; };
+		1F5A87B4172125AA00C5BD0A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1660171D269100FDF2A0 /* libxml2.dylib */; };
 		1F67AAEE171C011800357955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
 		1F67AAFD171C011800357955 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAFC171C011800357955 /* SenTestingKit.framework */; };
 		1F67AB00171C011800357955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAED171C011800357955 /* Foundation.framework */; };
@@ -271,6 +281,10 @@
 		1F5A165E171D268400FDF2A0 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		1F5A1660171D269100FDF2A0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		1F5A1662171D27EA00FDF2A0 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		1F5A87A61721109400C5BD0A /* global_bg_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = global_bg_pattern.png; sourceTree = "<group>"; };
+		1F5A87A91721181400C5BD0A /* ChatDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatDefinitions.m; sourceTree = "<group>"; };
+		1F5A87AC17211C0700C5BD0A /* TestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUser.h; sourceTree = "<group>"; };
+		1F5A87AD17211C0700C5BD0A /* TestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUser.m; sourceTree = "<group>"; };
 		1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKechengIphoneChatLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F67AAED171C011800357955 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F67AAF1171C011800357955 /* KechengIphoneChatLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KechengIphoneChatLib-Prefix.pch"; sourceTree = "<group>"; };
@@ -286,6 +300,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5A87B4172125AA00C5BD0A /* libxml2.dylib in Frameworks */,
+				1F5A87B31721259700C5BD0A /* libidn.a in Frameworks */,
+				1F5A87B2172124F100C5BD0A /* libresolv.dylib in Frameworks */,
+				1F5A87B11721249600C5BD0A /* Security.framework in Frameworks */,
+				1F5A87B01721247300C5BD0A /* CFNetwork.framework in Frameworks */,
 				1F294130171EC10600EE3F19 /* libKechengIphoneChatLib.a in Frameworks */,
 				1F4B5505171EAFA6004EB4A1 /* UIKit.framework in Frameworks */,
 				1F4B5506171EAFA6004EB4A1 /* Foundation.framework in Frameworks */,
@@ -356,6 +375,7 @@
 				1F4B54ED171E72F9004EB4A1 /* ChatEmojis.h */,
 				1F4B54EE171E72FA004EB4A1 /* ChatEmojis.m */,
 				1F4B54F0171E7D95004EB4A1 /* ChatDefinitions.h */,
+				1F5A87A91721181400C5BD0A /* ChatDefinitions.m */,
 			);
 			name = ChatView;
 			sourceTree = "<group>";
@@ -372,6 +392,7 @@
 		1F4B54F5171E9C3F004EB4A1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1F5A87A61721109400C5BD0A /* global_bg_pattern.png */,
 				1F4B54FC171EACE2004EB4A1 /* emoji_button_pressed@2x.png */,
 				1F4B54FD171EACE2004EB4A1 /* emoji_button@2x.png */,
 				1F4B54FE171EACE2004EB4A1 /* keyboard_button_pressed@2x.png */,
@@ -391,6 +412,8 @@
 				1F4B5512171EAFA6004EB4A1 /* AppDelegate.h */,
 				1F4B5513171EAFA6004EB4A1 /* AppDelegate.m */,
 				1F4B550A171EAFA6004EB4A1 /* Supporting Files */,
+				1F5A87AC17211C0700C5BD0A /* TestUser.h */,
+				1F5A87AD17211C0700C5BD0A /* TestUser.m */,
 			);
 			path = KechengIphoneTest;
 			sourceTree = "<group>";
@@ -859,6 +882,7 @@
 				1F492D76171F96AC0047066C /* button_send@2x.png in Resources */,
 				1F492D77171F96AC0047066C /* bubble_1@2x.png in Resources */,
 				1F492D78171F96AC0047066C /* bubble_2@2x.png in Resources */,
+				1F5A87A71721109400C5BD0A /* global_bg_pattern.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +940,8 @@
 				1F4B5510171EAFA6004EB4A1 /* main.m in Sources */,
 				1F4B5514171EAFA6004EB4A1 /* AppDelegate.m in Sources */,
 				1F492D5B171F94B70047066C /* ChatInputView.m in Sources */,
+				1F5A87AB1721181400C5BD0A /* ChatDefinitions.m in Sources */,
+				1F5A87AF17211C0700C5BD0A /* TestUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +1003,8 @@
 				1F4B54EF171E72FA004EB4A1 /* ChatEmojis.m in Sources */,
 				1F4B54F4171E9A21004EB4A1 /* CopyLabel.m in Sources */,
 				1F492D4F171F8EB50047066C /* ChatViewController.m in Sources */,
+				1F5A87AA1721181400C5BD0A /* ChatDefinitions.m in Sources */,
+				1F5A87AE17211C0700C5BD0A /* TestUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1067,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneTest/KechengIphoneTest-Prefix.pch";
 				INFOPLIST_FILE = "KechengIphoneTest/KechengIphoneTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/KechengIphoneChatLib/XMPP/Vendor/libidn\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1056,6 +1088,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneTest/KechengIphoneTest-Prefix.pch";
 				INFOPLIST_FILE = "KechengIphoneTest/KechengIphoneTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/KechengIphoneChatLib/XMPP/Vendor/libidn\"",
+				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1158,6 +1194,7 @@
 				DSTROOT = /tmp/KechengIphoneChatLib.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1176,6 +1213,7 @@
 				DSTROOT = /tmp/KechengIphoneChatLib.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KechengIphoneChatLib/KechengIphoneChatLib-Prefix.pch";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

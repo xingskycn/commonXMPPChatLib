@@ -44,6 +44,8 @@ static const CGFloat PADDING = 30.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"global_bg_pattern.png"]];
+    
     NSArray* xib = [[NSBundle mainBundle] loadNibNamed:@"ChatInputView" owner:self options:nil];
     self.chatInputView = [xib objectAtIndex:0];
     [self.chatInputView setFrame:CGRectMake(0, 372, self.view.frame.size.height - INPUT_VIEW_INIT_HEIGHT, INPUT_VIEW_INIT_HEIGHT)];
@@ -54,6 +56,13 @@ static const CGFloat PADDING = 30.f;
     self.chatEmoView.delegate = self.chatInputView;
     [self.view addSubview:self.chatEmoView];
     
+    _chatInputMode = CHAT_INPUT_MODE_NONE;
+    
+    self.navigationItem.title = @"Origin title";
+}
+
+- (void)registerNotification
+{
     //Add keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(relayoutForKeyboard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(relayoutForKeyboard:) name:UIKeyboardWillHideNotification object:nil];
@@ -65,7 +74,29 @@ static const CGFloat PADDING = 30.f;
     }
     #endif
     
-    _chatInputMode = CHAT_INPUT_MODE_NONE;
+    //Add chat Notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_DISCONNECTED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_CONNECTED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_CONNECTING_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_SEND_MESSAGE_FAILURE_NOTIFICATION object:nil];
+}
+
+- (void)handleChatConnectionStateNotification:(NSNotification*)notification
+{
+    if ([notification.name isEqualToString:CHAT_DISCONNECTED_NOTIFICATION]) {
+        self.navigationItem.title = @"Disconnected";
+    } else if ([notification.name isEqualToString:CHAT_CONNECTING_NOTIFICATION]) {
+        self.navigationItem.title = @"Connecting";
+    } else if ([notification.name isEqualToString:CHAT_CONNECTED_NOTIFICATION]) {
+        self.navigationItem.title = @"Connected";
+    }
+}
+
+- (void)handleChatMessageNotification:(NSNotification*)notification
+{
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -217,6 +248,11 @@ static const CGFloat PADDING = 30.f;
     self.chatTableView.frame = newFrame;
     [UIView commitAnimations];
     [self scrollTableViewToBottom];
+}
+
+- (void)inputViewSendMessage:(NSString *)message
+{
+    //Todo:zuoyl send message somting
 }
 
 - (void)onEmoButtonClick

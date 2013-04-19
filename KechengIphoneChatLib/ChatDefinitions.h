@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 zuoyl. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#define SCREEN_HEIGHT CGRectGetHeight([UIScreen mainScreen].applicationFrame) - 44
 
 typedef enum {
     CHAT_INPUT_MODE_NONE,
@@ -28,7 +31,6 @@ typedef enum {
 
 @protocol ChatInputViewDelegate <NSObject>
 
--(void)inputViewRectChangeFrame:(CGRect)nowRect;
 -(void)onInputViewHeightChanged:(CGFloat)changedHeight;
 -(void)inputViewSendMessage:(NSString *)message;
 -(CHAT_INPUT_MODE)chatInputMode;
@@ -43,4 +45,9 @@ typedef enum {
 
 @end
 
-#define SCREEN_HEIGHT CGRectGetHeight([UIScreen mainScreen].applicationFrame) - 44
+extern NSString * const CHAT_CONNECTED_NOTIFICATION;
+extern NSString * const CHAT_CONNECTING_NOTIFICATION;
+extern NSString * const CHAT_DISCONNECTED_NOTIFICATION;
+extern NSString * const CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION;
+extern NSString * const CHAT_SEND_MESSAGE_FAILURE_NOTIFICATION;
+extern NSString * const CHAT_RECEIVE_MESSAGE_NOTIFICATION;

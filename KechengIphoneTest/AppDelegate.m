@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ChatViewController.h"
+#import "ChatManager.h"
+#import "TestUser.h"
 
 @implementation AppDelegate
 
@@ -23,9 +25,21 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     ChatViewController* rootVC = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
+    [self setupChatManager];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)setupChatManager
+{
+    [ChatManager sharedInstance].serverHost = @"corner.kechenggezi.com";
+    [ChatManager sharedInstance].serverPort = 5222;
+    TestUser * user = [[TestUser alloc] init];
+    [ChatManager sharedInstance].me = user;
+    //dispatch_async(dispatch_get_main_queue(), ^{
+        [[ChatManager sharedInstance] login];
+    //});
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -97,6 +97,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (BOOL) connectToServer
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName: CHAT_CONNECTING_NOTIFICATION object:nil];
     if ([self checkConnectionAvailable]) {
         [_xmppStream disconnect];
         _connectionState = connectionStateOffline;
@@ -107,6 +108,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
         [_xmppStream setMyJID:[XMPPJID jidWithString:[self.me xmppUserName]]];
         [_xmppStream setHostName:self.serverHost];
         [_xmppStream setHostPort:self.serverPort];
+        
         NSError * error = nil;
         if (![_xmppStream connect:&error]) {
             _connectionState = connectionStateLoginFailure;
@@ -152,6 +154,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 {
     if ([presenceType isEqualToString:ON_LINE]) {
         //Post online notification
+        
     } else {
         //Post offline notification
     }
@@ -218,7 +221,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (void) wrongState
 {
-    
+    [_xmppStream disconnect];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_DISCONNECTED_NOTIFICATION object:nil];
 }
 
 #pragma mark -- XMPP delegate
@@ -239,6 +243,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
         XMPPPresence * presence = [XMPPPresence presence];
         [_xmppStream sendElement:presence];
         _connectionState = connectionStateConfiguring;
+        [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_CONNECTED_NOTIFICATION object:nil];
     } else {
         [self wrongState];
     }
@@ -264,6 +269,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 {
     ChatMessage* chatMessage = [self xmppMessage2ChatMessage:message];
     //Post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:chatMessage];
 }
 
 @end

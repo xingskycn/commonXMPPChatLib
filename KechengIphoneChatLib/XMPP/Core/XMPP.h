@@ -1,7 +1,6 @@
 // 
 // Core classes
 // 
-
 #import "XMPPJID.h"
 #import "XMPPStream.h"
 #import "XMPPElement.h"
