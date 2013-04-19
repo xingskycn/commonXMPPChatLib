@@ -40,18 +40,21 @@
         _headImageView.userInteractionEnabled = YES;
         _headBgView.image = [UIImage imageNamed:@"avatar_shadow"];
         [_headBgView addSubview:_headImageView];
+        self.accessoryType = UITableViewCellAccessoryNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
 
-- (void)layoutCell:(BOOL)left showTime:(BOOL)showTime messageSize:(CGSize)size
+- (void)layoutCell:(CHAT_SENDER_TYPE)sender showTime:(BOOL)showTime messageSize:(CGSize)size
 {
     float headBgX;
     float messageLabelX;
     float paddingTop = 5;
     NSString* bgImageName;
     
-    if (left) {
+    if (sender == CHAT_SENDER_TYPE_FRIEND) {
         headBgX = 10;
         bgImageName = @"bubble_2";
         messageLabelX = 70;
@@ -74,6 +77,49 @@
     
     _messageLabel.frame = CGRectMake(messageLabelX, paddingTop + 10, size.width, size.height);
     _bgView.frame = CGRectInset(_messageLabel.frame, -10, -5);
+}
+
+- (void) setTime:(NSDate *)messageDate
+{
+    _timeLabel.text = [self timeStringFromDate:messageDate];
+}
+
+- (NSString*) timeStringFromDate:(NSDate*)date
+{
+    if(date == nil)
+        return nil;
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    NSString *connectString = [formatter stringFromDate:date];
+    
+    if([self isToday:date])
+    {
+        //today
+        return connectString;
+    } else if([self isToday:[date dateByAddingTimeInterval:60*60*24]])
+    {
+        //yesterday
+        return [NSString stringWithFormat:@"%@ %@",@"昨天",connectString];
+    } else if([self isToday:[date dateByAddingTimeInterval:60*60*24*2]])
+    {
+        //-2days
+        return [NSString stringWithFormat:@"%@ %@",@"前天",connectString];
+    } else
+    {
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        return [formatter stringFromDate:date];
+    }
+
+}
+
+-(BOOL)isToday:(NSDate *)date
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
+                                     fromDate:date];
+    NSDate* beginningOfDate = [cal dateFromComponents:comps];
+    NSTimeInterval delta = [date timeIntervalSinceDate:beginningOfDate];
+    return (delta >= 0 && delta <= 60 * 60 * 24);
 }
 
 @end

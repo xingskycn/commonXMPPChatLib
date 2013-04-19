@@ -7,15 +7,19 @@
 //
 
 #import "ChatViewController.h"
+#import "ChatMessage.h"
+#import "ChatTableViewCell.h"
 
 static const int INPUT_VIEW_INIT_HEIGHT = 45;
-
 static const int HEADER_VIEW_HEIGHT = 45;
+static const CGFloat MESSAGE_FONT_SIZE = 17.0f;
+static const CGFloat PADDING = 30.f;
 
 @interface ChatViewController ()
 {
     NSMutableArray * _chatMessages;
     CHAT_INPUT_MODE _chatInputMode;
+    NSString* _userAvatarUrl;
 }
 
 - (void)scrollTableViewToBottom;
@@ -47,7 +51,7 @@ static const int HEADER_VIEW_HEIGHT = 45;
     [self.view addSubview:self.chatInputView];
     
     self.chatEmoView = [[ChatEmoView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, 320, 216)];
-    self.chatEmoView.delegate = self;
+    self.chatEmoView.delegate = self.chatInputView;
     [self.view addSubview:self.chatEmoView];
     
     //Add keyboard notification
@@ -108,6 +112,7 @@ static const int HEADER_VIEW_HEIGHT = 45;
     self.chatInputView.frame = bottomViewFrame;
     [self scrollTableViewToBottom];
     //[UIView commitAnimations];
+    [self.chatInputView syncEmoButtonIcon];
 }
 
 - (void)relayoutForEmoView
@@ -155,6 +160,50 @@ static const int HEADER_VIEW_HEIGHT = 45;
     [self.view endEditing:YES];
     [self relayoutForEmoView];
     //Todo:close emo board
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * cellIdentitier = @"ChatCell";
+    
+    ChatMessage* chatMessage = [_chatMessages objectAtIndex:indexPath.row];
+    ChatTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentitier];
+    if (cell == nil) {
+        cell = [[[ChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentitier] autorelease];
+    }
+    
+    CGSize size = [self sizeForMessage:chatMessage.content];
+    size.width += PADDING / 2;
+    
+    cell.messageLabel.text = chatMessage.content;
+    if (chatMessage.whoSend == CHAT_SENDER_TYPE_FRIEND) {
+        //他人的消息
+        cell.headImageView.image = self.headImage;
+        //Todo:zuoyl cell image and navigation.
+        //UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUserProfile:)];
+        //[cell.headImageView addGestureRecognizer:singleFingerTap];
+        //[singleFingerTap release];
+    } else {
+        //自己的消息
+        //[cell.headImageView setImageWithURL:[NSURL URLWithString:_userAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        cell.headImageView.image = [UIImage imageNamed:@"default_avatar"];
+    }
+    cell.headImageView.tag = chatMessage.whoSend;
+    
+    if (indexPath.row == 0) {
+        [cell setTime:chatMessage.date];
+    } else {
+        //Todo:zuoyl  set time
+    }
+    
+    [cell layoutCell:chatMessage.whoSend showTime:NO messageSize:size];
+    
+    return cell;
+}
+
+-(CGSize) sizeForMessage:(NSString*)msg {
+    CGSize textSize = {200, 10000.0};
+    return [msg sizeWithFont:[UIFont  systemFontOfSize:MESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
 }
 
 #pragma mark ChatInputView delegate

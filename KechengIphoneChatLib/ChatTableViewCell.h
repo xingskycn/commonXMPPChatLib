@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatDefinitions.h"
 
 @interface ChatTableViewCell : UITableViewCell
 
@@ -16,6 +17,8 @@
 @property (nonatomic, assign) UIImageView* headImageView;
 @property (nonatomic, assign) UIImageView* headBgView;
 
--(void)layoutCell:(BOOL)left showTime:(BOOL)showTime messageSize:(CGSize)size;
+-(void)layoutCell:(CHAT_SENDER_TYPE)sender showTime:(BOOL)showTime messageSize:(CGSize)size;
+
+-(void)setTime:(NSDate *)messageDate;
 
 @end

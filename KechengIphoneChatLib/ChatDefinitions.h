@@ -38,8 +38,8 @@ typedef enum {
 
 @protocol ChatEmoViewDelegate <NSObject>
 
-- (void) handleInput: (NSString *) emoji;
-- (void) handleDelete;
+- (void) onInputEmoji: (NSString *) emoji;
+- (void) onDeleteEmoji;
 
 @end
 

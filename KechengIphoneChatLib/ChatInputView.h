@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ChatDefinitions.h"
 
-@interface ChatInputView : UIView <UITextViewDelegate>
+@interface ChatInputView : UIView <UITextViewDelegate, ChatEmoViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *textViewBgImageView;
 

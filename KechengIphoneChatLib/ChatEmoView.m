@@ -120,12 +120,12 @@
 -(void)buttonPress:(id)sender
 {
     UIButton* button = sender;
-    [self.delegate handleInput:button.titleLabel.text];
+    [self.delegate onInputEmoji:button.titleLabel.text];
 }
 
 -(void)backButtonPress:(id)sender
 {
-    [self.delegate handleDelete];
+    [self.delegate onDeleteEmoji];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sv

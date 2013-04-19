@@ -100,6 +100,20 @@ static const int TEXT_MAX_LENGTH = 1000;
     [super dealloc];
 }
 
+#pragma mark ChatEmoView delegate
+- (void) onInputEmoji:(NSString *)emoji
+{
+    NSString *temp = [self.inputView.text stringByAppendingFormat:@"%@",emoji];
+    [self.inputView setText:temp];
+    [self textViewDidChange:self.inputView];
+}
+
+- (void) onDeleteEmoji
+{
+    [self.inputView deleteBackward];
+    [self textViewDidChange:self.inputView];
+}
+
 #pragma mark TextView delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
