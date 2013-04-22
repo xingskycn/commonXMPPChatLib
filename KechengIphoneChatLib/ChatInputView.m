@@ -39,7 +39,11 @@ static const int TEXT_MAX_LENGTH = 1000;
     [self.delegate onEmoButtonClick];
 }
 
-- (IBAction)sendButtonClick:(id)sender {
+- (IBAction)sendButtonClick:(id)sender
+{
+    [self.delegate onInputViewSendMessage:self.inputView.text];
+    self.inputView.text = @"";
+    [self textViewDidChange:self.inputView];
 }
 
 - (void)awakeFromNib

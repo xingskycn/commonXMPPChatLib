@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ChatMessage.h"
 #import "XMPP.h"
+#import "ChatDBHelper.h"
 
 @interface ChatManager : NSObject <XMPPStreamDelegate>
 

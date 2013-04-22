@@ -8,6 +8,7 @@
 
 #import "ChatManager.h"
 #import "XMPP.h"
+#import "ChatDBHelper.h"
 
 typedef enum {
     connectionStateUnkown,
@@ -87,6 +88,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
             [_xmppStream sendElement:[self chatMessage2XmppMessage:message] andGetReceipt:&receipt];
             if ([receipt wait:SEND_MESSAGE_TIMEOUT]) {
                 //Wait until the element has been sent
+                [[ChatDBHelper sharedInstance] insertChatMessage:message];
                 block(YES);
             } else {
                 //Maybe retry
@@ -186,19 +188,19 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     [xmlMessage addAttributeWithName:@"type" stringValue:@"chat"];
     [xmlMessage addAttributeWithName:@"to" stringValue:[message.myFriend xmppUserName]];
     [xmlMessage addChild:body];
-    [_xmppStream sendElement:xmlMessage];
     return xmlMessage;
 }
 
 - (ChatMessage*) xmppMessage2ChatMessage:(DDXMLElement *)xmppMessage
 {
     NSString * from = [[xmppMessage attributeForName:@"from"] stringValue];
-    if (![from isEqualToString:[self.me xmppUserName]]) {
+    if (![from isEqualToString:[self.me xmppUserName]] && [[xmppMessage elementForName:@"body"] stringValue] != nil) {
         ChatMessage* chatMessage = [[ChatMessage alloc] init];
         chatMessage.content = [[xmppMessage elementForName:@"body"] stringValue];
         chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
         chatMessage.date = [NSDate date];
         chatMessage.myFriend = [self.me buildChatUserFromXmppUserName:from];
+        chatMessage.whoSend = CHAT_SENDER_TYPE_FRIEND;
         return chatMessage;
     }
     
@@ -272,8 +274,13 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 - (void) xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     ChatMessage* chatMessage = [self xmppMessage2ChatMessage:message];
-    //Post notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:chatMessage];
+    if (chatMessage != nil) {
+        NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] initWithCapacity:1];
+        [userInfo setObject:chatMessage forKey:@"chatMessage"];
+        [[ChatDBHelper sharedInstance] insertChatMessage:chatMessage];
+        //Post notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:self userInfo:userInfo];
+    }
 }
 
 @end

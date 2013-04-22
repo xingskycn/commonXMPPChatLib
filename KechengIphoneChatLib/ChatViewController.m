@@ -9,6 +9,7 @@
 #import "ChatViewController.h"
 #import "ChatMessage.h"
 #import "ChatTableViewCell.h"
+#import "ChatManager.h"
 
 static const int INPUT_VIEW_INIT_HEIGHT = 45;
 static const int HEADER_VIEW_HEIGHT = 45;
@@ -20,6 +21,7 @@ static const CGFloat PADDING = 30.f;
     NSMutableArray * _chatMessages;
     CHAT_INPUT_MODE _chatInputMode;
     NSString* _userAvatarUrl;
+    int _currentPage;
 }
 
 - (void)scrollTableViewToBottom;
@@ -63,6 +65,11 @@ static const CGFloat PADDING = 30.f;
     [self registerNotification];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self initChatMessages];
+}
+
 - (void)registerNotification
 {
     //Add keyboard notification
@@ -81,8 +88,6 @@ static const CGFloat PADDING = 30.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_CONNECTED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_CONNECTING_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_SEND_MESSAGE_FAILURE_NOTIFICATION object:nil];
 }
 
 - (void)handleChatConnectionStateNotification:(NSNotification*)notification
@@ -98,7 +103,20 @@ static const CGFloat PADDING = 30.f;
 
 - (void)handleChatMessageNotification:(NSNotification*)notification
 {
-    
+    ChatMessage* newMessage = [notification.userInfo objectForKey:@"chatMessage"];
+    [_chatMessages insertObject:newMessage atIndex:0];
+    [self.chatTableView reloadData];
+    [self scrollTableViewToBottom];
+}
+
+- (void)initChatMessages
+{
+    if (_chatMessages == nil) {
+        _chatMessages = [[NSMutableArray alloc] init];
+    }
+    _currentPage = 1;
+    [_chatMessages addObjectsFromArray:[[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage]];
+    [self scrollTableViewToBottom];
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,7 +156,7 @@ static const CGFloat PADDING = 30.f;
     int bottom = keyboardFrameEndRelative.origin.y;
     CGRect tableViewFrame = self.chatTableView.frame;
     tableViewFrame.size.height = bottom - self.chatInputView.frame.size.height - 6;
-    self.chatInputView.frame = tableViewFrame;
+    self.chatTableView.frame = tableViewFrame;
     
     CGRect bottomViewFrame = self.chatInputView.frame;
     bottomViewFrame.origin.y = bottom - self.chatInputView.frame.size.height;
@@ -183,23 +201,38 @@ static const CGFloat PADDING = 30.f;
 #pragma mark Tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [_chatMessages count];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     //close keyboard
-    _chatInputMode = CHAT_INPUT_MODE_NONE;
-    [self.view endEditing:YES];
-    [self relayoutForEmoView];
-    //Todo:close emo board
+    if (_chatInputMode != CHAT_INPUT_MODE_NONE) {
+        _chatInputMode = CHAT_INPUT_MODE_NONE;
+        [self.view endEditing:YES];
+        [self relayoutForEmoView];
+    }
 }
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y == 0) {
+        NSMutableArray* earlierMessages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage + 1];
+        if ([earlierMessages count] != 0) {
+            [_chatMessages addObjectsFromArray:earlierMessages];
+            _currentPage += 1;
+            int oldHeight = self.chatTableView.contentSize.height;
+            [self.chatTableView reloadData];
+            [self.chatTableView setContentOffset:CGPointMake(0, self.chatTableView.contentSize.height - oldHeight - 20)];
+        }
+    }
+} 
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * cellIdentitier = @"ChatCell";
     
-    ChatMessage* chatMessage = [_chatMessages objectAtIndex:indexPath.row];
+    ChatMessage* chatMessage = [_chatMessages objectAtIndex:[_chatMessages count] - 1 - indexPath.row]; //倒序读取
     ChatTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentitier];
     if (cell == nil) {
         cell = [[[ChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentitier] autorelease];
@@ -252,9 +285,26 @@ static const CGFloat PADDING = 30.f;
     [self scrollTableViewToBottom];
 }
 
-- (void)inputViewSendMessage:(NSString *)message
+- (void)onInputViewSendMessage:(NSString *)message
 {
-    //Todo:zuoyl send message somting
+    ChatMessage* chatMessage = [[[ChatMessage alloc] init] autorelease];
+    chatMessage.myFriend = self.myFriend;
+    chatMessage.content = message;
+    chatMessage.whoSend = CHAT_SENDER_TYPE_ME;
+    chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
+    chatMessage.isNew = YES;
+    chatMessage.date = [NSDate date];
+    [_chatMessages insertObject:chatMessage atIndex:0];
+    [self.chatTableView reloadData];
+    [self scrollTableViewToBottom];
+    [[ChatManager sharedInstance] sendMessage:chatMessage withComplete:^(BOOL bSuccess) {
+        if (bSuccess) {
+            NSLog(@"send success");
+        } else {
+            //Todo:show send failed
+            NSLog(@"send failed");
+        }
+    }];
 }
 
 - (void)onEmoButtonClick

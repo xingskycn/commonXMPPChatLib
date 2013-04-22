@@ -15,6 +15,7 @@
 		1F15519B171FC3CD00C7469E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15519A171FC3CD00C7469E /* Security.framework */; };
 		1F15519F171FC73E00C7469E /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15519E171FC73E00C7469E /* libresolv.dylib */; };
 		1F294130171EC10600EE3F19 /* libKechengIphoneChatLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F67AAEA171C011800357955 /* libKechengIphoneChatLib.a */; };
+		1F419A1F1724DED700ADF24B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F419A1E1724DED700ADF24B /* libsqlite3.dylib */; };
 		1F492D4F171F8EB50047066C /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F492D4D171F8EB50047066C /* ChatViewController.m */; };
 		1F492D50171F92460047066C /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F492D4E171F8EB50047066C /* ChatViewController.xib */; };
 		1F492D51171F93BC0047066C /* ChatInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4B54F8171EA071004EB4A1 /* ChatInputView.xib */; };
@@ -184,6 +185,7 @@
 		1F15519A171FC3CD00C7469E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1F15519C171FC42D00C7469E /* libdnsinfo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdnsinfo.dylib; path = usr/lib/system/libdnsinfo.dylib; sourceTree = SDKROOT; };
 		1F15519E171FC73E00C7469E /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		1F419A1E1724DED700ADF24B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		1F492D4C171F8EB50047066C /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		1F492D4D171F8EB50047066C /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		1F492D4E171F8EB50047066C /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F419A1F1724DED700ADF24B /* libsqlite3.dylib in Frameworks */,
 				1F5A87B4172125AA00C5BD0A /* libxml2.dylib in Frameworks */,
 				1F5A87B2172124F100C5BD0A /* libresolv.dylib in Frameworks */,
 				1F5A87B11721249600C5BD0A /* Security.framework in Frameworks */,
@@ -733,6 +736,7 @@
 		1F67AAE1171C011800357955 = {
 			isa = PBXGroup;
 			children = (
+				1F419A1E1724DED700ADF24B /* libsqlite3.dylib */,
 				1F15519E171FC73E00C7469E /* libresolv.dylib */,
 				1F15519C171FC42D00C7469E /* libdnsinfo.dylib */,
 				1F15519A171FC3CD00C7469E /* Security.framework */,

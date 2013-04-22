@@ -60,7 +60,6 @@ static NSString* chatMessageTableName = @"chat_messages_table";
     }
     
     NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY, '%@' INTEGER, '%@' INTEGER, '%@' TEXT, '%@' INTEGER, '%@' INTEGER, '%@' DOUBLE)", chatMessageTableName, chatTableColumn1, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7];
-    NSLog(@"Create statement is %@", createSTMT);
     char * errorMesage;
     sqlite3_exec(_dbh, [createSTMT UTF8String], nil, nil, &errorMesage);
     sqlite3_close(_dbh);
@@ -75,19 +74,20 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 
 -(BOOL)insertChatMessage:(ChatMessage *)message
 {
+    
     const char * content = [message.content UTF8String];
     const char * filename = [self.chatDBPath UTF8String];
-    double recordDate = [message.date timeIntervalSince1970];
+    double messageDate = [message.date timeIntervalSince1970];
     sqlite3_stmt * stetment;
     sqlite3_open(filename, &_dbh);
-    NSString * insertSql = [NSString stringWithFormat:@"INSERT INTO '%@' (%@ ,%@, %@, %@, %@, %@) VALUES(:friend_id, :who_end, :content, :content_type, :is_new, :message_date)", chatMessageTableName, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7];
+    NSString * insertSql = [NSString stringWithFormat:@"INSERT INTO %@ (%@ ,%@, %@, %@, %@, %@) VALUES(:friend_id, :who_send, :content, :content_type, :is_new, :message_date)", chatMessageTableName, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7];
     const char * sql = [insertSql UTF8String];
     sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [message.myFriend chatUserId]);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":who_send"), message.whoSend);
     sqlite3_bind_text(stetment, sqlite3_bind_parameter_index(stetment, ":content"), content, strlen(content), NULL);
     sqlite3_bind_int(stetment,  sqlite3_bind_parameter_index(stetment, ":content_type"), message.contentType);
-    sqlite3_bind_double(stetment, sqlite3_bind_parameter_index(stetment, ":record_date"), recordDate);
+    sqlite3_bind_double(stetment, sqlite3_bind_parameter_index(stetment, ":message_date"), messageDate);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":is_new"), message.isNew);
     int r = sqlite3_step(stetment);
     sqlite3_finalize(stetment);
@@ -106,19 +106,19 @@ static NSString* chatMessageTableName = @"chat_messages_table";
     
     sqlite3_stmt * stetment;
     sqlite3_open(filename, &_dbh);
-    NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM '%@' WHERE %@ = :friend_id ORDER BY %@ limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn7, (page - 1) * messagesPerPage, page * messagesPerPage];
+    NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM %@ WHERE %@ = :friend_id ORDER BY %@ DESC limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn7, (page - 1) * messagesPerPage, page * messagesPerPage];
     const char * sql = [selectSql UTF8String];
     sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
     int r = sqlite3_step(stetment);
     while (r == SQLITE_ROW) {
         ChatMessage * chatMessage = [[ChatMessage alloc] init];
-        chatMessage.whoSend = sqlite3_column_int(stetment,3);
+        chatMessage.whoSend = sqlite3_column_int(stetment, 2);
         chatMessage.myFriend = chatFriend;
-        chatMessage.content = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 4)];
-        chatMessage.contentType = sqlite3_column_int(stetment, 5);
-        chatMessage.isNew = sqlite3_column_int(stetment, 6);
-        chatMessage.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_double(stetment, 7)];
+        chatMessage.content = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 3)];
+        chatMessage.contentType = sqlite3_column_int(stetment, 4);
+        chatMessage.isNew = sqlite3_column_int(stetment, 5);
+        chatMessage.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_double(stetment, 6)];
         [chatMessages addObject:chatMessage];
         [chatMessage release];
         chatMessage = nil;
@@ -137,7 +137,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
     
     sqlite3_stmt * stetment;
     sqlite3_open(filename, &_dbh);
-    NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM '%@' WHERE %@ = :friend_id AND %@ = :is_new ORDER BY %@", chatMessageTableName, chatTableColumn2, chatTableColumn6, chatTableColumn7];
+    NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM %@ WHERE %@ = :friend_id AND %@ = :is_new ORDER BY %@", chatMessageTableName, chatTableColumn2, chatTableColumn6, chatTableColumn7];
     const char * sql = [selectSql UTF8String];
     sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
     sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
@@ -162,7 +162,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
     return chatMessages;
 }
 
-- (BOOL) unreadMessage2readMessage:(id<ChatUser>)chatFriend
+- (BOOL) unreadMessage2ReadMessage:(id<ChatUser>)chatFriend
 {
     const char * filename = [self.chatDBPath UTF8String];
     sqlite3_stmt * stetment;

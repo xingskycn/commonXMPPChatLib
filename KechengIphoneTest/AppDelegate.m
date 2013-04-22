@@ -23,24 +23,41 @@
 {
     // Override point for customization after application launch.
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    [self setupChatManager];
     ChatViewController* rootVC = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+    TestUser* myFriend = [[TestUser alloc] init];
+    myFriend.user_id = 2;
+    myFriend.userName = @"userB";
+    myFriend.password = @"userB";
+    rootVC.myFriend = myFriend;
+    TestUser* me = [[TestUser alloc] init];
+    me.userName = @"userA";
+    me.password = @"userA";
+    me.user_id = 1;
+    rootVC.me = me;
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-    [self setupChatManager];
     return YES;
 }
 
 - (void)setupChatManager
 {
-    [ChatManager sharedInstance].serverHost = @"corner.kechenggezi.com";
+    [ChatManager sharedInstance].serverHost = @"localhost";
     [ChatManager sharedInstance].serverPort = 5222;
     TestUser * user = [[TestUser alloc] init];
+    user.userName = @"userA";
+    user.password = @"userA";
     [ChatManager sharedInstance].me = user;
     dispatch_async(dispatch_get_main_queue(), ^{
         [[ChatManager sharedInstance] login];
     });
+    NSArray * documents = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * filePath = [[documents objectAtIndex:0] stringByAppendingFormat:@"/corner.friendsxx"];
+    [ChatDBHelper sharedInstance].chatDBPath = filePath;
+    [[ChatDBHelper sharedInstance] createChatMessageTable];
 }
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -32,7 +32,7 @@ typedef enum {
 @protocol ChatInputViewDelegate <NSObject>
 
 -(void)onInputViewHeightChanged:(CGFloat)changedHeight;
--(void)inputViewSendMessage:(NSString *)message;
+-(void)onInputViewSendMessage:(NSString *)message;
 -(CHAT_INPUT_MODE)chatInputMode;
 -(void)onEmoButtonClick;
 

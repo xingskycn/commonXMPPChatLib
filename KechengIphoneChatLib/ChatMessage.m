@@ -10,4 +10,11 @@
 
 @implementation ChatMessage
 
+@synthesize myFriend;
+@synthesize whoSend;
+@synthesize content;
+@synthesize contentType;
+@synthesize date;
+@synthesize isNew;
+
 @end

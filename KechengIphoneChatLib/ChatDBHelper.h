@@ -24,6 +24,6 @@
 
 -(NSMutableArray *)unreadMessagesAboutMyFriend:(id<ChatUser>)chatFriend;
 
--(BOOL)unreadMessage2readMessage:(id<ChatUser>)chatFriend;
+-(BOOL)unreadMessage2ReadMessage:(id<ChatUser>)chatFriend;
 
 @end

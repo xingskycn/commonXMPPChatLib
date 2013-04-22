@@ -11,4 +11,8 @@
 
 @interface TestUser : NSObject <ChatUser>
 
+@property (nonatomic, retain) NSString* userName;
+@property (nonatomic, retain) NSString* password;
+@property int user_id;
+
 @end

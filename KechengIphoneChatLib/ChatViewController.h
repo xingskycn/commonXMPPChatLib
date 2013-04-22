@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ChatInputView.h"
 #import "ChatEmoView.h"
+#import "ChatUser.h"
 
 @interface ChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ChatInputViewDelegate>
 
@@ -17,5 +18,7 @@
 @property (retain, nonatomic) IBOutlet ChatInputView* chatInputView;
 @property (retain, nonatomic) ChatEmoView* chatEmoView;
 @property (retain, nonatomic) UIImage* headImage;  //Todo:zuoyl friend's image
+@property (retain, nonatomic) id<ChatUser> me;
+@property (retain, nonatomic) id<ChatUser> myFriend;
 
 @end
