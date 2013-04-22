@@ -112,7 +112,7 @@ static const CGFloat PADDING = 30.f;
 - (void)addMessages:(NSMutableArray*) messages
 {
     [self buildTimeArrayWithMessages:messages];
-    [_chatMessages addObjectsFromArray:[[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage]];
+    [_chatMessages addObjectsFromArray:messages];
 }
 
 - (void)handleChatMessageNotification:(NSNotification*)notification
