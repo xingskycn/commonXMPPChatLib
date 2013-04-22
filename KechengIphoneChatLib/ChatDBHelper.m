@@ -32,7 +32,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 @interface ChatDBHelper()
 {
     sqlite3* _dbh;
-    NSObject* _dbLockToken;
+    NSObject* _dbMutexToken;
 }
 @end
 
@@ -53,7 +53,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 
 -(BOOL)createChatMessageTable
 {
-    @synchronized(_dbLockToken) {
+    @synchronized(_dbMutexToken) {
         const char * filename = [self.chatDBPath UTF8String];
         if (sqlite3_open(filename, &_dbh) != SQLITE_OK) {
             const char* error = sqlite3_errmsg(_dbh);
@@ -77,7 +77,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 
 -(BOOL)insertChatMessage:(ChatMessage *)message
 {
-    @synchronized(_dbLockToken) {
+    @synchronized(_dbMutexToken) {
         const char * content = [message.content UTF8String];
         const char * filename = [self.chatDBPath UTF8String];
         double messageDate = [message.date timeIntervalSince1970];
@@ -105,7 +105,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 
 - (NSMutableArray *)MessagesAboutMyFriend:(id<ChatUser>)chatFriend page:(int)page
 {
-    @synchronized(_dbLockToken) {
+    @synchronized(_dbMutexToken) {
         NSMutableArray* chatMessages = [[[NSMutableArray alloc] init] autorelease];
         const char * filename = [self.chatDBPath UTF8String];
         
@@ -138,7 +138,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 
 - (NSMutableArray *) unreadMessagesAboutMyFriend:(id<ChatUser>)chatFriend
 {
-    @synchronized(_dbLockToken) {
+    @synchronized(_dbMutexToken) {
         NSMutableArray* chatMessages = [[[NSMutableArray alloc] init] autorelease];
         const char * filename = [self.chatDBPath UTF8String];
         
@@ -172,7 +172,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
 
 - (BOOL) unreadMessage2ReadMessage:(id<ChatUser>)chatFriend
 {
-    @synchronized(_dbLockToken) {
+    @synchronized(_dbMutexToken) {
         const char * filename = [self.chatDBPath UTF8String];
         sqlite3_stmt * stetment;
         sqlite3_open(filename, &_dbh);

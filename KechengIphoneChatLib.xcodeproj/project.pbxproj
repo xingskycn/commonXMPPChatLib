@@ -186,6 +186,8 @@
 		1F15519C171FC42D00C7469E /* libdnsinfo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdnsinfo.dylib; path = usr/lib/system/libdnsinfo.dylib; sourceTree = SDKROOT; };
 		1F15519E171FC73E00C7469E /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		1F419A1E1724DED700ADF24B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		1F419A20172547A700ADF24B /* default_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_avatar@2x.png"; sourceTree = "<group>"; };
+		1F419A2117254A1B00ADF24B /* avatar_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_shadow@2x.png"; sourceTree = "<group>"; };
 		1F492D4C171F8EB50047066C /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		1F492D4D171F8EB50047066C /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		1F492D4E171F8EB50047066C /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
@@ -435,6 +437,8 @@
 		1F4B54F5171E9C3F004EB4A1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1F419A2117254A1B00ADF24B /* avatar_shadow@2x.png */,
+				1F419A20172547A700ADF24B /* default_avatar@2x.png */,
 				1F5A87A61721109400C5BD0A /* global_bg_pattern.png */,
 				1F4B54FC171EACE2004EB4A1 /* emoji_button_pressed@2x.png */,
 				1F4B54FD171EACE2004EB4A1 /* emoji_button@2x.png */,

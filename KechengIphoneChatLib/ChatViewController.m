@@ -234,6 +234,7 @@ static const CGFloat PADDING = 30.f;
     
     ChatMessage* chatMessage = [_chatMessages objectAtIndex:[_chatMessages count] - 1 - indexPath.row]; //倒序读取
     ChatTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentitier];
+    
     if (cell == nil) {
         cell = [[[ChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentitier] autorelease];
     }
@@ -267,9 +268,19 @@ static const CGFloat PADDING = 30.f;
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Calculate Date
+    ChatMessage * message = [_chatMessages objectAtIndex:indexPath.row];
+    CGSize size = [self sizeForMessage:message.content];
+    size.height += 30;
+    //size.height += hasDate ? 60 : 30;
+    return MAX(60, size.height);
+}
+
 -(CGSize) sizeForMessage:(NSString*)msg {
-    CGSize textSize = {200, 10000.0};
-    return [msg sizeWithFont:[UIFont  systemFontOfSize:MESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = {200.0, 10000.0};
+    return [msg sizeWithFont:[UIFont  systemFontOfSize:MESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:NSLineBreakByCharWrapping];
 }
 
 #pragma mark ChatInputView delegate
