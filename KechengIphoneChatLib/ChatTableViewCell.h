@@ -17,7 +17,7 @@
 @property (nonatomic, assign) UIImageView* headImageView;
 @property (nonatomic, assign) UIImageView* headBgView;
 
--(void)layoutCell:(CHAT_SENDER_TYPE)sender showTime:(BOOL)showTime messageSize:(CGSize)size;
+-(void)layoutCell:(CHAT_SENDER_TYPE)sender messageSize:(CGSize)size;
 
 -(void)setTime:(NSDate *)messageDate;
 

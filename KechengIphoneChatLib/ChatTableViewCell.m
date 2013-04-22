@@ -47,7 +47,7 @@
     return self;
 }
 
-- (void)layoutCell:(CHAT_SENDER_TYPE)sender showTime:(BOOL)showTime messageSize:(CGSize)size
+- (void)layoutCell:(CHAT_SENDER_TYPE)sender messageSize:(CGSize)size
 {
     float headBgX;
     float messageLabelX;
@@ -64,7 +64,7 @@
         messageLabelX = 320 - size.width - 70;
     }
     
-    if(showTime) {
+    if([_timeLabel.text length] != 0) {
         _timeLabel.frame = CGRectMake(0, 5, 320, 15);
         paddingTop += 25;
     } else {

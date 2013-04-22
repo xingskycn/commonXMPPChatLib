@@ -19,9 +19,11 @@ static const CGFloat PADDING = 30.f;
 @interface ChatViewController ()
 {
     NSMutableArray * _chatMessages;
+    NSMutableArray * _chatTimeArray;
     CHAT_INPUT_MODE _chatInputMode;
     NSString* _userAvatarUrl;
     int _currentPage;
+    NSDate * _lastChatTime;
 }
 
 - (void)scrollTableViewToBottom;
@@ -101,10 +103,22 @@ static const CGFloat PADDING = 30.f;
     }
 }
 
+- (void)addAMessage:(ChatMessage*) message
+{
+    [self buildTimeArrayWithMessage:message];
+    [_chatMessages insertObject:message atIndex:0];
+}
+
+- (void)addMessages:(NSMutableArray*) messages
+{
+    [self buildTimeArrayWithMessages:messages];
+    [_chatMessages addObjectsFromArray:[[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage]];
+}
+
 - (void)handleChatMessageNotification:(NSNotification*)notification
 {
     ChatMessage* newMessage = [notification.userInfo objectForKey:@"chatMessage"];
-    [_chatMessages insertObject:newMessage atIndex:0];
+    [self addAMessage:newMessage];
     [self.chatTableView reloadData];
     [self scrollTableViewToBottom];
 }
@@ -113,9 +127,18 @@ static const CGFloat PADDING = 30.f;
 {
     if (_chatMessages == nil) {
         _chatMessages = [[NSMutableArray alloc] init];
+    } else {
+        [_chatMessages removeAllObjects];
+    }
+    
+    if (_chatTimeArray == nil) {
+        _chatTimeArray = [[NSMutableArray alloc] init];
+    } else {
+        [_chatTimeArray removeAllObjects];
     }
     _currentPage = 1;
-    [_chatMessages addObjectsFromArray:[[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage]];
+    NSMutableArray* messages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage];
+    [self addMessages:messages];
     [self scrollTableViewToBottom];
 }
 
@@ -198,6 +221,40 @@ static const CGFloat PADDING = 30.f;
     }
 }
 
+//Used for loading messages
+- (void)buildTimeArrayWithMessages:(NSMutableArray*)chatMessages
+{
+    //chat messages的时间顺序是从新到旧
+    for (int i = 1; i < [chatMessages count]; i++) {
+        ChatMessage* messageA = [chatMessages objectAtIndex:i - 1];
+        ChatMessage* messageB = [chatMessages objectAtIndex:i];
+        [self addTimeForLaterMessage:messageA withEarlierMessage:messageB];
+    }
+    //Add last time
+    [_chatTimeArray addObject:[[chatMessages lastObject] date]];
+}
+
+//Used for sending and receiveing message
+- (void)buildTimeArrayWithMessage:(ChatMessage*)chatMessage
+{
+    if ([_chatMessages count] > 0) {
+        ChatMessage * lastMessage = [_chatMessages objectAtIndex:0];
+        [self addTimeForLaterMessage:chatMessage withEarlierMessage:lastMessage];
+    } else {
+        [_chatTimeArray addObject:chatMessage.date];
+    }
+}
+
+- (void)addTimeForLaterMessage:(ChatMessage*)laterMessage withEarlierMessage:(ChatMessage*)earlierMessage
+{
+    NSTimeInterval theInterval = [laterMessage.date timeIntervalSinceDate:earlierMessage.date];
+    if (fabs(theInterval > 5 * 60)) {
+        [_chatTimeArray addObject:laterMessage.date];
+    } else {
+        [_chatTimeArray addObject:@"null"];
+    };
+}
+
 #pragma mark Tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -219,7 +276,7 @@ static const CGFloat PADDING = 30.f;
     if (scrollView.contentOffset.y == 0) {
         NSMutableArray* earlierMessages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage + 1];
         if ([earlierMessages count] != 0) {
-            [_chatMessages addObjectsFromArray:earlierMessages];
+            [self addMessages:earlierMessages];
             _currentPage += 1;
             int oldHeight = self.chatTableView.contentSize.height;
             [self.chatTableView reloadData];
@@ -257,13 +314,11 @@ static const CGFloat PADDING = 30.f;
     }
     cell.headImageView.tag = chatMessage.whoSend;
     
-    if (indexPath.row == 0) {
+    if ([[_chatTimeArray objectAtIndex:indexPath.row] isKindOfClass:[NSDate class]]) {
         [cell setTime:chatMessage.date];
-    } else {
-        //Todo:zuoyl  set time
     }
     
-    [cell layoutCell:chatMessage.whoSend showTime:NO messageSize:size];
+    [cell layoutCell:chatMessage.whoSend messageSize:size];
     
     return cell;
 }
@@ -271,10 +326,10 @@ static const CGFloat PADDING = 30.f;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Calculate Date
+    BOOL hasDate = [[_chatTimeArray objectAtIndex:indexPath.row] isKindOfClass:[NSDate class]];
     ChatMessage * message = [_chatMessages objectAtIndex:indexPath.row];
     CGSize size = [self sizeForMessage:message.content];
-    size.height += 30;
-    //size.height += hasDate ? 60 : 30;
+    size.height += hasDate ? 60 : 30;
     return MAX(60, size.height);
 }
 
@@ -305,7 +360,7 @@ static const CGFloat PADDING = 30.f;
     chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
     chatMessage.isNew = YES;
     chatMessage.date = [NSDate date];
-    [_chatMessages insertObject:chatMessage atIndex:0];
+    [self addAMessage:chatMessage];
     [self.chatTableView reloadData];
     [self scrollTableViewToBottom];
     [[ChatManager sharedInstance] sendMessage:chatMessage withComplete:^(BOOL bSuccess) {
