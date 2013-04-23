@@ -26,4 +26,6 @@
 
 -(BOOL)unreadMessage2ReadMessage:(id<ChatUser>)chatFriend;
 
+-(BOOL)resendChatMessageSucceed:(ChatMessage *)message;
+
 @end

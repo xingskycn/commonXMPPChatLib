@@ -27,6 +27,8 @@ static NSString* chatTableColumn6 = @"is_new";
 
 static NSString* chatTableColumn7 = @"message_date";
 
+static NSString* chatTableColumn8 = @"is_succeed";
+
 static NSString* chatMessageTableName = @"chat_messages_table";
 
 @interface ChatDBHelper()
@@ -61,7 +63,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
             sqlite3_close(_dbh);
         }
         
-        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY, '%@' INTEGER, '%@' INTEGER, '%@' TEXT, '%@' INTEGER, '%@' INTEGER, '%@' DOUBLE)", chatMessageTableName, chatTableColumn1, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7];
+        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY, '%@' INTEGER, '%@' INTEGER, '%@' TEXT, '%@' INTEGER, '%@' INTEGER, '%@' DOUBLE, '%@' INTEGER)", chatMessageTableName, chatTableColumn1, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7, chatTableColumn8];
         char * errorMesage;
         sqlite3_exec(_dbh, [createSTMT UTF8String], nil, nil, &errorMesage);
         sqlite3_close(_dbh);
@@ -83,7 +85,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
         double messageDate = [message.date timeIntervalSince1970];
         sqlite3_stmt * stetment;
         sqlite3_open(filename, &_dbh);
-        NSString * insertSql = [NSString stringWithFormat:@"INSERT INTO %@ (%@ ,%@, %@, %@, %@, %@) VALUES(:friend_id, :who_send, :content, :content_type, :is_new, :message_date)", chatMessageTableName, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7];
+        NSString * insertSql = [NSString stringWithFormat:@"INSERT INTO %@ (%@ ,%@, %@, %@, %@, %@, %@) VALUES(:friend_id, :who_send, :content, :content_type, :is_new, :message_date, :is_succeed)", chatMessageTableName, chatTableColumn2, chatTableColumn3, chatTableColumn4, chatTableColumn5, chatTableColumn6, chatTableColumn7, chatTableColumn8];
         const char * sql = [insertSql UTF8String];
         sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [message.myFriend chatUserId]);
@@ -92,10 +94,35 @@ static NSString* chatMessageTableName = @"chat_messages_table";
         sqlite3_bind_int(stetment,  sqlite3_bind_parameter_index(stetment, ":content_type"), message.contentType);
         sqlite3_bind_double(stetment, sqlite3_bind_parameter_index(stetment, ":message_date"), messageDate);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":is_new"), message.isNew);
+        sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, "is_succeed"), message.isSucceed);
         int r = sqlite3_step(stetment);
         sqlite3_finalize(stetment);
         sqlite3_close(_dbh);
         if (r == SQLITE_DONE) {
+            sqlite3_open(filename, &_dbh);
+            message.message_id = sqlite3_last_insert_rowid(_dbh);
+            sqlite3_close(_dbh);
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+}
+
+-(BOOL)resendChatMessageSucceed:(ChatMessage *)message
+{
+    @synchronized(_dbMutexToken) {
+        const char * filename = [self.chatDBPath UTF8String];
+        sqlite3_stmt * stetment;
+        sqlite3_open(filename, &_dbh);
+        NSString * updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET %@ = 1 WHERE %@ = :message_id", chatMessageTableName, chatTableColumn8, chatTableColumn1];
+        const char * sql = [updateSql UTF8String];
+        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
+        sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":message_id"), message.message_id);
+        int r = sqlite3_step(stetment);
+        sqlite3_finalize(stetment);
+        sqlite3_close(_dbh);
+        if (r == SQLITE_DONE || r == SQLITE_OK) {
             return YES;
         } else {
             return NO;
@@ -124,6 +151,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
             chatMessage.contentType = sqlite3_column_int(stetment, 4);
             chatMessage.isNew = sqlite3_column_int(stetment, 5);
             chatMessage.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_double(stetment, 6)];
+            chatMessage.isSucceed = sqlite3_column_int(stetment, 7);
             [chatMessages addObject:chatMessage];
             [chatMessage release];
             chatMessage = nil;

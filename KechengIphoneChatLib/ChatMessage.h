@@ -24,4 +24,8 @@
 
 @property (nonatomic) BOOL isNew;
 
+@property (nonatomic) BOOL isSucceed;
+
+@property (nonatomic) int message_id;
+
 @end

@@ -22,7 +22,6 @@
         _timeLabel.textColor = [UIColor lightGrayColor];
         [self.contentView addSubview:_timeLabel];
         
-        
         _bgView = [[UIImageView alloc]initWithFrame:CGRectZero];
         [self.contentView addSubview:_bgView];
         

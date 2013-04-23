@@ -88,10 +88,13 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
             [_xmppStream sendElement:[self chatMessage2XmppMessage:message] andGetReceipt:&receipt];
             if ([receipt wait:SEND_MESSAGE_TIMEOUT]) {
                 //Wait until the element has been sent
+                message.isSucceed = YES;
                 [[ChatDBHelper sharedInstance] insertChatMessage:message];
                 block(YES);
             } else {
                 //Maybe retry
+                message.isSucceed = NO;
+                [[ChatDBHelper sharedInstance] insertChatMessage:message];
                 block(NO);
             }
         });

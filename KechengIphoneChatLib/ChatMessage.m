@@ -16,5 +16,7 @@
 @synthesize contentType;
 @synthesize date;
 @synthesize isNew;
+@synthesize isSucceed;
+@synthesize message_id;
 
 @end
