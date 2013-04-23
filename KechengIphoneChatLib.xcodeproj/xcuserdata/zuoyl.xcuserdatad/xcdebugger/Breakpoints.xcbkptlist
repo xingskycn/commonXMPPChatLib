@@ -437,11 +437,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "-relayoutForKeyboard:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -450,11 +450,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "366"
-         endingLineNumber = "366"
+         startingLineNumber = "372"
+         endingLineNumber = "372"
          landmarkName = "-onInputViewSendMessage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -463,20 +463,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
-         landmarkName = "-relayoutForEmoView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "196"
@@ -489,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "213"
-         endingLineNumber = "213"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
          landmarkName = "-relayoutForEmoView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,11 +489,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "367"
-         endingLineNumber = "367"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
+         landmarkName = "-relayoutForEmoView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "KechengIphoneChatLib/ChatViewController.m"
+         timestampString = "388379292.462876"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "373"
+         endingLineNumber = "373"
          landmarkName = "-onInputViewSendMessage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -840,11 +840,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "360"
-         endingLineNumber = "360"
+         startingLineNumber = "366"
+         endingLineNumber = "366"
          landmarkName = "-onInputViewSendMessage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -892,11 +892,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-handleChatMessageNotification:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -918,11 +918,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "128"
-         endingLineNumber = "128"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
          landmarkName = "-initChatMessages"
          landmarkType = "5">
       </FileBreakpoint>
@@ -931,11 +931,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "290"
-         endingLineNumber = "290"
+         startingLineNumber = "291"
+         endingLineNumber = "291"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -970,11 +970,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
          landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -983,11 +983,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "276"
-         endingLineNumber = "276"
+         startingLineNumber = "277"
+         endingLineNumber = "277"
          landmarkName = "-scrollViewDidEndDecelerating:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -996,11 +996,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "218"
-         endingLineNumber = "218"
+         startingLineNumber = "219"
+         endingLineNumber = "219"
          landmarkName = "-scrollTableViewToBottom"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1009,11 +1009,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
+         startingLineNumber = "290"
+         endingLineNumber = "290"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1022,11 +1022,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "356"
-         endingLineNumber = "356"
+         startingLineNumber = "362"
+         endingLineNumber = "362"
          landmarkName = "-onInputViewSendMessage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1035,11 +1035,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "366"
-         endingLineNumber = "366"
+         startingLineNumber = "372"
+         endingLineNumber = "372"
          landmarkName = "-onInputViewSendMessage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1074,11 +1074,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "299"
-         endingLineNumber = "299"
+         startingLineNumber = "300"
+         endingLineNumber = "300"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1087,11 +1087,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "328"
-         endingLineNumber = "328"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-tableView:heightForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1100,11 +1100,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "330"
-         endingLineNumber = "330"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
          landmarkName = "-tableView:heightForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1113,20 +1113,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "313"
-         endingLineNumber = "313"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341728.204579"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "314"
@@ -1138,12 +1125,25 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "KechengIphoneChatLib/ChatTableViewCell.m"
-         timestampString = "388320315.100944"
+         filePath = "KechengIphoneChatLib/ChatViewController.m"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
+         startingLineNumber = "315"
+         endingLineNumber = "315"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "KechengIphoneChatLib/ChatTableViewCell.m"
+         timestampString = "388378858.976608"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
          landmarkName = "-setTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1152,7 +1152,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatTableViewCell.m"
-         timestampString = "388320040.531744"
+         timestampString = "388378858.976608"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "48"
@@ -1165,11 +1165,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatTableViewCell.m"
-         timestampString = "388320315.100944"
+         timestampString = "388378858.976608"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-setTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1178,11 +1178,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388341995.72986"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "279"
-         endingLineNumber = "279"
+         startingLineNumber = "280"
+         endingLineNumber = "280"
          landmarkName = "-scrollViewDidEndDecelerating:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1191,11 +1191,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388342109.91935"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "292"
-         endingLineNumber = "292"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1204,11 +1204,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388342177.347322"
+         timestampString = "388377052.826732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "282"
-         endingLineNumber = "282"
+         startingLineNumber = "283"
+         endingLineNumber = "283"
          landmarkName = "-scrollViewDidEndDecelerating:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1217,12 +1217,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatViewController.m"
-         timestampString = "388342220.831349"
+         timestampString = "388379292.462876"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "329"
-         endingLineNumber = "329"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-tableView:heightForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "KechengIphoneChatLib/ChatTableViewCell.m"
+         timestampString = "388378061.690989"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "18"
+         endingLineNumber = "18"
+         landmarkName = "-initWithStyle:reuseIdentifier:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

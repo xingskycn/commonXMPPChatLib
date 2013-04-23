@@ -103,12 +103,13 @@ static const CGFloat PADDING = 30.f;
     }
 }
 
+//Main function for add message when receiving and sending
 - (void)addAMessage:(ChatMessage*) message
 {
     [self buildTimeArrayWithMessage:message];
     [_chatMessages insertObject:message atIndex:0];
 }
-
+//Main function for loading messages
 - (void)addMessages:(NSMutableArray*) messages
 {
     [self buildTimeArrayWithMessages:messages];
@@ -310,11 +311,13 @@ static const CGFloat PADDING = 30.f;
     } else {
         //自己的消息
         //[cell.headImageView setImageWithURL:[NSURL URLWithString:_userAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        cell.headImageView.image = [UIImage imageNamed:@"default_avatar"];
+        cell.headImageView.image = [UIImage imageNamed:@"button_send"];
     }
     cell.headImageView.tag = chatMessage.whoSend;
     
-    if ([[_chatTimeArray objectAtIndex:indexPath.row] isKindOfClass:[NSDate class]]) {
+    id obj = [_chatTimeArray objectAtIndex:[_chatTimeArray count] - 1 - indexPath.row];
+    BOOL hasDate = [obj isKindOfClass:[NSDate class]];
+    if (hasDate) {
         [cell setTime:chatMessage.date];
     }
     
@@ -326,14 +329,16 @@ static const CGFloat PADDING = 30.f;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Calculate Date
-    BOOL hasDate = [[_chatTimeArray objectAtIndex:indexPath.row] isKindOfClass:[NSDate class]];
-    ChatMessage * message = [_chatMessages objectAtIndex:indexPath.row];
+    ChatMessage* message = [_chatMessages objectAtIndex:[_chatMessages count] - 1 - indexPath.row]; //倒序读取
+    id obj = [_chatTimeArray objectAtIndex:[_chatTimeArray count] - 1 - indexPath.row];
+    BOOL hasDate = [obj isKindOfClass:[NSDate class]];
     CGSize size = [self sizeForMessage:message.content];
-    size.height += hasDate ? 60 : 30;
-    return MAX(60, size.height);
+    size.height += hasDate ? 60 : 50;
+    return MAX(50, size.height);
 }
 
--(CGSize) sizeForMessage:(NSString*)msg {
+-(CGSize) sizeForMessage:(NSString*)msg
+{
     CGSize textSize = {200.0, 10000.0};
     return [msg sizeWithFont:[UIFont  systemFontOfSize:MESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:NSLineBreakByCharWrapping];
 }

@@ -38,7 +38,7 @@
         
         _headImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _headImageView.userInteractionEnabled = YES;
-        _headBgView.image = [UIImage imageNamed:@"avatar_shadow"];
+        _headBgView.image = [UIImage imageNamed:@"button_send"];
         [_headBgView addSubview:_headImageView];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -73,6 +73,7 @@
     
     _headBgView.frame = CGRectMake(headBgX, paddingTop, 42, 42);
     _headImageView.frame = CGRectMake(1, 1, 40, 40);
+
     _bgView.image = [[UIImage imageNamed:bgImageName] stretchableImageWithLeftCapWidth:24 topCapHeight:30];
     
     _messageLabel.frame = CGRectMake(messageLabelX, paddingTop + 10, size.width, size.height);
