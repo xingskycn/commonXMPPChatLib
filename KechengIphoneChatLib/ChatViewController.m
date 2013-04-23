@@ -290,7 +290,8 @@ static const CGFloat PADDING = 30.f;
 {
     static NSString * cellIdentitier = @"ChatCell";
     
-    ChatMessage* chatMessage = [_chatMessages objectAtIndex:[_chatMessages count] - 1 - indexPath.row]; //倒序读取
+    int row = [self convertIndexPathRow:indexPath.row];
+    ChatMessage* chatMessage = [_chatMessages objectAtIndex:row]; //倒序读取
     ChatTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentitier];
     
     if (cell == nil) {
@@ -315,8 +316,7 @@ static const CGFloat PADDING = 30.f;
     }
     cell.headImageView.tag = chatMessage.whoSend;
     
-    id obj = [_chatTimeArray objectAtIndex:[_chatTimeArray count] - 1 - indexPath.row];
-    BOOL hasDate = [obj isKindOfClass:[NSDate class]];
+    BOOL hasDate = [[_chatTimeArray objectAtIndex:row] isKindOfClass:[NSDate class]];
     if (hasDate) {
         [cell setTime:chatMessage.date];
     }
@@ -329,12 +329,19 @@ static const CGFloat PADDING = 30.f;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Calculate Date
-    ChatMessage* message = [_chatMessages objectAtIndex:[_chatMessages count] - 1 - indexPath.row]; //倒序读取
-    id obj = [_chatTimeArray objectAtIndex:[_chatTimeArray count] - 1 - indexPath.row];
-    BOOL hasDate = [obj isKindOfClass:[NSDate class]];
+    int row = [self convertIndexPathRow:indexPath.row];
+    ChatMessage* message = [_chatMessages objectAtIndex:row]; //倒序读取
+    BOOL hasDate = [[_chatTimeArray objectAtIndex:row] isKindOfClass:[NSDate class]];
     CGSize size = [self sizeForMessage:message.content];
     size.height += hasDate ? 60 : 50;
     return MAX(50, size.height);
+}
+
+-(int)convertIndexPathRow:(int)tableViewIndexRow
+{
+    //因为消息数组中存储的是时间从新到旧的顺序，显示消息时的顺序是从旧到新
+    //_chatTimeArray与_chatMessages是对等的
+    return [_chatMessages count] - 1 - tableViewIndexRow;
 }
 
 -(CGSize) sizeForMessage:(NSString*)msg
