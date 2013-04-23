@@ -93,31 +93,26 @@
     [formatter setDateFormat:@"HH:mm:ss"];
     NSString *connectString = [formatter stringFromDate:date];
     
-    if([self isToday:date])
-    {
+    if([self isToday:date]) {
         //today
         return connectString;
-    } else if([self isToday:[date dateByAddingTimeInterval:60*60*24]])
-    {
+    } else if ([self isToday:[date dateByAddingTimeInterval:60 * 60 * 24]]) {
         //yesterday
         return [NSString stringWithFormat:@"%@ %@",@"昨天",connectString];
-    } else if([self isToday:[date dateByAddingTimeInterval:60*60*24*2]])
-    {
+    } else if ([self isToday:[date dateByAddingTimeInterval:60 * 60 * 24 * 2]]) {
         //-2days
         return [NSString stringWithFormat:@"%@ %@",@"前天",connectString];
-    } else
-    {
+    } else {
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         return [formatter stringFromDate:date];
     }
-
 }
 
 -(BOOL)isToday:(NSDate *)date
 {
     NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
-                                     fromDate:date];
+    NSDateComponents *comps = [cal components:(NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
+                                     fromDate:[NSDate date]];
     NSDate* beginningOfDate = [cal dateFromComponents:comps];
     NSTimeInterval delta = [date timeIntervalSinceDate:beginningOfDate];
     return (delta >= 0 && delta <= 60 * 60 * 24);
