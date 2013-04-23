@@ -56,6 +56,12 @@ static const int TEXT_MAX_LENGTH = 1000;
     [self sendSubviewToBack:self.bgImageView];
     _previousContentHeight = self.inputView.contentSize.height;
     self.inputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.inputView.clearsContextBeforeDrawing = NO;
+    self.inputView.font = [UIFont systemFontOfSize:17.0f];
+    self.inputView.returnKeyType = UIReturnKeySend;
+    self.inputView.clipsToBounds = NO;
+    self.inputView.scrollEnabled = NO;
+    self.inputView.dataDetectorTypes = UIDataDetectorTypeAll;
 }
 
 - (void)syncEmoButtonIcon
@@ -163,5 +169,15 @@ static const int TEXT_MAX_LENGTH = 1000;
     } else {
         textView.text = [textView.text substringToIndex:TEXT_MAX_LENGTH];
     }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self sendButtonClick:nil];
+        return NO;
+    }
+    
+    return YES;
 }
 @end
