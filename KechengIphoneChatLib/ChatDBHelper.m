@@ -145,6 +145,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
         int r = sqlite3_step(stetment);
         while (r == SQLITE_ROW) {
             ChatMessage * chatMessage = [[ChatMessage alloc] init];
+            chatMessage.message_id = sqlite3_column_int(stetment, 0);
             chatMessage.whoSend = sqlite3_column_int(stetment, 2);
             chatMessage.myFriend = chatFriend;
             chatMessage.content = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 3)];
@@ -180,6 +181,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
         int r = sqlite3_step(stetment);
         while (r == SQLITE_ROW) {
             ChatMessage * chatMessage = [[ChatMessage alloc] init];
+            chatMessage.message_id = sqlite3_column_int(stetment, 1);
             chatMessage.whoSend = sqlite3_column_int(stetment,3);
             chatMessage.myFriend = chatFriend;
             chatMessage.content = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 4)];
@@ -216,6 +218,37 @@ static NSString* chatMessageTableName = @"chat_messages_table";
         } else {
             return NO;
         }
+    }
+}
+
+- (NSMutableArray*)MessagesForMessageCenter:(id<ChatUser>)me
+{
+    @synchronized(_dbMutexToken) {
+        NSMutableArray* chatMessages = [[[NSMutableArray alloc] init] autorelease];
+        const char * filename = [self.chatDBPath UTF8String];
+        sqlite3_stmt * stetment;
+        sqlite3_open(filename, &_dbh);
+        NSString * sel = [NSString stringWithFormat:@"SELECT * FROM '%@' GROUP BY %@ ORDER BY %@ DESC", chatMessageTableName, chatTableColumn2, chatTableColumn7];
+        const char * sql = [sel UTF8String];
+        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
+        int r = sqlite3_step(stetment);
+        while (r == SQLITE_ROW) {
+            ChatMessage * chatMessage = [[ChatMessage alloc] init];
+            chatMessage.message_id = sqlite3_column_int(stetment, 0);
+            chatMessage.whoSend = sqlite3_column_int(stetment, 2);
+            chatMessage.myFriend = [me buildChatUserFromUserId:sqlite3_column_int(stetment, 1)];
+            chatMessage.content = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 3)];
+            chatMessage.contentType = sqlite3_column_int(stetment, 4);
+            chatMessage.isNew = sqlite3_column_int(stetment, 5);
+            chatMessage.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_double(stetment, 6)];
+            chatMessage.isSucceed = sqlite3_column_int(stetment, 7);
+            [chatMessages addObject:chatMessage];
+            [chatMessage release];
+            chatMessage = nil;
+            r = sqlite3_step(stetment);
+        }
+        
+        return chatMessages;
     }
 }
 

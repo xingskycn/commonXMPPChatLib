@@ -28,4 +28,6 @@
 
 -(BOOL)resendChatMessageSucceed:(ChatMessage *)message;
 
+-(NSMutableArray *)MessagesForMessageCenter:(id<ChatUser>)me;
+
 @end

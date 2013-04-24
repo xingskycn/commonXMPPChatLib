@@ -1166,7 +1166,6 @@
 				INFOPLIST_FILE = "KechengIphoneTest/KechengIphoneTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/KechengIphoneChatLib/XMPP/Vendor/libidn\"",
 					"\"$(SRCROOT)/KechengIphoneChatLib/ChatView/Lib/XMPP/Vendor/libidn\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1189,7 +1188,6 @@
 				INFOPLIST_FILE = "KechengIphoneTest/KechengIphoneTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/KechengIphoneChatLib/XMPP/Vendor/libidn\"",
 					"\"$(SRCROOT)/KechengIphoneChatLib/ChatView/Lib/XMPP/Vendor/libidn\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -1298,7 +1296,6 @@
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/KechengIphoneChatLib/XMPP/Vendor/libidn\"",
 					"\"$(SRCROOT)/KechengIphoneChatLib/ChatView/Lib/XMPP/Vendor/libidn\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1318,7 +1315,6 @@
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/KechengIphoneChatLib/XMPP/Vendor/libidn\"",
 					"\"$(SRCROOT)/KechengIphoneChatLib/ChatView/Lib/XMPP/Vendor/libidn\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
