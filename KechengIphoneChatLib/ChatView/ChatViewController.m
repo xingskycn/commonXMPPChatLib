@@ -62,13 +62,18 @@ static const CGFloat PADDING = 30.f;
     
     _chatInputMode = CHAT_INPUT_MODE_NONE;
     
-    self.navigationItem.title = @"Origin title";
-    
     [self registerNotification];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    if ([[ChatManager sharedInstance] checkConnectionAvailable]) {
+        self.navigationItem.title = @"Connected";
+    } else {
+        self.navigationItem.title = @"Disconnected";
+        [[ChatManager sharedInstance] login];
+    }
+    
     [self initChatMessages];
 }
 
