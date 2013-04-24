@@ -195,8 +195,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "131"
          endingLineNumber = "131"
-         landmarkName = "-login"
-         landmarkType = "5">
+         landmarkName = "@implementation ChatManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -208,7 +208,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "130"
          endingLineNumber = "130"
-         landmarkName = "-login"
+         landmarkName = "-connectToServer"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -312,8 +312,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "245"
          endingLineNumber = "245"
-         landmarkName = "-xmppStreamDidAuthenticate:"
-         landmarkType = "5">
+         landmarkName = "@implementation ChatManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -325,8 +325,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "259"
          endingLineNumber = "259"
-         landmarkName = "-xmppStream:didReceivePresence:"
-         landmarkType = "5">
+         landmarkName = "@implementation ChatManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -364,8 +364,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "233"
          endingLineNumber = "233"
-         landmarkName = "-xmppStreamDidConnect:"
-         landmarkType = "5">
+         landmarkName = "@implementation ChatManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -390,7 +390,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "145"
          endingLineNumber = "145"
-         landmarkName = "-checkAuthentication"
+         landmarkName = "-logout"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -403,7 +403,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "166"
          endingLineNumber = "166"
-         landmarkName = "-mePresence:"
+         landmarkName = "-friendPresence:presenceType:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -572,7 +572,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "101"
          endingLineNumber = "101"
-         landmarkName = "-connectToServer"
+         landmarkName = "-sendMessage:withComplete:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -832,7 +832,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "226"
          endingLineNumber = "226"
-         landmarkName = "-wrongState"
+         landmarkName = "-createConnectionCheckTimer"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -871,8 +871,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "234"
          endingLineNumber = "234"
-         landmarkName = "-xmppStreamDidConnect:"
-         landmarkType = "5">
+         landmarkName = "@implementation ChatManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -884,8 +884,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "196"
          endingLineNumber = "196"
-         landmarkName = "-xmppMessage2ChatMessage:"
-         landmarkType = "5">
+         landmarkName = "@implementation ChatManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

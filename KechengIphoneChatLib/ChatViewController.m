@@ -304,7 +304,7 @@ static const CGFloat PADDING = 30.f;
     cell.messageLabel.text = chatMessage.content;
     if (chatMessage.whoSend == CHAT_SENDER_TYPE_FRIEND) {
         //他人的消息
-        cell.headImageView.image = self.headImage;
+        cell.headImageView.image = self.friendHeadImage;
         //Todo:zuoyl cell image and navigation.
         //UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUserProfile:)];
         //[cell.headImageView addGestureRecognizer:singleFingerTap];
@@ -312,7 +312,7 @@ static const CGFloat PADDING = 30.f;
     } else {
         //自己的消息
         //[cell.headImageView setImageWithURL:[NSURL URLWithString:_userAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        cell.headImageView.image = [UIImage imageNamed:@"button_send"];
+        cell.headImageView.image = self.myHeadImage;
     }
     cell.headImageView.tag = chatMessage.whoSend;
     
