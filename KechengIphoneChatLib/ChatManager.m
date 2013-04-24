@@ -46,8 +46,6 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (void) mePresence:(NSString*)presenceType;
 
-- (BOOL) checkConnectionAvailable;
-
 - (NSXMLElement*) chatMessage2XmppMessage:(ChatMessage*)message;
 
 - (ChatMessage*) xmppMessage2ChatMessage:(NSXMLElement*)xmppMessage;
@@ -118,6 +116,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
         NSError * error = nil;
         if (![_xmppStream connect:&error]) {
             _connectionState = connectionStateLoginFailure;
+            [[NSNotificationCenter defaultCenter] postNotificationName: CHAT_DISCONNECTED_NOTIFICATION object:nil];
             return NO;
         } else {
             return YES;

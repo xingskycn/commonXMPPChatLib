@@ -106,14 +106,18 @@ static const CGFloat PADDING = 30.f;
 //Main function for add message when receiving and sending
 - (void)addAMessage:(ChatMessage*) message
 {
-    [self buildTimeArrayWithMessage:message];
-    [_chatMessages insertObject:message atIndex:0];
+    if (message != nil) {
+        [self buildTimeArrayWithMessage:message];
+        [_chatMessages insertObject:message atIndex:0];
+    }
 }
 //Main function for loading messages
 - (void)addMessages:(NSMutableArray*) messages
 {
-    [self buildTimeArrayWithMessages:messages];
-    [_chatMessages addObjectsFromArray:messages];
+    if ([messages count] > 0) {
+        [self buildTimeArrayWithMessages:messages];
+        [_chatMessages addObjectsFromArray:messages];
+    }
 }
 
 - (void)handleChatMessageNotification:(NSNotification*)notification
@@ -140,6 +144,7 @@ static const CGFloat PADDING = 30.f;
     _currentPage = 1;
     NSMutableArray* messages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage];
     [self addMessages:messages];
+    [self.chatTableView reloadData];
     [self scrollTableViewToBottom];
 }
 

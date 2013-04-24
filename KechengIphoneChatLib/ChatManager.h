@@ -29,4 +29,6 @@
 
 - (void) logout;
 
+- (BOOL) checkConnectionAvailable;
+
 @end
