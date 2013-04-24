@@ -203,6 +203,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
         chatMessage.date = [NSDate date];
         chatMessage.myFriend = [self.me buildChatUserFromXmppUserName:from];
         chatMessage.whoSend = CHAT_SENDER_TYPE_FRIEND;
+        chatMessage.isNew = YES;
+        chatMessage.isSucceed = YES;
         return chatMessage;
     }
     

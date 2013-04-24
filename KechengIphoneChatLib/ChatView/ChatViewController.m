@@ -77,6 +77,13 @@ static const CGFloat PADDING = 30.f;
     [self initChatMessages];
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[ChatDBHelper sharedInstance] unreadMessage2ReadMessage:self.myFriend];
+    });
+}
+
 - (void)registerNotification
 {
     //Add keyboard notification
