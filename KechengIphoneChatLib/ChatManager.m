@@ -223,6 +223,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
             dispatch_source_cancel(_connectionCheckTimer);
         }
     });
+    dispatch_resume(_connectionCheckTimer);
 }
 
 - (void) wrongState
