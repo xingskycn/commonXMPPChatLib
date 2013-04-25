@@ -381,9 +381,13 @@ static const CGFloat PADDING = 30.f;
 
 - (void)onInputViewSendMessage:(NSString *)message
 {
+    NSString* cleanString = [message stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([cleanString length] == 0) {
+        return;
+    }
     ChatMessage* chatMessage = [[[ChatMessage alloc] init] autorelease];
     chatMessage.myFriend = self.myFriend;
-    chatMessage.content = message;
+    chatMessage.content = cleanString;
     chatMessage.whoSend = CHAT_SENDER_TYPE_ME;
     chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
     chatMessage.isNew = YES;
