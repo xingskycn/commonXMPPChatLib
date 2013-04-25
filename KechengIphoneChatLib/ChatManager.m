@@ -88,11 +88,13 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
                 //Wait until the element has been sent
                 message.isSucceed = YES;
                 [[ChatDBHelper sharedInstance] insertChatMessage:message];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION object:nil];
                 block(YES);
             } else {
                 //Maybe retry
                 message.isSucceed = NO;
                 [[ChatDBHelper sharedInstance] insertChatMessage:message];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_SEND_MESSAGE_FAILURE_NOTIFICATION object:nil];
                 block(NO);
             }
         });
