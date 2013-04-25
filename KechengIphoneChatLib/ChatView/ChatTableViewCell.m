@@ -37,7 +37,7 @@
         
         _headImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _headImageView.userInteractionEnabled = YES;
-        _headBgView.image = [UIImage imageNamed:@"button_send"];
+        _headBgView.image = [UIImage imageNamed:@"avatar_shadow"];
         [_headBgView addSubview:_headImageView];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleNone;

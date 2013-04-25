@@ -52,7 +52,7 @@ static const CGFloat PADDING = 30.f;
     
     NSArray* xib = [[NSBundle mainBundle] loadNibNamed:@"ChatInputView" owner:self options:nil];
     self.chatInputView = [xib objectAtIndex:0];
-    [self.chatInputView setFrame:CGRectMake(0, 372, self.view.frame.size.height - INPUT_VIEW_INIT_HEIGHT, INPUT_VIEW_INIT_HEIGHT)];
+    [self.chatInputView setFrame:CGRectMake(0, SCREEN_HEIGHT - INPUT_VIEW_INIT_HEIGHT, 320, INPUT_VIEW_INIT_HEIGHT)];
     self.chatInputView.delegate = self;
     [self.view addSubview:self.chatInputView];
     
@@ -243,10 +243,10 @@ static const CGFloat PADDING = 30.f;
 - (void)buildTimeArrayWithMessages:(NSMutableArray*)chatMessages
 {
     //chat messages的时间顺序是从新到旧
-    for (int i = 1; i < [chatMessages count]; i++) {
-        ChatMessage* messageA = [chatMessages objectAtIndex:i - 1];
-        ChatMessage* messageB = [chatMessages objectAtIndex:i];
-        [self addTimeForLaterMessage:messageA withEarlierMessage:messageB];
+    for (int i = 0; i < [chatMessages count] - 1; i++) {
+        ChatMessage* messageA = [chatMessages objectAtIndex:i];
+        ChatMessage* messageB = [chatMessages objectAtIndex:i + 1];
+        [self addTimeForLaterMessage:messageA withEarlierMessage:messageB add2Last:YES];
     }
     //Add last time
     [_chatTimeArray addObject:[[chatMessages lastObject] date]];
@@ -257,19 +257,27 @@ static const CGFloat PADDING = 30.f;
 {
     if ([_chatMessages count] > 0) {
         ChatMessage * lastMessage = [_chatMessages objectAtIndex:0];
-        [self addTimeForLaterMessage:chatMessage withEarlierMessage:lastMessage];
+        [self addTimeForLaterMessage:chatMessage withEarlierMessage:lastMessage add2Last:NO];
     } else {
         [_chatTimeArray addObject:chatMessage.date];
     }
 }
 
-- (void)addTimeForLaterMessage:(ChatMessage*)laterMessage withEarlierMessage:(ChatMessage*)earlierMessage
+- (void)addTimeForLaterMessage:(ChatMessage*)laterMessage withEarlierMessage:(ChatMessage*)earlierMessage add2Last:(BOOL)bAdd2Last
 {
     NSTimeInterval theInterval = [laterMessage.date timeIntervalSinceDate:earlierMessage.date];
-    if (fabs(theInterval > 5 * 60)) {
-        [_chatTimeArray addObject:laterMessage.date];
+    if (fabs(theInterval > 5 * 60 * 60)) {
+        if (bAdd2Last) {
+            [_chatTimeArray addObject:laterMessage.date];
+        } else {
+            [_chatTimeArray insertObject:laterMessage.date atIndex:0];
+        }
     } else {
-        [_chatTimeArray addObject:@"null"];
+        if (bAdd2Last) {
+            [_chatTimeArray addObject:@"null"];
+        } else {
+            [_chatTimeArray insertObject:@"null" atIndex:0];
+        }
     };
 }
 
@@ -310,6 +318,7 @@ static const CGFloat PADDING = 30.f;
     int row = [self convertIndexPathRow:indexPath.row];
     ChatMessage* chatMessage = [_chatMessages objectAtIndex:row]; //倒序读取
     ChatTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentitier];
+    cell.timeLabel.text = @"";
     
     if (cell == nil) {
         cell = [[[ChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentitier] autorelease];
@@ -322,16 +331,14 @@ static const CGFloat PADDING = 30.f;
     if (chatMessage.whoSend == CHAT_SENDER_TYPE_FRIEND) {
         //他人的消息
         [cell.headImageView setImageWithURL:[NSURL URLWithString:[self.myFriend tinyAvatarUrl]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        //Todo:zuoyl cell image and navigation.
-        //UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUserProfile:)];
-        //[cell.headImageView addGestureRecognizer:singleFingerTap];
-        //[singleFingerTap release];
     } else {
         //自己的消息
         [cell.headImageView setImageWithURL:[NSURL URLWithString:[self.me tinyAvatarUrl]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     }
     cell.headImageView.tag = chatMessage.whoSend;
-    
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUserProfile:)];
+    [cell.headImageView addGestureRecognizer:singleFingerTap];
+    [singleFingerTap release];
     BOOL hasDate = [[_chatTimeArray objectAtIndex:row] isKindOfClass:[NSDate class]];
     if (hasDate) {
         [cell setTime:chatMessage.date];
@@ -428,6 +435,11 @@ static const CGFloat PADDING = 30.f;
     
     [self relayoutForEmoView];
     [self.chatInputView syncEmoButtonIcon];
+}
+
+- (void)showUserProfile:(id)sender
+{
+    
 }
 
 - (CHAT_INPUT_MODE)chatInputMode

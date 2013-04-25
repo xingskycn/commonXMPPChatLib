@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
          landmarkName = "-login"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
          landmarkName = "@implementation ChatManager"
          landmarkType = "3">
       </FileBreakpoint>
@@ -216,7 +216,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "90"
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "-sendMessage:withComplete:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388313051.745595"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "245"
-         endingLineNumber = "245"
+         startingLineNumber = "247"
+         endingLineNumber = "247"
          landmarkName = "-xmppStreamDidConnect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388313051.745595"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "259"
-         endingLineNumber = "259"
+         startingLineNumber = "261"
+         endingLineNumber = "261"
          landmarkName = "-xmppStreamDidAuthenticate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388313051.745595"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "233"
-         endingLineNumber = "233"
+         startingLineNumber = "235"
+         endingLineNumber = "235"
          landmarkName = "-wrongState"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "-connectToServer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -385,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "145"
-         endingLineNumber = "145"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
          landmarkName = "-logout"
          landmarkType = "5">
       </FileBreakpoint>
@@ -398,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "-friendPresence:presenceType:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "-connectToServer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -567,11 +567,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
          landmarkName = "@implementation ChatManager"
          landmarkType = "3">
       </FileBreakpoint>
@@ -814,11 +814,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388053712.040685"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
+         startingLineNumber = "120"
+         endingLineNumber = "120"
          landmarkName = "-connectToServer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -827,11 +827,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388313051.745595"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "226"
-         endingLineNumber = "226"
+         startingLineNumber = "228"
+         endingLineNumber = "228"
          landmarkName = "-createConnectionCheckTimer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -853,11 +853,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388292450.068224"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "104"
-         endingLineNumber = "104"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
          landmarkName = "-connectToServer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -866,11 +866,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388313051.745595"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
+         startingLineNumber = "236"
+         endingLineNumber = "236"
          landmarkName = "-wrongState"
          landmarkType = "5">
       </FileBreakpoint>
@@ -879,11 +879,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388313051.745595"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "196"
-         endingLineNumber = "196"
+         startingLineNumber = "198"
+         endingLineNumber = "198"
          landmarkName = "-xmppMessage2ChatMessage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1061,11 +1061,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "KechengIphoneChatLib/ChatManager.m"
-         timestampString = "388311650.09765"
+         timestampString = "388573173.365045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
          landmarkName = "-sendMessage:withComplete:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -138,7 +138,7 @@ static NSString* chatMessageTableName = @"chat_messages_table";
         
         sqlite3_stmt * stetment;
         sqlite3_open(filename, &_dbh);
-        NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM %@ WHERE %@ = :friend_id ORDER BY %@ DESC limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn7, (page - 1) * messagesPerPage, page * messagesPerPage];
+        NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM %@ WHERE %@ = :friend_id ORDER BY %@ DESC limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn7, (page - 1) * messagesPerPage, messagesPerPage];
         const char * sql = [selectSql UTF8String];
         sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);

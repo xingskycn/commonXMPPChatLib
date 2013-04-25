@@ -54,7 +54,7 @@ static const int TEXT_MAX_LENGTH = 1000;
     self.bgImageView.image = [[UIImage imageNamed:@"chat.png"]
                               stretchableImageWithLeftCapWidth:18 topCapHeight:20];
     [self sendSubviewToBack:self.bgImageView];
-    _previousContentHeight = self.inputView.contentSize.height;
+    _previousContentHeight = 44;//self.inputView.contentSize.height;
     self.inputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.inputView.clearsContextBeforeDrawing = NO;
     self.inputView.font = [UIFont systemFontOfSize:17.0f];
@@ -84,10 +84,10 @@ static const int TEXT_MAX_LENGTH = 1000;
     newFrame.size.height = newHeight;
     
     CGRect sendBtnFrame = self.sendButton.frame;
-    sendBtnFrame.size.height += heightChange;
+    sendBtnFrame.origin.y += heightChange;
     
     CGRect emoBtnFrame = self.emoButton.frame;
-    emoBtnFrame.origin.y += heightChange / 2;
+    emoBtnFrame.origin.y += heightChange;
     
     [UIView beginAnimations:@"bottomFrameChange" context:NULL];
     [UIView setAnimationDuration:0.1f];
@@ -135,7 +135,7 @@ static const int TEXT_MAX_LENGTH = 1000;
             if (contentHeight != _previousContentHeight) {
                 // limit chatInputHeight <= 4 lines
                 if (contentHeight <= CONTENT_MAX_HEIGHT) {
-                    CGFloat chatBarHeight = contentHeight + 18.0f + 4;
+                    CGFloat chatBarHeight = contentHeight + 17.0f + 4.0f;
                     [self setSelfHeight:chatBarHeight];
                     
                     if (_previousContentHeight > CONTENT_MAX_HEIGHT) {
@@ -153,6 +153,8 @@ static const int TEXT_MAX_LENGTH = 1000;
                     if (_previousContentHeight < CONTENT_MAX_HEIGHT) {
                         [self setSelfHeight:SELF_MAX_HEIGHT];
                     }
+                } else {
+                    textView.contentOffset = CGPointMake(0.0f, contentHeight - 75.0f);
                 }
             }
         } else {
