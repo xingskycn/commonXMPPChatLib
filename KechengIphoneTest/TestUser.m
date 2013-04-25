@@ -23,6 +23,11 @@
     return self.userName;
 }
 
+- (NSString*) tinyAvatarUrl
+{
+    return @"";
+}
+
 - (id<ChatUser>)buildChatUserFromXmppUserName:(NSString *)xmppUserName
 {
     NSArray* nameComponents = [xmppUserName componentsSeparatedByString:@"@"];

@@ -18,6 +18,8 @@
 
 +(NSString*)userNameFromXmppUserName:(NSString*) xmppUserName;
 
+-(NSString*)tinyAvatarUrl;
+
 -(id<ChatUser>)buildChatUserFromXmppUserName:(NSString*) xmppUserName;
 
 -(id<ChatUser>)buildChatUserFromUserId:(int)userId;

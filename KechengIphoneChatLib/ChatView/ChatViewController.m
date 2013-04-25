@@ -10,6 +10,7 @@
 #import "ChatMessage.h"
 #import "ChatTableViewCell.h"
 #import "ChatManager.h"
+#import "UIImageView+AFNetworking.h"
 
 static const int INPUT_VIEW_INIT_HEIGHT = 45;
 static const int HEADER_VIEW_HEIGHT = 45;
@@ -21,7 +22,6 @@ static const CGFloat PADDING = 30.f;
     NSMutableArray * _chatMessages;
     NSMutableArray * _chatTimeArray;
     CHAT_INPUT_MODE _chatInputMode;
-    NSString* _userAvatarUrl;
     int _currentPage;
     NSDate * _lastChatTime;
 }
@@ -321,15 +321,14 @@ static const CGFloat PADDING = 30.f;
     cell.messageLabel.text = chatMessage.content;
     if (chatMessage.whoSend == CHAT_SENDER_TYPE_FRIEND) {
         //他人的消息
-        cell.headImageView.image = self.friendHeadImage;
+        [cell.headImageView setImageWithURL:[NSURL URLWithString:[self.myFriend tinyAvatarUrl]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         //Todo:zuoyl cell image and navigation.
         //UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUserProfile:)];
         //[cell.headImageView addGestureRecognizer:singleFingerTap];
         //[singleFingerTap release];
     } else {
         //自己的消息
-        //[cell.headImageView setImageWithURL:[NSURL URLWithString:_userAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        cell.headImageView.image = self.myHeadImage;
+        [cell.headImageView setImageWithURL:[NSURL URLWithString:[self.me tinyAvatarUrl]] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     }
     cell.headImageView.tag = chatMessage.whoSend;
     

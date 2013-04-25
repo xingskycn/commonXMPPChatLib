@@ -17,8 +17,6 @@
 @property (retain, nonatomic) IBOutlet UITableView *chatTableView;
 @property (retain, nonatomic) IBOutlet ChatInputView* chatInputView;
 @property (retain, nonatomic) ChatEmoView* chatEmoView;
-@property (retain, nonatomic) UIImage* friendHeadImage;
-@property (retain, nonatomic) UIImage* myHeadImage;
 @property (retain, nonatomic) id<ChatUser> me;
 @property (retain, nonatomic) id<ChatUser> myFriend;
 
