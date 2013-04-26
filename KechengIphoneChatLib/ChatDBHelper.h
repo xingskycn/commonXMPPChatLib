@@ -29,6 +29,8 @@
 
 -(BOOL)resendChatMessageSucceed:(ChatMessage *)message;
 
+-(int)unreadMessageCountOfMyFriend:(id<ChatUser>)chatFriend;
+
 -(NSMutableArray *)MessagesForMessageCenter:(id<ChatUser>)me;
 
 //Chat friends

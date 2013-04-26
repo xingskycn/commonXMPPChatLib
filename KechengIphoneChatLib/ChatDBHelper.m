@@ -232,6 +232,25 @@ static NSString* chatFriendTableName = @"chat_friend_table";
     }
 }
 
+-(int)unreadMessageCountOfMyFriend:(id<ChatUser>)chatFriend
+{
+    @synchronized(_dbMutexToken) {
+        const char * filename = [self.chatDBPath UTF8String];
+        sqlite3_stmt * stetment;
+        sqlite3_open(filename, &_dbh);
+        NSString * selectSQL = [NSString stringWithFormat:@"SELECT count(message_id) FROM %@ WHERE %@ = :friend_id AND is_new = 1", chatMessageTableName, chatTableColumn2];
+        const char * sql = [selectSQL UTF8String];
+        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
+        sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
+        int r = sqlite3_step(stetment);
+        if (r == SQLITE_ROW) {
+            return sqlite3_column_int(stetment, 0);
+        } else {
+            return -1;
+        }
+    }
+}
+
 - (NSMutableArray*)MessagesForMessageCenter:(id<ChatUser>)me
 {
     @synchronized(_dbMutexToken) {
