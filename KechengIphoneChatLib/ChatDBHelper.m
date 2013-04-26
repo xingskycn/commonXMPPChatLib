@@ -273,7 +273,7 @@ static NSString* chatFriendTableName = @"chat_friend_table";
             sqlite3_close(_dbh);
         }
         
-        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@', '%@' INTEGER PRIMARY KEY, '%@', TEXT, '%@', TEXT", chatFriendTableName, chatFriendColumn1, chatFriendColumn2, chatFriendColumn3];
+        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@', '%@' INTEGER PRIMARY KEY, '%@' TEXT, '%@' TEXT", chatFriendTableName, chatFriendColumn1, chatFriendColumn2, chatFriendColumn3];
         char * errorMessage;
         sqlite3_exec(_dbh, [createSTMT UTF8String], nil, nil, &errorMessage);
         sqlite3_close(_dbh);
@@ -324,15 +324,17 @@ static NSString* chatFriendTableName = @"chat_friend_table";
         sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatUser chatUserId]);
         int r = sqlite3_step(stetment);
-        while (r == SQLITE_ROW) {
+        if (r == SQLITE_ROW) {
             [chatUser setChatUserName:[NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 1)]];
             [chatUser setTinyAvatarUrl:[NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 2)]];
             r = sqlite3_step(stetment);
+            sqlite3_finalize(stetment);
+            sqlite3_close(_dbh);
+            return YES;
+        } else {
+            return NO;
         }
-        sqlite3_finalize(stetment);
-        sqlite3_close(_dbh);
     }
-    return YES;
 }
 
 @end
