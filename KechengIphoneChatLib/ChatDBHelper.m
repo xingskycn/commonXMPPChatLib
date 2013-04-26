@@ -273,7 +273,7 @@ static NSString* chatFriendTableName = @"chat_friend_table";
             sqlite3_close(_dbh);
         }
         
-        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@', '%@' INTEGER PRIMARY KEY, '%@' TEXT, '%@' TEXT", chatFriendTableName, chatFriendColumn1, chatFriendColumn2, chatFriendColumn3];
+        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' (%@ INTEGER PRIMARY KEY, %@ TEXT, %@ TEXT)", chatFriendTableName, chatFriendColumn1, chatFriendColumn2, chatFriendColumn3];
         char * errorMessage;
         sqlite3_exec(_dbh, [createSTMT UTF8String], nil, nil, &errorMessage);
         sqlite3_close(_dbh);
@@ -330,6 +330,26 @@ static NSString* chatFriendTableName = @"chat_friend_table";
             r = sqlite3_step(stetment);
             sqlite3_finalize(stetment);
             sqlite3_close(_dbh);
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+}
+
+-(BOOL)deleteAllFriendInformation
+{
+    @synchronized(_dbMutexToken) {
+        const char * filename = [self.chatDBPath UTF8String];
+        sqlite3_stmt * stetment;
+        sqlite3_open(filename, &_dbh);
+        
+        const char * sql = [[NSString stringWithFormat:@"DELETE FROM %@", chatFriendTableName] UTF8String];
+        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
+        int r = sqlite3_step(stetment);
+        sqlite3_finalize(stetment);
+        sqlite3_close(_dbh);
+        if (r == SQLITE_DONE) {
             return YES;
         } else {
             return NO;

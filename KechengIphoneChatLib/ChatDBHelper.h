@@ -37,4 +37,6 @@
 -(BOOL)insertOrUpdateChatFriend:(id<ChatUser>)chatUser;
 
 -(BOOL)getChatUserInformation:(id<ChatUser>)chatUser;
+
+-(BOOL)deleteAllFriendInformation;
 @end
