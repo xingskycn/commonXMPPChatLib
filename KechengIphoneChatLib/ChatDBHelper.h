@@ -16,6 +16,7 @@
 
 +(ChatDBHelper*)sharedInstance;
 
+//Chat message
 -(BOOL)createChatMessageTable;
 
 -(BOOL)insertChatMessage:(ChatMessage *)message;
@@ -30,4 +31,10 @@
 
 -(NSMutableArray *)MessagesForMessageCenter:(id<ChatUser>)me;
 
+//Chat friends
+-(BOOL)createChatFriendsTable;
+
+-(BOOL)insertOrUpdateChatFriend:(id<ChatUser>)chatUser;
+
+-(BOOL)getChatUserInformation:(id<ChatUser>)chatUser;
 @end

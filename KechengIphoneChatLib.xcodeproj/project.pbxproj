@@ -1612,6 +1612,7 @@
 				1FBCEDAA172904EC002F61A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

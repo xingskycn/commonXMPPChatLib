@@ -135,9 +135,11 @@ static const CGFloat PADDING = 30.f;
 - (void)handleChatMessageNotification:(NSNotification*)notification
 {
     ChatMessage* newMessage = [notification.userInfo objectForKey:@"chatMessage"];
-    [self addAMessage:newMessage];
-    [self.chatTableView reloadData];
-    [self scrollTableViewToBottom];
+    if ([newMessage.myFriend chatUserId] == [self.myFriend chatUserId]) {
+        [self addAMessage:newMessage];
+        [self.chatTableView reloadData];
+        [self scrollTableViewToBottom];
+    }
 }
 
 - (void)initChatMessages

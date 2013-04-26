@@ -20,6 +20,12 @@
 
 -(NSString*)tinyAvatarUrl;
 
+-(NSString*)chatUserName;
+
+-(void)setTinyAvatarUrl:(NSString*)tinyAvatarUrl;
+
+-(void)setChatUserName:(NSString*)chatUserName;
+
 -(id<ChatUser>)buildChatUserFromXmppUserName:(NSString*) xmppUserName;
 
 -(id<ChatUser>)buildChatUserFromUserId:(int)userId;

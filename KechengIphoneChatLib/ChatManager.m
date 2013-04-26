@@ -104,10 +104,10 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 - (BOOL) connectToServer
 {
     [[NSNotificationCenter defaultCenter] postNotificationName: CHAT_CONNECTING_NOTIFICATION object:nil];
-    if ([self checkConnectionAvailable]) {
+    //if ([self checkConnectionAvailable]) {
         [_xmppStream disconnect];
         _connectionState = connectionStateOffline;
-    }
+    //}
     
     if (_connectionState == connectionStateUnkown || _connectionState == connectionStateOffline || _connectionState == connectionStateLoginFailure) {
         _connectionState = connectionStateConnectingServer;
