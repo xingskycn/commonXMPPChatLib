@@ -217,7 +217,7 @@ static NSString* chatFriendTableName = @"chat_friend_table";
         const char * filename = [self.chatDBPath UTF8String];
         sqlite3_stmt * stetment;
         sqlite3_open(filename, &_dbh);
-        NSString * updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET %@ = 0 WHERE %@ = :friend_id AND %@ = 1", chatMessageTableName, chatTableColumn6, chatTableColumn2, chatTableColumn6];
+        NSString * updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET %@ = 0 WHERE %@ = :friend_id AND %@ = 1", chatMessageTableName, chatTableColumn6, chatTableColumn2 , chatTableColumn6];
         const char * sql = [updateSql UTF8String];
         sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
@@ -243,11 +243,15 @@ static NSString* chatFriendTableName = @"chat_friend_table";
         sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
         int r = sqlite3_step(stetment);
+        int result;
         if (r == SQLITE_ROW) {
-            return sqlite3_column_int(stetment, 0);
+            result = sqlite3_column_int(stetment, 0);
         } else {
-            return -1;
+            result = -1;
         }
+        sqlite3_finalize(stetment);
+        sqlite3_close(_dbh);
+        return result;
     }
 }
 
@@ -277,6 +281,8 @@ static NSString* chatFriendTableName = @"chat_friend_table";
             chatMessage = nil;
             r = sqlite3_step(stetment);
         }
+        sqlite3_finalize(stetment);
+        sqlite3_close(_dbh);
         
         return chatMessages;
     }
