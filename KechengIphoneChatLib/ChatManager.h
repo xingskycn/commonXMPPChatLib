@@ -23,6 +23,8 @@
 
 @property (retain, nonatomic) id <ChatUser> me;
 
+@property (retain, nonatomic) NSString * CHAT_SHOULD_VIBRATE_KEY;
+
 - (void) sendMessage:(ChatMessage*)message withComplete:(void (^)(BOOL bSuccess))block;
 
 - (void) login;

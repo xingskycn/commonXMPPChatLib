@@ -11,26 +11,31 @@
 #import "ChatTableViewCell.h"
 #import "ChatManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "Toast+UIView.h"
 
-static const int INPUT_VIEW_INIT_HEIGHT = 45;
-static const int HEADER_VIEW_HEIGHT = 45;
-static const CGFloat MESSAGE_FONT_SIZE = 17.0f;
+static const int INPUT_VIEW_INIT_HEIGHT = 44;
+static const CGFloat MESSAGE_FONT_SIZE = 16.0f;
 static const CGFloat PADDING = 30.f;
+
+static const int EMO_VIEW_WIDTH = 320;
+static const int EMO_VIEW_HEIGHT = 216;
 
 @interface ChatViewController ()
 {
     NSMutableArray * _chatMessages;
     NSMutableArray * _chatTimeArray;
     CHAT_INPUT_MODE _chatInputMode;
-    int _currentPage;
     NSDate * _lastChatTime;
+    BOOL _bExecuteKeyboardNotification;
+    CGRect _keyboardRect;
+    NSTimeInterval _keyboardAnimationDuration;
+    UIView * _recognizerView;
+    int _keyboardAnimationOption;
 }
 
 - (void)scrollTableViewToBottom;
 
 - (void)relayoutForKeyboard:(NSNotification *)notification;
-
-- (void)relayoutForEmoView;
 
 @end
 
@@ -59,29 +64,54 @@ static const CGFloat PADDING = 30.f;
     self.chatEmoView = [[ChatEmoView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, 320, 216)];
     self.chatEmoView.delegate = self.chatInputView;
     [self.view addSubview:self.chatEmoView];
-    
     _chatInputMode = CHAT_INPUT_MODE_NONE;
+    _bExecuteKeyboardNotification = YES;
+    _keyboardAnimationDuration = 0;
     
     [self registerNotification];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) handleReconnect:(UITapGestureRecognizer *)recognizer
 {
-    if ([[ChatManager sharedInstance] checkConnectionAvailable]) {
-        self.navigationItem.title = @"Connected";
-    } else {
-        self.navigationItem.title = @"Disconnected";
+    if (![[ChatManager sharedInstance] checkConnectionAvailable]) {
         [[ChatManager sharedInstance] login];
     }
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    _recognizerView = [[[UIView alloc] initWithFrame:CGRectMake(80, 2, 230, 40)] autorelease];
+    _recognizerView.backgroundColor = [UIColor clearColor];
+    [self.navigationController.navigationBar addSubview:_recognizerView];
+    UITapGestureRecognizer * tapGestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleReconnect:)] autorelease];
+    [_recognizerView addGestureRecognizer:tapGestureRecognizer];
+    [self initTitle];
+    [[ChatDBHelper sharedInstance] unreadMessage2ReadMessage:self.myFriend];
     [self initChatMessages];
+}
+
+- (void) initTitle
+{
+    if ([[ChatManager sharedInstance] checkConnectionAvailable]) {
+        self.navigationItem.title = [self.myFriend chatUserName];
+    } else {
+        self.navigationItem.title = @"连接失败.";
+    }
+}
+
+- (void) makeDisconnectedToast
+{
+    [self.view makeToast:@"当前无网络连接，请稍后重试。" duration:1.5 position:@"topcenter"];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[ChatDBHelper sharedInstance] unreadMessage2ReadMessage:self.myFriend];
-    });
+    [_recognizerView removeFromSuperview];
+    _chatInputMode = CHAT_INPUT_MODE_NONE;
+    [self.chatInputView syncEmoButtonIcon];
+    [self.chatInputView clearTextView];
+    [self.view endEditing:YES];
+    [self configureView];
 }
 
 - (void)registerNotification
@@ -102,16 +132,18 @@ static const CGFloat PADDING = 30.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_CONNECTED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatConnectionStateNotification:) name:CHAT_CONNECTING_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChatMessageNotification:) name:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeDisconnectedToast) name:NO_AVAILABLE_NETWORK object:nil];
 }
 
 - (void)handleChatConnectionStateNotification:(NSNotification*)notification
 {
     if ([notification.name isEqualToString:CHAT_DISCONNECTED_NOTIFICATION]) {
-        self.navigationItem.title = @"Disconnected";
+        self.navigationItem.title = @"连接失败.";
+        //[self makeDisconnectedToast];
     } else if ([notification.name isEqualToString:CHAT_CONNECTING_NOTIFICATION]) {
-        self.navigationItem.title = @"Connecting";
+        self.navigationItem.title = @"正在连接中...";
     } else if ([notification.name isEqualToString:CHAT_CONNECTED_NOTIFICATION]) {
-        self.navigationItem.title = @"Connected";
+        self.navigationItem.title = [self.myFriend chatUserName];
     }
 }
 
@@ -137,6 +169,11 @@ static const CGFloat PADDING = 30.f;
     ChatMessage* newMessage = [notification.userInfo objectForKey:@"chatMessage"];
     if ([newMessage.myFriend chatUserId] == [self.myFriend chatUserId]) {
         [self addAMessage:newMessage];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if (self.view.window) {
+                [[ChatDBHelper sharedInstance] unreadMessage2ReadMessage:newMessage.myFriend];
+            }
+        });
         [self.chatTableView reloadData];
         [self scrollTableViewToBottom];
     }
@@ -155,8 +192,7 @@ static const CGFloat PADDING = 30.f;
     } else {
         [_chatTimeArray removeAllObjects];
     }
-    _currentPage = 1;
-    NSMutableArray* messages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage];
+    NSMutableArray* messages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend startIndex:0];
     [self addMessages:messages];
     [self.chatTableView reloadData];
     [self scrollTableViewToBottom];
@@ -177,60 +213,23 @@ static const CGFloat PADDING = 30.f;
 
 - (void)relayoutForKeyboard:(NSNotification*) notification
 {
+    NSDictionary* options = [notification userInfo];
+    NSValue* aValue = [options objectForKey:UIKeyboardFrameEndUserInfoKey];
+    _keyboardRect = [aValue CGRectValue];
+    _keyboardAnimationDuration = [[options objectForKey:UIKeyboardAnimationDurationUserInfoKey]doubleValue];
+    _keyboardAnimationOption = [[options objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    if (!_bExecuteKeyboardNotification) {
+        return;
+    }
     if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
         _chatInputMode = CHAT_INPUT_MODE_TEXT;
+        [self configureView];
     }
     if ([notification.name isEqualToString:UIKeyboardWillHideNotification]) {
         _chatInputMode = CHAT_INPUT_MODE_NONE;
+        [self configureView];
     }
-    NSDictionary* options = [notification userInfo];
-    NSValue* aValue = [options objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
-    NSValue *animationDurationValue = [options objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
-    
-    //[UIView beginAnimations:nil context:NULL];
-    //[UIView setAnimationDuration:animationDuration];
-    
-    CGRect keyboardFrameEndRelative = [self.view convertRect:keyboardRect fromView:nil];
-    
-    //Todo:zuoyl int bottom = keyboardFrameEndRelative.origin.y>least ? least : keyboardFrameEndRelative.origin.y;
-    int bottom = keyboardFrameEndRelative.origin.y;
-    CGRect tableViewFrame = self.chatTableView.frame;
-    tableViewFrame.size.height = bottom - self.chatInputView.frame.size.height - 6;
-    self.chatTableView.frame = tableViewFrame;
-    
-    CGRect bottomViewFrame = self.chatInputView.frame;
-    bottomViewFrame.origin.y = bottom - self.chatInputView.frame.size.height;
-    self.chatInputView.frame = bottomViewFrame;
-    [self scrollTableViewToBottom];
-    //[UIView commitAnimations];
     [self.chatInputView syncEmoButtonIcon];
-}
-
-- (void)relayoutForEmoView
-{
-    
-    CGFloat screenHeight = SCREEN_HEIGHT;
-    CGRect bottomViewFrame = self.chatInputView.frame;
-    CGRect msgTableViewFrame = self.chatTableView.frame;
-    if (_chatInputMode == CHAT_INPUT_MODE_EMO) {
-        bottomViewFrame.origin.y = self.view.frame.size.height - self.chatEmoView.frame.size.height - self.chatInputView.frame.size.height;
-        msgTableViewFrame.size.height = self.view.frame.size.height - self.chatEmoView.frame.size.height - self.chatInputView.frame.size.height - 6;
-        self.chatEmoView.frame = CGRectMake(0, screenHeight - 216, 320, 216);
-    } else if (_chatInputMode == CHAT_INPUT_MODE_NONE) {
-        bottomViewFrame.origin.y = self.view.frame.size.height - self.chatInputView.frame.size.height;
-        msgTableViewFrame.size.height = self.view.frame.size.height - self.chatInputView.frame.size.height - 6;
-        self.chatEmoView.frame = CGRectMake(0, screenHeight, 320, 216);
-    }
-    self.chatInputView.frame = bottomViewFrame;
-    [UIView beginAnimations:@"chatEmoView" context:NULL];
-    [UIView setAnimationDuration:0.25f];
-    
-    self.chatTableView.frame = msgTableViewFrame;
-    [self scrollTableViewToBottom];
-    [UIView commitAnimations];
 }
 
 - (void)scrollTableViewToBottom
@@ -295,17 +294,18 @@ static const CGFloat PADDING = 30.f;
     if (_chatInputMode != CHAT_INPUT_MODE_NONE) {
         _chatInputMode = CHAT_INPUT_MODE_NONE;
         [self.view endEditing:YES];
-        [self relayoutForEmoView];
+        //[self relayoutForEmoView];
+        [self configureView];
     }
 }
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y == 0) {
-        NSMutableArray* earlierMessages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend page:_currentPage + 1];
+        int startIndex = [_chatMessages count] - 1 > 0 ? [_chatMessages count] : 0;
+        NSMutableArray* earlierMessages = [[ChatDBHelper sharedInstance] MessagesAboutMyFriend:self.myFriend startIndex:startIndex];
         if ([earlierMessages count] != 0) {
             [self addMessages:earlierMessages];
-            _currentPage += 1;
             int oldHeight = self.chatTableView.contentSize.height;
             [self.chatTableView reloadData];
             [self.chatTableView setContentOffset:CGPointMake(0, self.chatTableView.contentSize.height - oldHeight - 20)];
@@ -358,7 +358,7 @@ static const CGFloat PADDING = 30.f;
     ChatMessage* message = [_chatMessages objectAtIndex:row]; //倒序读取
     BOOL hasDate = [[_chatTimeArray objectAtIndex:row] isKindOfClass:[NSDate class]];
     CGSize size = [self sizeForMessage:message.content];
-    size.height += hasDate ? 60 : 50;
+    size.height += hasDate ? 60 : 30;
     return MAX(50, size.height);
 }
 
@@ -376,15 +376,15 @@ static const CGFloat PADDING = 30.f;
 }
 
 #pragma mark ChatInputView delegate
-- (void)onInputViewHeightChanged:(CGFloat)changedHeight
+- (void) onInputViewChangeFrame:(CGRect)inputViewFrame
 {
-    CGRect newFrame = self.chatTableView.frame;
-    newFrame.size.height -= changedHeight;
-    
-    [UIView beginAnimations:@"ChangeTableViewHeight" context:NULL];
-    [UIView setAnimationDuration:0.1f];
-    self.chatTableView.frame = newFrame;
-    [UIView commitAnimations];
+    int keyboardOrEmoHeight = 0;
+    if (_chatInputMode == CHAT_INPUT_MODE_TEXT) {
+        keyboardOrEmoHeight = CGRectGetHeight(_keyboardRect);
+    } else if (_chatInputMode == CHAT_INPUT_MODE_EMO) {
+        keyboardOrEmoHeight = EMO_VIEW_HEIGHT;
+    }
+    self.chatTableView.frame = CGRectMake(self.chatTableView.frame.origin.x, self.chatTableView.frame.origin.y, CGRectGetWidth(self.chatTableView.frame), SCREEN_HEIGHT - keyboardOrEmoHeight - CGRectGetHeight(inputViewFrame));
     [self scrollTableViewToBottom];
 }
 
@@ -399,14 +399,13 @@ static const CGFloat PADDING = 30.f;
     chatMessage.content = cleanString;
     chatMessage.whoSend = CHAT_SENDER_TYPE_ME;
     chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
-    chatMessage.isNew = YES;
+    chatMessage.isNew = NO;
     chatMessage.date = [NSDate date];
     [self addAMessage:chatMessage];
     [self.chatTableView reloadData];
     [self scrollTableViewToBottom];
     [[ChatManager sharedInstance] sendMessage:chatMessage withComplete:^(BOOL bSuccess) {
         if (bSuccess) {
-            NSLog(@"send success");
         } else {
             //Todo:show send failed
             NSLog(@"send failed");
@@ -418,11 +417,13 @@ static const CGFloat PADDING = 30.f;
 {
     switch (_chatInputMode) {
         case CHAT_INPUT_MODE_TEXT: {
+            _bExecuteKeyboardNotification = NO;
             [self.view endEditing:YES];
             _chatInputMode = CHAT_INPUT_MODE_EMO;
             break;
         }
         case CHAT_INPUT_MODE_EMO: {
+            _bExecuteKeyboardNotification = NO;
             _chatInputMode = CHAT_INPUT_MODE_TEXT;
             [self.chatInputView.inputView becomeFirstResponder];
             break;
@@ -434,14 +435,61 @@ static const CGFloat PADDING = 30.f;
         default:
             break;
     }
-    
-    [self relayoutForEmoView];
+    _bExecuteKeyboardNotification = YES;
+    [self configureView];
     [self.chatInputView syncEmoButtonIcon];
 }
 
-- (void)showUserProfile:(id)sender
+- (void)configureView
 {
-    
+    CGRect changRect;
+    switch (_chatInputMode) {
+        case CHAT_INPUT_MODE_TEXT:
+            changRect = _keyboardRect;
+            break;
+        case CHAT_INPUT_MODE_EMO:
+            changRect = CGRectMake(0, SCREEN_HEIGHT - EMO_VIEW_HEIGHT, EMO_VIEW_WIDTH, EMO_VIEW_HEIGHT);
+            break;
+        case CHAT_INPUT_MODE_NONE:
+            changRect = CGRectZero;
+            break;
+        default:
+            break;
+    }
+    self.chatInputView.keyboardOrEmoRect = changRect;
+    if (_chatInputMode == CHAT_INPUT_MODE_EMO) {
+        _keyboardAnimationDuration = 0.25;
+    }
+    [UIView animateWithDuration:_keyboardAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionNone animations:^{
+        CGRect inputViewRect = self.chatInputView.frame;
+        self.chatInputView.frame = CGRectMake(inputViewRect.origin.x, SCREEN_HEIGHT - changRect.size.height - inputViewRect.size.height, inputViewRect.size.width, inputViewRect.size.height);
+        if (_chatInputMode == CHAT_INPUT_MODE_EMO) {
+            self.chatEmoView.frame = changRect;
+        } else {
+            self.chatEmoView.frame = CGRectMake(0, SCREEN_HEIGHT, CGRectGetWidth(self.chatEmoView.frame), CGRectGetHeight(self.chatEmoView.frame));
+        }
+        CGRect tableViewRect = self.chatTableView.frame;
+        self.chatTableView.frame = CGRectMake(tableViewRect.origin.x, 0, tableViewRect.size.width, SCREEN_HEIGHT - CGRectGetHeight(changRect) - CGRectGetHeight(self.chatInputView.frame));
+        CGFloat contentHeight = self.chatTableView.contentSize.height;
+        if (CGRectGetHeight(self.chatTableView.frame) < contentHeight) {
+        self.chatTableView.contentOffset = CGPointMake(0, contentHeight - CGRectGetHeight(self.chatTableView.frame));
+        }
+    } completion:nil];
+}
+
+- (void) showUserProfile:(id)sender
+{
+    //On avatar clicked
+//    if (!_personDetailController) {
+//        _personDetailController = [[PersonDetailController alloc]initWithNibName:@"PersonDetailController" bundle:nil];
+//    }
+//    int tag = ((UITapGestureRecognizer*)sender).view.tag;
+//    if(tag == CHAT_SENDER_TYPE_FRIEND) {
+//        _personDetailController.user = (User*)self.myFriend;
+//    } else {
+//        _personDetailController.user = (User*)self.me;
+//    }
+//    [self.navigationController pushViewController:_personDetailController animated:YES];
 }
 
 - (CHAT_INPUT_MODE)chatInputMode

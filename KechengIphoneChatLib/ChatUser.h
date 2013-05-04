@@ -16,8 +16,6 @@
 
 -(NSString*)xmppUserName;
 
-+(NSString*)userNameFromXmppUserName:(NSString*) xmppUserName;
-
 -(NSString*)tinyAvatarUrl;
 
 -(NSString*)chatUserName;

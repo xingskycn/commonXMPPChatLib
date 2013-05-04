@@ -31,7 +31,7 @@ typedef enum {
 
 @protocol ChatInputViewDelegate <NSObject>
 
--(void)onInputViewHeightChanged:(CGFloat)changedHeight;
+-(void)onInputViewChangeFrame:(CGRect)inputViewFrame;
 -(void)onInputViewSendMessage:(NSString *)message;
 -(CHAT_INPUT_MODE)chatInputMode;
 -(void)onEmoButtonClick;
@@ -51,3 +51,5 @@ extern NSString * const CHAT_DISCONNECTED_NOTIFICATION;
 extern NSString * const CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION;
 extern NSString * const CHAT_SEND_MESSAGE_FAILURE_NOTIFICATION;
 extern NSString * const CHAT_RECEIVE_MESSAGE_NOTIFICATION;
+extern NSString * const CHAT_MESSAGE_NOTIFICATION_KEY;
+extern NSString * const NO_AVAILABLE_NETWORK;

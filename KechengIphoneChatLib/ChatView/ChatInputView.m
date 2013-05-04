@@ -13,13 +13,15 @@ static const CGFloat CONTENT_MAX_HEIGHT = 84.0f;
 static const CGFloat SELF_MAX_HEIGHT = 104.0f;
 static const CGFloat SELF_MIN_HEIGHT = 44.0f;
 static const int TEXT_MAX_LENGTH = 1000;
+static const int TEXT_VIEW_MIN_HEIGHT = 37;
+static const int TEXT_VIEW_MAX_HEIGHT = 100;
 
 @interface ChatInputView()
 {
     CGFloat _previousContentHeight;
+    CGFloat _originHeight;
+    CGFloat _textViewHeightChanged;
 }
-
-- (void) setSelfHeight:(CGFloat)newHeight;
 
 @end
 
@@ -49,19 +51,20 @@ static const int TEXT_MAX_LENGTH = 1000;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.inputView.delegate = self;
     [self syncEmoButtonIcon];
-    self.bgImageView.image = [[UIImage imageNamed:@"chat.png"]
-                              stretchableImageWithLeftCapWidth:18 topCapHeight:20];
-    [self sendSubviewToBack:self.bgImageView];
-    _previousContentHeight = 44;//self.inputView.contentSize.height;
+    self.textViewBgImageView.image = [[UIImage imageNamed:@"chat_inputbox"] stretchableImageWithLeftCapWidth:13 topCapHeight:13];
     self.inputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     self.inputView.clearsContextBeforeDrawing = NO;
     self.inputView.font = [UIFont systemFontOfSize:17.0f];
     self.inputView.returnKeyType = UIReturnKeySend;
-    self.inputView.clipsToBounds = NO;
+    self.inputView.clipsToBounds = YES;
     self.inputView.scrollEnabled = NO;
     self.inputView.dataDetectorTypes = UIDataDetectorTypeAll;
+    self.inputView.delegate = self;
+    self.bgImageView.image = [[UIImage imageNamed:@"chat_bg"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    [self sendSubviewToBack:self.bgImageView];
+    _originHeight = CGRectGetHeight(self.frame);
+
 }
 
 - (void)syncEmoButtonIcon
@@ -73,31 +76,6 @@ static const int TEXT_MAX_LENGTH = 1000;
         [self.emoButton setBackgroundImage:[UIImage imageNamed:@"emoji_button"] forState:UIControlStateNormal];
         [self.emoButton setBackgroundImage:[UIImage imageNamed:@"emoji_button_pressed"] forState:UIControlStateHighlighted];
     }
-}
-
-- (void)setSelfHeight:(CGFloat)newHeight
-{
-    CGFloat heightChange = newHeight - self.frame.size.height;
-    [self.delegate onInputViewHeightChanged:heightChange];
-    CGRect newFrame = self.frame;
-    newFrame.origin.y -= heightChange;
-    newFrame.size.height = newHeight;
-    
-    CGRect sendBtnFrame = self.sendButton.frame;
-    sendBtnFrame.origin.y += heightChange;
-    
-    CGRect emoBtnFrame = self.emoButton.frame;
-    emoBtnFrame.origin.y += heightChange;
-    
-    [UIView beginAnimations:@"bottomFrameChange" context:NULL];
-    [UIView setAnimationDuration:0.1f];
-    self.frame = newFrame;
-    CGRect imageFrame = self.bgImageView.frame;
-    imageFrame.size.height = newHeight;
-    self.bgImageView.frame = imageFrame;
-    self.sendButton.frame = sendBtnFrame;
-    self.emoButton.frame = emoBtnFrame;
-    [UIView commitAnimations];
 }
 
 - (void)dealloc
@@ -127,50 +105,38 @@ static const int TEXT_MAX_LENGTH = 1000;
 #pragma mark TextView delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if([textView.text length] <= TEXT_MAX_LENGTH) {
-        CGFloat contentHeight = textView.contentSize.height - MESSAGE_FONT_SIZE + 2.0f;
-        
-        if ([textView hasText]) {
-            // Resize textView to contentHeight
-            if (contentHeight != _previousContentHeight) {
-                // limit chatInputHeight <= 4 lines
-                if (contentHeight <= CONTENT_MAX_HEIGHT) {
-                    CGFloat chatBarHeight = contentHeight + 17.0f + 4.0f;
-                    [self setSelfHeight:chatBarHeight];
-                    
-                    if (_previousContentHeight > CONTENT_MAX_HEIGHT) {
-                        textView.scrollEnabled = NO;
-                    }
-                } else if (_previousContentHeight <= CONTENT_MAX_HEIGHT) {
-                    self.inputView.scrollEnabled = YES;
-                    self.inputView.clipsToBounds = YES;
-                    CGRect textViewFrame = self.inputView.frame;
-                    textViewFrame.size.height = contentHeight - 16;
-                    self.inputView.frame = textViewFrame;
-                    // shift to bottom
-                    textView.contentOffset = CGPointMake(0.0f, contentHeight - 68.0f);
-                    
-                    if (_previousContentHeight < CONTENT_MAX_HEIGHT) {
-                        [self setSelfHeight:SELF_MAX_HEIGHT];
-                    }
-                } else {
-                    textView.contentOffset = CGPointMake(0.0f, contentHeight - 75.0f);
-                }
-            }
+    if ([textView.text length] <= TEXT_MAX_LENGTH) {
+        CGFloat contentHeight = self.inputView.contentSize.height;
+        if (contentHeight <= TEXT_VIEW_MIN_HEIGHT) {
+            _textViewHeightChanged = 0;
+        } else if (contentHeight > TEXT_VIEW_MIN_HEIGHT && contentHeight < TEXT_VIEW_MAX_HEIGHT) {
+            _textViewHeightChanged = contentHeight - TEXT_VIEW_MIN_HEIGHT;
         } else {
-            // textView is empty
-            if (_previousContentHeight > 22.0f) {
-                [self setSelfHeight:SELF_MIN_HEIGHT];
-                if (_previousContentHeight > CONTENT_MAX_HEIGHT) {
-                    textView.scrollEnabled = NO;
-                }
-            }
-            textView.contentOffset = CGPointMake(0.0f, 6.0f); // fix quirk
+            _textViewHeightChanged = TEXT_VIEW_MAX_HEIGHT - TEXT_VIEW_MIN_HEIGHT;
         }
-        _previousContentHeight = contentHeight;
-    } else {
-        textView.text = [textView.text substringToIndex:TEXT_MAX_LENGTH];
+        [self configureView];
     }
+}
+
+- (void)configureView
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.frame = CGRectMake(self.frame.origin.x, SCREEN_HEIGHT - CGRectGetHeight(self.keyboardOrEmoRect) - _originHeight - _textViewHeightChanged, CGRectGetWidth(self.frame), _originHeight + _textViewHeightChanged);
+        self.inputView.frame = CGRectMake(self.inputView.frame.origin.x, self.inputView.frame.origin.y, self.inputView.frame.size.width, 27 + _textViewHeightChanged);
+        self.textViewBgImageView.frame = CGRectMake(self.textViewBgImageView.frame.origin.x, self.textViewBgImageView.frame.origin.y, CGRectGetWidth(self.textViewBgImageView.frame), 33 + _textViewHeightChanged);
+        CGFloat contentHeight = self.inputView.contentSize.height;
+        [self.inputView scrollRectToVisible:CGRectMake(0, contentHeight - CGRectGetHeight(self.inputView.frame) - 4, CGRectGetWidth(self.inputView.frame), CGRectGetHeight(self.inputView.frame)) animated:YES];
+        self.emoButton.frame = CGRectMake(self.emoButton.frame.origin.x, CGRectGetHeight(self.frame) - CGRectGetHeight(self.emoButton.frame) - 6, CGRectGetWidth(self.emoButton.frame), CGRectGetHeight(self.emoButton.frame));
+        self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, CGRectGetHeight(self.frame) - CGRectGetHeight(self.sendButton.frame) - 6, CGRectGetWidth(self.sendButton.frame), CGRectGetHeight(self.sendButton.frame));
+        [self.delegate onInputViewChangeFrame:self.frame];
+    }];
+    
+}
+
+- (void) clearTextView
+{
+    self.inputView.text = @"";
+    [self textViewDidChange:self.inputView];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

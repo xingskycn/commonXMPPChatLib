@@ -14,3 +14,5 @@ NSString * const CHAT_DISCONNECTED_NOTIFICATION = @"chat_disconnected_notificati
 NSString * const CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION = @"chat_send_message_success_notification";
 NSString * const CHAT_SEND_MESSAGE_FAILURE_NOTIFICATION = @"chat_send_message_failure_notification";
 NSString * const CHAT_RECEIVE_MESSAGE_NOTIFICATION = @"chat_receive_message_notification";
+NSString * const CHAT_MESSAGE_NOTIFICATION_KEY = @"chatMessage";
+NSString * const NO_AVAILABLE_NETWORK = @"no_available_network";

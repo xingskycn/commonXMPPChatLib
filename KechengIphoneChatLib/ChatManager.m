@@ -9,6 +9,8 @@
 #import "ChatManager.h"
 #import "XMPP.h"
 #import "ChatDBHelper.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "Reachability.h"
 
 typedef enum {
     connectionStateUnkown,
@@ -34,6 +36,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
     connectionState _connectionState;
     dispatch_source_t _connectionCheckTimer;
     BOOL _bRunCheckTimer;
+    dispatch_source_t _connectionTimer;
+    BOOL _bConnecting;
 }
 
 - (BOOL) connectToServer;
@@ -88,7 +92,9 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
                 //Wait until the element has been sent
                 message.isSucceed = YES;
                 [[ChatDBHelper sharedInstance] insertChatMessage:message];
-                [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION object:nil];
+                NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] initWithCapacity:1];
+                [userInfo setObject:message forKey:CHAT_MESSAGE_NOTIFICATION_KEY];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_SEND_MESSAGE_SUCCESS_NOTIFICATION object:self userInfo:userInfo];
                 block(YES);
             } else {
                 //Maybe retry
@@ -104,10 +110,8 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 - (BOOL) connectToServer
 {
     [[NSNotificationCenter defaultCenter] postNotificationName: CHAT_CONNECTING_NOTIFICATION object:nil];
-    //if ([self checkConnectionAvailable]) {
-        [_xmppStream disconnect];
-        _connectionState = connectionStateOffline;
-    //}
+    [_xmppStream disconnect];
+    _connectionState = connectionStateOffline;
     
     if (_connectionState == connectionStateUnkown || _connectionState == connectionStateOffline || _connectionState == connectionStateLoginFailure) {
         _connectionState = connectionStateConnectingServer;
@@ -133,7 +137,7 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 - (void) login
 {
     //Establish connection to server
-    [self connectToServer];
+    [self createConnectionTimer];
 }
 
 - (void) logout
@@ -180,7 +184,6 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (BOOL) checkConnectionAvailable
 {
-    //May be not right
     return [_xmppStream isConnected] && [_xmppStream isAuthenticated];
 }
 
@@ -197,12 +200,23 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
 
 - (ChatMessage*) xmppMessage2ChatMessage:(DDXMLElement *)xmppMessage
 {
+    NSString * type = [[xmppMessage attributeForName:@"type"] stringValue];
+    if ([type isEqualToString:@"error"]) {
+        return nil;
+    }
     NSString * from = [[xmppMessage attributeForName:@"from"] stringValue];
     if (![from isEqualToString:[self.me xmppUserName]] && [[xmppMessage elementForName:@"body"] stringValue] != nil) {
+        NSDate *date = nil;
+        NSXMLElement * delay = [xmppMessage elementForName:@"delay"];
+        if (delay) {
+            date = [self delayTimeToNSDate:[delay attributeForName:@"stamp"].stringValue];
+        } else {
+            date = [NSDate date];
+        }
         ChatMessage* chatMessage = [[ChatMessage alloc] init];
         chatMessage.content = [[xmppMessage elementForName:@"body"] stringValue];
         chatMessage.contentType = CHAT_CONTENT_TYPE_TEXT;
-        chatMessage.date = [NSDate date];
+        chatMessage.date = date;
         chatMessage.myFriend = [self.me buildChatUserFromXmppUserName:from];
         chatMessage.whoSend = CHAT_SENDER_TYPE_FRIEND;
         chatMessage.isNew = YES;
@@ -227,6 +241,28 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
         }
     });
     dispatch_resume(_connectionCheckTimer);
+}
+
+- (void) createConnectionTimer
+{
+    _connectionTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(_connectionTimer, dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), DISPATCH_TIME_FOREVER, 0);
+    dispatch_source_set_event_handler(_connectionTimer, ^{
+        Reachability * reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+        reach.reachableBlock = ^(Reachability*reach) {
+            if (![self checkConnectionAvailable]) {
+                [self connectToServer];
+            } else {
+                dispatch_source_cancel(_connectionTimer);
+            }
+        };
+        reach.unreachableBlock = ^(Reachability*reach) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NO_AVAILABLE_NETWORK object:nil];
+            dispatch_source_cancel(_connectionTimer);
+        };
+        [reach startNotifier];
+    });
+    dispatch_resume(_connectionTimer);
 }
 
 - (void) wrongState
@@ -287,7 +323,22 @@ static int CHECK_CONNECTION_TIMEOUT = 60;
         [[ChatDBHelper sharedInstance] insertChatMessage:chatMessage];
         //Post notification
         [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_RECEIVE_MESSAGE_NOTIFICATION object:self userInfo:userInfo];
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:self.CHAT_SHOULD_VIBRATE_KEY] boolValue]) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
     }
+}
+
+#pragma mark-- private method
+-(NSDate *)delayTimeToNSDate:(NSString *)time_str{
+    time_str = [time_str stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    time_str = [time_str stringByReplacingOccurrencesOfString:@"Z" withString:@" "];
+    NSDateFormatter * dateFormatrer = [[[NSDateFormatter alloc]init]autorelease];
+    [dateFormatrer setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatrer setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDate * date_0zone = [dateFormatrer dateFromString:time_str];
+    NSDate * date_8zone = [NSDate dateWithTimeInterval:8*60*60 sinceDate:date_0zone];
+    return date_8zone;
 }
 
 @end

@@ -32,15 +32,6 @@ static NSString* chatTableColumn8 = @"is_succeed";
 
 static NSString* chatMessageTableName = @"chat_messages_table";
 
-//Chat friend
-static NSString* chatFriendColumn1 = @"friend_id";
-
-static NSString* chatFriendColumn2 = @"name";
-
-static NSString* chatFriendColumn3 = @"tiny_avatar_url";
-
-static NSString* chatFriendTableName = @"chat_friend_table";
-
 @interface ChatDBHelper()
 {
     sqlite3* _dbh;
@@ -140,7 +131,7 @@ static NSString* chatFriendTableName = @"chat_friend_table";
     }
 }
 
-- (NSMutableArray *)MessagesAboutMyFriend:(id<ChatUser>)chatFriend page:(int)page
+- (NSMutableArray *)MessagesAboutMyFriend:(id<ChatUser>)chatFriend startIndex:(int)startIndex
 {
     @synchronized(_dbMutexToken) {
         NSMutableArray* chatMessages = [[[NSMutableArray alloc] init] autorelease];
@@ -148,7 +139,7 @@ static NSString* chatFriendTableName = @"chat_friend_table";
         
         sqlite3_stmt * stetment;
         sqlite3_open(filename, &_dbh);
-        NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM %@ WHERE %@ = :friend_id ORDER BY %@ DESC limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn7, (page - 1) * messagesPerPage, messagesPerPage];
+        NSString * selectSql = [NSString stringWithFormat:@"SELECT  * FROM %@ WHERE %@ = :friend_id ORDER BY %@ DESC limit %d, %d", chatMessageTableName, chatTableColumn2, chatTableColumn1, startIndex, messagesPerPage];
         const char * sql = [selectSql UTF8String];
         sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
         sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
@@ -232,6 +223,30 @@ static NSString* chatFriendTableName = @"chat_friend_table";
     }
 }
 
+-(ChatMessage*)lastMessageOfMyFriend:(id<ChatUser>)chatFriend
+{
+    @synchronized(_dbMutexToken) {
+        const char * filename = [self.chatDBPath UTF8String];
+        sqlite3_stmt * stetment;
+        sqlite3_open(filename, &_dbh);
+        NSString * selectSQL = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = :friend_id ORDER BY %@ DESC LIMIT 1", chatMessageTableName, chatTableColumn2, chatTableColumn1];
+        const char * sql = [selectSQL UTF8String];
+        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
+        sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatFriend chatUserId]);
+        int r = sqlite3_step(stetment);
+        ChatMessage * lastMessage = nil;
+        if (r == SQLITE_ROW) {
+            lastMessage = [[[ChatMessage alloc] init] autorelease];
+            lastMessage.myFriend = chatFriend;
+            lastMessage.content = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 3)];
+            lastMessage.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_double(stetment, 6)];
+        }
+        sqlite3_finalize(stetment);
+        sqlite3_close(_dbh);
+        return lastMessage;
+    }
+}
+
 -(int)unreadMessageCountOfMyFriend:(id<ChatUser>)chatFriend
 {
     @synchronized(_dbMutexToken) {
@@ -247,7 +262,29 @@ static NSString* chatFriendTableName = @"chat_friend_table";
         if (r == SQLITE_ROW) {
             result = sqlite3_column_int(stetment, 0);
         } else {
-            result = -1;
+            result = 0;
+        }
+        sqlite3_finalize(stetment);
+        sqlite3_close(_dbh);
+        return result;
+    }
+}
+
+- (int)unreadMessageCount
+{
+    @synchronized(_dbMutexToken) {
+        const char * filename = [self.chatDBPath UTF8String];
+        sqlite3_stmt * stetment;
+        sqlite3_open(filename, &_dbh);
+        NSString * selectSQL = [NSString stringWithFormat:@"SELECT count(message_id) FROM %@ WHERE is_new = 1", chatMessageTableName];
+        const char * sql = [selectSQL UTF8String];
+        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
+        int r = sqlite3_step(stetment);
+        int result;
+        if (r == SQLITE_ROW) {
+            result = sqlite3_column_int(stetment, 0);
+        } else {
+            result = 0;
         }
         sqlite3_finalize(stetment);
         sqlite3_close(_dbh);
@@ -285,100 +322,6 @@ static NSString* chatFriendTableName = @"chat_friend_table";
         sqlite3_close(_dbh);
         
         return chatMessages;
-    }
-}
-
--(BOOL)createChatFriendsTable
-{
-    @synchronized(_dbMutexToken) {
-        const char * filename = [self.chatDBPath UTF8String];
-        if (sqlite3_open(filename, &_dbh) != SQLITE_OK) {
-            const char* error = sqlite3_errmsg(_dbh);
-            NSLog(@"Database failed to Open. %s", error);
-            sqlite3_close(_dbh);
-        }
-        
-        NSString * createSTMT = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' (%@ INTEGER PRIMARY KEY, %@ TEXT, %@ TEXT)", chatFriendTableName, chatFriendColumn1, chatFriendColumn2, chatFriendColumn3];
-        char * errorMessage;
-        sqlite3_exec(_dbh, [createSTMT UTF8String], nil, nil, &errorMessage);
-        sqlite3_close(_dbh);
-        
-        if (errorMessage != nil) {
-            NSLog(@"errorMessage:%s", errorMessage);
-            return NO;
-        } else {
-            return YES;
-        }
-    }
-}
-
--(BOOL)insertOrUpdateChatFriend:(id<ChatUser>)chatUser
-{
-    @synchronized(_dbMutexToken) {
-        const char * name = [[chatUser chatUserName] UTF8String];
-        const char * tinyAvatarUrl = [[chatUser tinyAvatarUrl] UTF8String];
-        const char * filename = [self.chatDBPath UTF8String];
-        sqlite3_stmt * stetment;
-        sqlite3_open(filename, &_dbh);
-        NSString* insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %@ (%@, %@, %@) VALUES (:friend_id, :name, :tiny_avatar_url)", chatFriendTableName, chatFriendColumn1, chatFriendColumn2, chatFriendColumn3];
-        const char * sql = [insertSQL UTF8String];
-        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
-        sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatUser chatUserId]);
-        sqlite3_bind_text(stetment, sqlite3_bind_parameter_index(stetment, ":name"), name, strlen(name), NULL);
-        sqlite3_bind_text(stetment, sqlite3_bind_parameter_index(stetment, ":tiny_avatar_url"), tinyAvatarUrl, strlen(tinyAvatarUrl), NULL);
-        int r = sqlite3_step(stetment);
-        sqlite3_finalize(stetment);
-        sqlite3_close(_dbh);
-        if (r == SQLITE_DONE) {
-            return YES;
-        } else {
-            return NO;
-        }
-    }
-}
-
--(BOOL)getChatUserInformation:(id<ChatUser>)chatUser
-{
-    @synchronized(_dbMutexToken) {
-        const char * filename = [self.chatDBPath UTF8String];
-        sqlite3_stmt * stetment;
-        sqlite3_open(filename, &_dbh);
-        
-        NSString * selectSql = [NSString stringWithFormat:@"SELECT * FROM %@ where %@ = :friend_id", chatFriendTableName, chatFriendColumn1];
-        const char * sql = [selectSql UTF8String];
-        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
-        sqlite3_bind_int(stetment, sqlite3_bind_parameter_index(stetment, ":friend_id"), [chatUser chatUserId]);
-        int r = sqlite3_step(stetment);
-        if (r == SQLITE_ROW) {
-            [chatUser setChatUserName:[NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 1)]];
-            [chatUser setTinyAvatarUrl:[NSString stringWithUTF8String:(char *)sqlite3_column_text(stetment, 2)]];
-            r = sqlite3_step(stetment);
-            sqlite3_finalize(stetment);
-            sqlite3_close(_dbh);
-            return YES;
-        } else {
-            return NO;
-        }
-    }
-}
-
--(BOOL)deleteAllFriendInformation
-{
-    @synchronized(_dbMutexToken) {
-        const char * filename = [self.chatDBPath UTF8String];
-        sqlite3_stmt * stetment;
-        sqlite3_open(filename, &_dbh);
-        
-        const char * sql = [[NSString stringWithFormat:@"DELETE FROM %@", chatFriendTableName] UTF8String];
-        sqlite3_prepare(_dbh, sql, strlen(sql), &stetment, NULL);
-        int r = sqlite3_step(stetment);
-        sqlite3_finalize(stetment);
-        sqlite3_close(_dbh);
-        if (r == SQLITE_DONE) {
-            return YES;
-        } else {
-            return NO;
-        }
     }
 }
 

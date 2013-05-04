@@ -29,6 +29,7 @@
         _messageLabel.backgroundColor = [UIColor clearColor];
         _messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _messageLabel.numberOfLines = 0;
+        _messageLabel.font = [UIFont systemFontOfSize:16.0];
         [self.contentView addSubview:_messageLabel];
         
         _headBgView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -60,7 +61,7 @@
     } else {
         headBgX = 320 - 42 - 10;
         bgImageName = @"bubble_1";
-        messageLabelX = 320 - size.width - 70;
+        messageLabelX = 320 - size.width - 65;
     }
     
     if([_timeLabel.text length] != 0) {
@@ -70,13 +71,21 @@
         _timeLabel.frame = CGRectZero;
     }
     
+    
     _headBgView.frame = CGRectMake(headBgX, paddingTop, 42, 42);
     _headImageView.frame = CGRectMake(1, 1, 40, 40);
 
     _bgView.image = [[UIImage imageNamed:bgImageName] stretchableImageWithLeftCapWidth:24 topCapHeight:30];
     
     _messageLabel.frame = CGRectMake(messageLabelX, paddingTop + 10, size.width, size.height);
-    _bgView.frame = CGRectInset(_messageLabel.frame, -10, -5);
+    CGRect bgRect;
+    if (sender == CHAT_SENDER_TYPE_FRIEND) {
+        bgRect = CGRectInset(_messageLabel.frame, -15, -5);
+        _bgView.frame = CGRectMake(bgRect.origin.x, bgRect.origin.y, CGRectGetWidth(bgRect) - 10, CGRectGetHeight(bgRect));
+    } else {
+        bgRect = CGRectInset(_messageLabel.frame, -10, -5);
+        _bgView.frame = CGRectMake(bgRect.origin.x, bgRect.origin.y, CGRectGetWidth(bgRect) - 5, CGRectGetHeight(bgRect));
+    }
 }
 
 - (void) setTime:(NSDate *)messageDate

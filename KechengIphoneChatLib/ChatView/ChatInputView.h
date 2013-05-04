@@ -19,6 +19,7 @@
 
 @property (retain, nonatomic) IBOutlet UIButton *emoButton;
 @property (retain, nonatomic) IBOutlet UIButton *sendButton;
+@property (nonatomic) CGRect keyboardOrEmoRect;
 
 @property (retain, nonatomic) id <ChatInputViewDelegate> delegate;
 
@@ -27,5 +28,7 @@
 - (IBAction)sendButtonClick:(id)sender;
 
 - (void) syncEmoButtonIcon;
+
+- (void) clearTextView;
 
 @end

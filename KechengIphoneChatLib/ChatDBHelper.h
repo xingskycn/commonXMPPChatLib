@@ -21,7 +21,7 @@
 
 -(BOOL)insertChatMessage:(ChatMessage *)message;
 
--(NSMutableArray *)MessagesAboutMyFriend:(id<ChatUser>)chatFriend page:(int)page;
+-(NSMutableArray *)MessagesAboutMyFriend:(id<ChatUser>)chatFriend startIndex:(int)startIndex;
 
 -(NSMutableArray *)unreadMessagesAboutMyFriend:(id<ChatUser>)chatFriend;
 
@@ -31,14 +31,9 @@
 
 -(int)unreadMessageCountOfMyFriend:(id<ChatUser>)chatFriend;
 
+-(int)unreadMessageCount;
+-(ChatMessage*)lastMessageOfMyFriend:(id<ChatUser>)chatFriend;
+
 -(NSMutableArray *)MessagesForMessageCenter:(id<ChatUser>)me;
 
-//Chat friends
--(BOOL)createChatFriendsTable;
-
--(BOOL)insertOrUpdateChatFriend:(id<ChatUser>)chatUser;
-
--(BOOL)getChatUserInformation:(id<ChatUser>)chatUser;
-
--(BOOL)deleteAllFriendInformation;
 @end
