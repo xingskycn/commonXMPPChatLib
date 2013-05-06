@@ -34,6 +34,4 @@
 -(int)unreadMessageCount;
 -(ChatMessage*)lastMessageOfMyFriend:(id<ChatUser>)chatFriend;
 
--(NSMutableArray *)MessagesForMessageCenter:(id<ChatUser>)me;
-
 @end
